@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-import { cmdParser, _Settings, initialization, Settings } from "../utils/initialization"
+import { cmdParser, _Settings, initialization, Settings, writers } from "../utils/initialization"
 import { FirebaseEngine } from "../FirebaseEngine"
 import { app } from "firebase-admin"
+import { Logger } from "../utils/Logger"
 
 const arg: {
     "Name": string,
@@ -32,12 +33,12 @@ const arg: {
 ]
 
 function errorHandler(){
-    console.log("=========================EXAMPLES=========================")
-    console.log("backup-engine.js operations=\"clean, restore\", path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
-    console.log("backup-engine.js o=\"b, c\", p=\"./test/utils/vend-park-development.json\"")
-    console.log("=========================ARGUMENTS========================")
-    console.table(arg)
-    console.log("===========================ERROR==========================")
+    Logger.log("=========================EXAMPLES=========================")
+    Logger.log("backup-engine.js operations=\"clean, restore\", path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
+    Logger.log("backup-engine.js o=\"b, c\", p=\"./test/utils/vend-park-development.json\"")
+    Logger.log("=========================ARGUMENTS========================")
+    Logger.table(arg)
+    Logger.log("===========================ERROR==========================")
 }
 
 ( async() => {
@@ -49,7 +50,7 @@ function errorHandler(){
     const firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings, init.admin)
     const run = async() => {
         for(const operation of init.settings.operations) for(const service of init.settings.services){
-            console.log(operation, service)
+            Logger.log(operation+"/"+service)
             await firebaseEngine.jobs[
                 operation as "backup"|"clean"|"restore"
             ][
@@ -58,16 +59,29 @@ function errorHandler(){
         }
         return
     }
-    run().then(() => {
-        console.log("All Jobs Complete!")
-        process.exit(0)
+    run().then(()=>{
+        const arr: Promise<any>[] = [Promise.resolve()]
+        for(const key in writers){
+            const writer = writers[key]
+            const promise = new Promise((res,rej) => {  
+                writer.fileStream.on("finish", () => {
+                    res()
+                })
+                writer.gzipStream.end()
+            })
+            arr.push(promise)
+        }
+        return Promise.all(arr)
+    }).then(() => {
+        Logger.log("All Jobs Complete!")
+        setTimeout(process.exit, 1, 0)
     }).catch((err) => {
         errorHandler()
-        console.error(err.message)
-        process.exit(1)
+        Logger.error(err.message)
+        setTimeout(process.exit, 1, 1)
     })
 })().catch((err: Error) => {
     errorHandler()
-    console.error(err.message)
-    process.exit(1)
+    Logger.error(err.message)
+    setTimeout(process.exit, 1, 1)
 })

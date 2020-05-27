@@ -1,5 +1,43 @@
 import { readFileSync } from "fs"
 import { initializeApp, app, credential } from "firebase-admin"
+import { createWriteStream, WriteStream } from "fs"
+import { createGzip, Gzip } from "zlib"
+import { Logger } from "../utils/Logger"
+import { createHash } from "crypto"
+
+const store: {
+    admin?: app.App,
+    settings?: Settings
+} = {}
+
+export const writers: {[key: string]: Writer} = {}
+export const createWriteFileStream = (path: string) => {
+    const hash = createHash("sha1")
+    hash.update(path)
+    const key = hash.digest("hex")
+    if(!writers[key])
+        writers[key] = new Writer(path)
+    return writers[key]
+}
+
+export class Writer {
+    constructor(path: string){
+        this.fileStream = createWriteStream(path, {
+            flags: "w", 
+            mode: 0o600
+        })
+        this.gzipStream = createGzip()
+        this.gzipStream.on("error", (err) => {
+            Logger.warn(err)
+        })
+        this.fileStream.on("error", (err) => {
+            Logger.warn(err)
+        })
+        this.gzipStream.pipe(this.fileStream)
+    }
+    public fileStream: WriteStream
+    public gzipStream: Gzip
+}
 
 export interface Settings {
     operations: string[],
@@ -86,6 +124,11 @@ export const initialization = (settings: _Settings = {
     backup: undefined,
     services: []
 }) =>  {
+    if(store.settings && store.admin)
+        return store as {
+            settings: Settings,
+            admin: app.App
+        }
     const _settings: {[key: string]: any} = {
         operations: settings.operations,
         path: settings.path,
@@ -98,12 +141,13 @@ export const initialization = (settings: _Settings = {
     _settings.serviceAccount = JSON.parse(readFileSync(_settings.path).toString())
     if(!_settings.backup)
         _settings.backup = _settings.serviceAccount.project_id+"_"+Date.now().toString()+".backup"
-    const admin:  app.App = initializeApp({
-        databaseURL: "https://"+_settings.serviceAccount.project_id+".firebaseio.com",
-        storageBucket: _settings.serviceAccount.project_id+".appspot.com",
-        projectId: _settings.serviceAccount.project_id,
-        credential: credential.cert(_settings.serviceAccount)
-    })
+    if(!store.admin)
+        store.admin = initializeApp({
+            databaseURL: "https://"+_settings.serviceAccount.project_id+".firebaseio.com",
+            storageBucket: _settings.serviceAccount.project_id+".appspot.com",
+            projectId: _settings.serviceAccount.project_id,
+            credential: credential.cert(_settings.serviceAccount)
+        })
     if(_settings.operations.length === 0)
         _settings.operations.push("backup")
     if(_settings.services.length === 0)
@@ -112,8 +156,9 @@ export const initialization = (settings: _Settings = {
             "firestore",
             "storage"
         ]
-    return {
-        settings: _settings as Settings,
-        admin: admin
+    store.settings = _settings as Settings
+    return store as {
+        settings: Settings,
+        admin: app.App
     }
 }

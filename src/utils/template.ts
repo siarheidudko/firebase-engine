@@ -1,5 +1,6 @@
 import { app } from "firebase-admin"
 import { Settings } from "./initialization"
+import { Logger } from "./Logger"
 
 export class JobTemplate {
     constructor(settings: Settings, admin: app.App  ){       
@@ -21,15 +22,15 @@ export class JobOneTemplate extends JobTemplate{
         super(settings, admin)
     }
     public firestore = async () => { 
-        console.warn("Not supported.")
+        Logger.warn("Not supported.")
         return
     }
     public auth = async () => { 
-        console.warn("Not supported.")
+        Logger.warn("Not supported.")
         return
     }
     public storage = async () => { 
-        console.warn("Not supported.")
+        Logger.warn("Not supported.")
         return
     }
 }
@@ -39,7 +40,13 @@ export class JobOneServiceTemplate extends JobTemplate{
         super(settings, admin)
     }
     public run = async () => { 
-        console.warn("Not supported.")
+        Logger.warn("Not supported.")
         return
     }
+}
+
+export interface DataModel {
+    service: "firestore"|"auth"|"storage",
+    path: string,
+    data: string
 }

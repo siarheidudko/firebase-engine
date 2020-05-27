@@ -32,8 +32,8 @@ class JobsBackup extends JobOneTemplate {
             return
         }
         this.firestore = async () => {
-            const job = new JobBackupFirestore(this.settings, this.admin)
-            await job.run()
+            const newJob = new JobBackupFirestore(this.settings, this.admin)
+            await newJob.run()
             return
         }
         this.storage = async () => {

@@ -1,11 +1,12 @@
 import { app, firestore as Firestore } from "firebase-admin"
 import { Settings } from "../../utils/initialization"
-import { JobOneServiceTemplate } from "../../utils/template"
+import { JobOneServiceTemplate, DataModel } from "../../utils/template"
 import { createReadStream, ReadStream } from "fs"
 import { createGunzip, Gunzip } from "zlib"
 const Objectstream = require("@sergdudko/objectstream")
 import { Transform, Writable } from "stream"
 import { FirestoreConverter } from "../../utils/FirestoreConverter"
+import { Logger } from "../../utils/Logger"
 
 export class JobRestoreFirestore extends JobOneServiceTemplate {
     constructor(settings: Settings, admin: app.App){
@@ -19,7 +20,7 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
         this.parserStream = new Objectstream.Parser() as Transform
         const self = this
         this.writeStream = new Writable({
-            write(object, encoding, callback) {
+            write(object: DataModel, encoding, callback) {
                 (async () => {
                     if(
                         (object.service !== "firestore") ||
@@ -27,7 +28,7 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
                         (typeof(object.data) !== "string")
                     )
                         return
-                    const docRef = self.Firestore.doc(object.path)
+                    const docRef = self.firestore.doc(object.path)
                     const docData = FirestoreConverter.fromString(object.data)
                     await self.writeBuffer.set(docRef, docData)
                     return
@@ -42,19 +43,20 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
             objectMode: true
         })
         this.fileStream.on("error", (err) => {
-            console.warn(err)
+            Logger.warn(err)
         })
         this.gunzipStream.on("error", (err) => {
-            console.warn(err)
+            Logger.warn(err)
         })
         this.parserStream.on("error", (err) => {
-            console.warn(err)
+            Logger.warn(err)
         })
         this.writeStream.on("error", (err) => {
-            console.warn(err)
+            Logger.warn(err)
         })
     }
-    private Firestore: Firestore.Firestore = Firestore() 
+    private counter: number = 0
+    private firestore: Firestore.Firestore = this.admin.firestore()
     private fileStream: ReadStream
     private gunzipStream: Gunzip
     private parserStream: Transform
@@ -62,10 +64,10 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
     private writeBuffer = {
         batchSize: 100,
         iteration: 0,
-        batch: this.Firestore.batch(),
+        batch: this.firestore.batch(),
         clear: async () => {
             this.writeBuffer.iteration = 1
-            this.writeBuffer.batch = this.Firestore.batch()
+            this.writeBuffer.batch = this.firestore.batch()
             return this.writeBuffer
         },
         commit: async () => {
@@ -74,6 +76,9 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
             return this.writeBuffer
         },
         set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
+            ++this.counter
+            if((this.counter % 100) === 0)
+                Logger.log(" -- Firebase Restore - "+this.counter+" docs.")
             ++this.writeBuffer.iteration
             this.writeBuffer.batch.set(ref, data)
             if(this.writeBuffer.iteration === this.writeBuffer.batchSize){
@@ -87,7 +92,8 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
             //this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
             this.writeStream.on("finish", () => {
-                console.log(" - Firestore Restore Complete!")
+                Logger.log(" -- Firebase Restore - "+this.counter+" docs.")
+                Logger.log(" - Firestore Restore Complete!")
                 res()
             })
         })
