@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import { cmdParser, _Settings } from "../utils/initialization"
+import { cmdParser, _Settings, initialization, Settings } from "../utils/initialization"
 import { FirebaseEngine } from "../FirebaseEngine"
+import { app } from "firebase-admin"
 
 const arg: {
     "Name": string,
@@ -40,21 +41,25 @@ function errorHandler(){
 }
 
 ( async() => {
-    const settings: _Settings = cmdParser()
-    const firebaseEngine: FirebaseEngine = new FirebaseEngine(settings)
+    const _settings: _Settings = cmdParser()
+    const init: {
+        settings: Settings,
+        admin: app.App
+    } = initialization(_settings)
+    const firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings, init.admin)
     const run = async() => {
-        for(const operation of settings.operations) for(const service of settings.services){
+        for(const operation of init.settings.operations) for(const service of init.settings.services){
+            console.log(operation, service)
             await firebaseEngine.jobs[
                 operation as "backup"|"clean"|"restore"
             ][
                 service as "firestore"|"auth"|"storage"
             ]()
-            console.log(operation, service)
         }
         return
     }
     run().then(() => {
-        console.log("Complete!")
+        console.log("All Jobs Complete!")
         process.exit(0)
     }).catch((err) => {
         errorHandler()

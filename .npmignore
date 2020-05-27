@@ -2,4 +2,4 @@
 node_modules
 
 _package.json
-backup-engine.js
+*.backup

@@ -93,5 +93,7 @@ export class FirestoreConverter {
                 _obj[key] = FirestoreConverter.fromObject(d.data[key])
             return _obj
         }
+        if(d.type === "custom")
+            return JSON.parse(d.data)
     }
 }
