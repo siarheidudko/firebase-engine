@@ -90,7 +90,6 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
     public run = async () => {
         await new Promise((res, rej) => {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
-            //this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
             this.writeStream.on("finish", () => {
                 Logger.log(" -- Firebase Restore - "+this.counter+" docs.")
                 Logger.log(" - Firestore Restore Complete!")

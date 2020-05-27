@@ -1,6 +1,6 @@
 {
   "name": "firebase-engine",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Tools  for firebase (backup, clean,  restore)",
   "main": "./lib/index.js",
   "scripts": {

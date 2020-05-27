@@ -30,11 +30,11 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
         const docData = docSnap.data()
         if(!docData)
             return
-        const docJson = FirestoreConverter.toString(docData)
+        const docString = FirestoreConverter.toString(docData)
         const _doc: DataModel = {
             service: "firestore",
             path: ref.path,
-            data: docJson
+            data: docString
         }
         await new Promise((res, rej) => {
             this.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
@@ -59,7 +59,7 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
         await new Promise(async (res, rej) => {
             try {
                 this.stringiferStream.pipe(this.writer.gzipStream)
-                this.writer.gzipStream.on("unpipe", () => {
+                this.writer.gzipStream.once("unpipe", () => {
                     Logger.log(" -- Firestore Backup - "+this.counter+" docs.")
                     Logger.log(" - Firestore Backup Complete!")
                     res()

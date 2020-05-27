@@ -26,11 +26,11 @@ export class JobBackupAuth extends JobOneServiceTemplate {
             ++this.counter
             if((this.counter % 100) === 0)
                 Logger.log(" -- Auth Backup - "+this.counter+" users.")
-            const docJson = AuthConverter.toString(userRecord)
+            const docString = AuthConverter.toString(userRecord)
             const _doc: DataModel = {
                 service: "auth",
                 path: userRecord.uid,
-                data: docJson
+                data: docString
             }
             await new Promise((res, rej) => {
                 this.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
@@ -47,7 +47,7 @@ export class JobBackupAuth extends JobOneServiceTemplate {
         await new Promise(async (res, rej) => {
             try {
                 this.stringiferStream.pipe(this.writer.gzipStream)
-                this.writer.gzipStream.on("unpipe", () => {
+                this.writer.gzipStream.once("unpipe", () => {
                     Logger.log(" -- Auth Backup - "+this.counter+" users.")
                     Logger.log(" - Auth Backup Complete!")
                     res()

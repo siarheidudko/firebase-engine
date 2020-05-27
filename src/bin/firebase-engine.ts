@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cmdParser, _Settings, initialization, Settings, writers } from "../utils/initialization"
+import { cmdParser, _Settings, initialization, Settings } from "../utils/initialization"
 import { FirebaseEngine } from "../FirebaseEngine"
 import { app } from "firebase-admin"
 import { Logger } from "../utils/Logger"
@@ -60,18 +60,7 @@ function errorHandler(){
         return
     }
     run().then(()=>{
-        const arr: Promise<any>[] = [Promise.resolve()]
-        for(const key in writers){
-            const writer = writers[key]
-            const promise = new Promise((res,rej) => {  
-                writer.fileStream.on("finish", () => {
-                    res()
-                })
-                writer.gzipStream.end()
-            })
-            arr.push(promise)
-        }
-        return Promise.all(arr)
+        return firebaseEngine.exit()
     }).then(() => {
         Logger.log("All Jobs Complete!")
         setTimeout(process.exit, 1, 0)

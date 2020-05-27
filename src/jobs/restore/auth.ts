@@ -91,7 +91,6 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
     public run = async () => {
         await new Promise((res, rej) => {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
-            //this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
             this.writeStream.on("finish", () => {
                 Logger.log(" -- Auth Restore - "+this.counter+" users.")
                 Logger.log(" - Auth Restore Complete!")
