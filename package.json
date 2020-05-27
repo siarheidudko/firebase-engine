@@ -1,0 +1,38 @@
+{
+  "name": "firebase-engine",
+  "version": "0.0.1",
+  "description": "Tools  for firebase (backup, clean,  restore)",
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "rm -rf lib && tsc"
+  },
+  "bin": "./lib/bin/firebase-engine.js",
+  "repository": {
+    "type": "git",
+    "url": "git:siarheidudko/firebase-engine"
+  },
+  "keywords": [
+    "firebase",
+    "firestore",
+    "auth",
+    "storage",
+    "backup",
+    "clean",
+    "restore",
+    "copy",
+    "move"
+  ],
+  "author": "Siarhei Dudko <slavianich@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@sergdudko/objectstream": "^1.7.7",
+    "firebase-admin": "^8.12.1"
+  },
+  "devDependencies": {
+    "mocha": "^7.2.0",
+    "nyc": "^15.0.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3"
+  }
+}
