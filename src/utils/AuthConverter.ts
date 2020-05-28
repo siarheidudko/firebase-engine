@@ -5,11 +5,36 @@ import { auth as Auth } from "firebase-admin"
  */
 export class AuthConverter {
     /**
+     * Copy only the allowed fields, 
+     * otherwise the object breaks 
+     * inside firebase.auth (after recovery)
+     */
+    private static userField = [
+        "customClaims",
+        "disabled",
+        "displayName",
+        "email",
+        "emailVerified",
+        "metadata",
+        "multiFactor",
+        "passwordHash",
+        "passwordSalt",
+        "phoneNumber",
+        "photoURL",
+        "providerData",
+        "tenantId",
+        "uid",
+    ]
+    /**
      * Convert an object to a string
      * @param d - Object for convert
      */
     public static toString (d: Auth.UserRecord){
-        const _obj:{[key: string]: any} = d.toJSON()
+        const obj:{[key: string]: any} = d.toJSON()
+        const _obj:{[key: string]: any} = {}
+        for(const key of AuthConverter.userField){
+            if(obj[key]) _obj[key] = obj[key]
+        }
         return JSON.stringify(_obj)
     }
     /**
