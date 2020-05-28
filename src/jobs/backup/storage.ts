@@ -1,12 +1,10 @@
 import { app, storage as Storage } from "firebase-admin"
-import { Settings, Writer, createWriteFileStream } from "../../utils/initialization"
-import { JobOneServiceTemplate, DataModel } from "../../utils/template"
-const Objectstream = require("@sergdudko/objectstream")
-import { Transform } from "stream"
+import { Settings } from "../../utils/initialization"
+import { JobBackupServiceTemplate, DataModel } from "../../utils/template"
 import { StorageConverter } from "../../utils/StorageConverter"
 import { Logger } from "../../utils/Logger"
 
-export class JobBackupStorage extends JobOneServiceTemplate {
+export class JobBackupStorage extends JobBackupServiceTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
@@ -15,11 +13,6 @@ export class JobBackupStorage extends JobOneServiceTemplate {
         super(settings, admin)
         this.storage = this.admin.storage()
         this.bucket = this.storage.bucket(this.settings.serviceAccount.project_id+".appspot.com")
-        this.writer = createWriteFileStream(this.settings.backup)
-        this.stringiferStream = new Objectstream.Stringifer() as Transform
-        this.stringiferStream.on("error", (err) => {
-            Logger.warn(err)
-        })
     }
     /**
      * firebase storage app
@@ -29,14 +22,6 @@ export class JobBackupStorage extends JobOneServiceTemplate {
      * storage bucket
      */
     private bucket: any
-    /**
-     * Writer streams in object
-     */
-    private writer: Writer
-    /**
-     * object to string stream
-     */
-    private stringiferStream: Transform
     /**
      * backup one file function
      */

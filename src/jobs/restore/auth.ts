@@ -1,14 +1,11 @@
 import { app, auth as Auth } from "firebase-admin"
 import { Settings } from "../../utils/initialization"
-import { JobOneServiceTemplate, DataModel } from "../../utils/template"
-import { createReadStream, ReadStream } from "fs"
-import { createGunzip, Gunzip } from "zlib"
-const Objectstream = require("@sergdudko/objectstream")
-import { Transform, Writable } from "stream"
+import { JobBackupSRestoreTemplate, DataModel } from "../../utils/template"
+import { Writable } from "stream"
 import { AuthConverter } from "../../utils/AuthConverter"
 import { Logger } from "../../utils/Logger"
 
-export class JobRestoreAuth extends JobOneServiceTemplate {
+export class JobRestoreAuth extends JobBackupSRestoreTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
@@ -16,13 +13,6 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.auth = this.admin.auth()
-        this.fileStream = createReadStream(this.settings.backup, {
-            flags: "r", 
-            mode: 0o600, 
-            highWaterMark: 64*1024
-        })
-        this.gunzipStream = createGunzip()
-        this.parserStream = new Objectstream.Parser() as Transform
         const self = this
         this.writeStream = new Writable({
             write(object: DataModel, encoding, callback) { 
@@ -47,15 +37,6 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
             },
             objectMode: true
         })
-        this.fileStream.on("error", (err) => {
-            Logger.warn(err)
-        })
-        this.gunzipStream.on("error", (err) => {
-            Logger.warn(err)
-        })
-        this.parserStream.on("error", (err) => {
-            Logger.warn(err)
-        })
         this.writeStream.on("error", (err) => {
             Logger.warn(err)
         })
@@ -64,18 +45,6 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
      * firebase auth app
      */
     private auth: Auth.Auth
-    /**
-     * file read stream
-     */
-    private fileStream: ReadStream
-    /**
-     * unzip stream
-     */
-    private gunzipStream: Gunzip
-    /**
-     * string to object stream
-     */
-    private parserStream: Transform
     /**
      * write user to project stream
      */

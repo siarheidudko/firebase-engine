@@ -1,5 +1,9 @@
 import { app } from "firebase-admin"
-import { Settings } from "./initialization"
+const Objectstream = require("@sergdudko/objectstream")
+import { Transform } from "stream"
+import { createReadStream, ReadStream } from "fs"
+import { createGunzip, Gunzip } from "zlib"
+import { Settings, Writer, createWriteFileStream } from "./initialization"
 import { Logger } from "./Logger"
 
 /**
@@ -96,6 +100,73 @@ export class JobOneServiceTemplate extends JobTemplate{
         Logger.warn("Not supported.")
         return
     }
+}
+
+/**
+ * Job backup
+ */
+export class JobBackupServiceTemplate extends JobOneServiceTemplate{
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
+    constructor(settings: Settings, admin: app.App){
+        super(settings, admin)
+        this.writer = createWriteFileStream(this.settings.backup)
+        this.stringiferStream = new Objectstream.Stringifer() as Transform
+        this.stringiferStream.on("error", (err) => {
+            Logger.warn(err)
+        })
+    }
+    /**
+     * Writer streams in object
+     */
+    public writer: Writer
+    /**
+     * object to string stream
+     */
+    public stringiferStream: Transform
+}
+
+/**
+ * Job restore
+ */
+export class JobBackupSRestoreTemplate extends JobOneServiceTemplate{
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
+    constructor(settings: Settings, admin: app.App){
+        super(settings, admin)
+        this.fileStream = createReadStream(this.settings.backup, {
+            flags: "r", 
+            mode: 0o600, 
+            highWaterMark: 64*1024
+        })
+        this.gunzipStream = createGunzip()
+        this.parserStream = new Objectstream.Parser() as Transform
+        this.fileStream.on("error", (err) => {
+            Logger.warn(err)
+        })
+        this.gunzipStream.on("error", (err) => {
+            Logger.warn(err)
+        })
+        this.parserStream.on("error", (err) => {
+            Logger.warn(err)
+        })
+    }
+    /**
+     * file read stream
+     */
+    public fileStream: ReadStream
+    /**
+     * unzip stream
+     */
+    public gunzipStream: Gunzip
+    /**
+     * string to object stream
+     */
+    public parserStream: Transform
 }
 
 /**
