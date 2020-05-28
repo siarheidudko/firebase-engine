@@ -37,7 +37,7 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
      */
     private stringiferStream: Transform
     /**
-     * backup one document
+     * backup one document function
      */
     private documentBackup = async (ref: Firestore.DocumentReference) => {
         ++this.counter

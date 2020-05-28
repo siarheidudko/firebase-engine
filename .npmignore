@@ -1,5 +1,5 @@
 .gitignore
 node_modules
-
-_package.json
+docs
+src
 *.backup
