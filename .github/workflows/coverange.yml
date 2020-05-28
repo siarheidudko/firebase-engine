@@ -1,4 +1,4 @@
-name: Deploy Cloud Functions to production
+name: Lint, Build and Test in Emulator
 on:
   push:
     branches:
