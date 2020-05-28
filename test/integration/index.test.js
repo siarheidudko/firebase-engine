@@ -32,8 +32,8 @@ describe("Integration test CLI", function() {
         }
     }
     const userData = { 
-        uid:  "yZq3YOEDr7cXKtjnUjDpSJpwMBp1 ",
-        email:  "sdudko@remedypointsolutions.com ",
+        uid:  "yZq3YOEDr7cXKtjnUjDpSJpwMBp1",
+        email:  "sdudko@remedypointsolutions.com",
         emailVerified: false,
         displayName: undefined,
         photoURL: undefined,
@@ -41,7 +41,7 @@ describe("Integration test CLI", function() {
         disabled: false,
         metadata:{ 
             lastSignInTime: null,
-            creationTime:  "Thu, 28 May 2020 17:08:39 GMT " 
+            creationTime:  "Thu, 28 May 2020 17:08:39 GMT" 
         },
         passwordHash: undefined,
         passwordSalt: undefined,
@@ -51,11 +51,11 @@ describe("Integration test CLI", function() {
         tenantId: undefined,
         providerData:[ 
             { 
-                uid:  "sdudko@remedypointsolutions.com ",
+                uid:  "sdudko@remedypointsolutions.com",
                 displayName: undefined,
-                email:  "sdudko@remedypointsolutions.com ",
+                email:  "sdudko@remedypointsolutions.com",
                 photoURL: undefined,
-                providerId:  "password ",
+                providerId:  "password",
                 phoneNumber: undefined 
             } 
         ] 
