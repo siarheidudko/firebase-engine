@@ -152,13 +152,14 @@ describe("Integration test CLI", function() {
     */
     it("node ./lib/bin/firebase-engine.js operations=\"backup\" service=\"firestore, storage, auth\" path=\""+settings.serviceAccountPath+"\" backup=\""+backupPath+"\"", async function(){      
         await fsPromises.unlink(backupPath).catch((err)=>{})
-        await childProcessPromise("node", [
+        const log = await childProcessPromise("node", [
             "./lib/bin/firebase-engine.js",
             "operations=\"backup\"",
             "service=\"firestore, storage, auth\"",
             "path=\""+settings.serviceAccountPath+"\"",
             "backup=\""+backupPath+"\""
         ])
+        console.log(log)
         const files = await fsPromises.readdir("./")
         const errors = []
         if(files.indexOf(path.basename(backupPath)) === -1)
@@ -171,12 +172,13 @@ describe("Integration test CLI", function() {
         clean all
     */
     it("node ./lib/bin/firebase-engine.js operations=\"clean\" service=\"all\" path=\""+settings.serviceAccountPath+"\"", async function(){      
-        await childProcessPromise("node", [
+        const log = await childProcessPromise("node", [
             "./lib/bin/firebase-engine.js",
             "operations=\"clean\"",
             "service=\"all\"",
             "path=\""+settings.serviceAccountPath+"\""
         ])
+        console.log(log)
         const collections = await Firestore.listCollections()
         const errors = []
         if(Array.isArray(collections) && (collections.length !== 0))
@@ -198,12 +200,13 @@ describe("Integration test CLI", function() {
         const _files = await fsPromises.readdir("./")
         if(_files.indexOf(path.basename(backupPath)) === -1)
             throw new Error("Backup file not found!")
-        await childProcessPromise("node", [
+        const log = await childProcessPromise("node", [
             "./lib/bin/firebase-engine.js",
             "operations=\"restore\"",
             "path=\""+settings.serviceAccountPath+"\"",
             "backup=\""+backupPath+"\""
         ])
+        console.log(log)
         const collections = await Firestore.listCollections()
         const errors = []
         if(Array.isArray(collections) && (collections.length === 0))
