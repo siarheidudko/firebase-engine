@@ -47,7 +47,7 @@ jobs:
       - name: Run builder
         run: npm run build
   tests:
-    uns-on: ubuntu-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       matrix:
