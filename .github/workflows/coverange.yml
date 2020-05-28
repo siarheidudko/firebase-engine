@@ -4,22 +4,6 @@ on:
     branches:
       - master
 jobs:
-  linting:
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    env:
-      NODE_VERSION: 10
-    steps:
-      - name: Сheckout repo
-        uses: actions/checkout@v2
-      - name: Install node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Install linter
-        run: sudo npm install tslint -g
-      - name: Run linter
-        run: npm run lint
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -47,12 +31,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install builder
-        run: sudo npm install typescript -g
+        run: sudo npm install typescript tslint -g
+      - name: Run linter
+        run: npm run lint
       - name: Run builder
         run: npm run build
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
     strategy:
       matrix:
         node-version: [10.x, 12.x]
@@ -78,5 +66,7 @@ jobs:
         run: npm ci
       - name: Install emulator and test library
         run: sudo npm install firebase-tools nyc mocha -g
+      - name: Set service account
+        run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
         run: npm run cov
