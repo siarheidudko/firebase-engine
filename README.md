@@ -14,20 +14,46 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 	npm i firebase-engine -g
 ```
 
-## Docs
+## Launch parameters
 
-[See docs](https://siarheidudko.github.io/firebase-engine)
+|     Name     | Short name |                                   Description                                    |
+|--------------|------------|----------------------------------------------------------------------------------|
+|  operations  |     o      |              backup (b), restore (r) or clean (c). Default: backup               |
+|     path     |     p      |                        Path to service account JSON file                         |
+|   services   |     s      |  firestore (f), storage (s), auth (a), can be separated by commas. Default: all  |
+|    backup    |     b      |   Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup   |
 
 ## Use
-    
-```
-	firebase-engine operations="clean, restore", path="./test.json" services="firestore, storage" backup="test.backup"
+
+With full names
+```bash
+	firebase-engine operations="clean, restore" path="./test.json" services="firestore, storage" backup="test.backup"
 ```
 
+With short names
+```bash
+	firebase-engine o="b, c" p="./test.json" b="test.backup"
 ```
-	firebase-engine o="b, c", p="./test.json" b="test.backup"
-```
+
+## Open Source
+
+[See source docs](https://siarheidudko.github.io/firebase-engine)
+
+[See source](https://github.com/siarheidudko/firebase-engine)
+
+## Service Account Key
+
+Get your service account key from IAM
+[Open google IAM](https://console.cloud.google.com/iam-admin/serviceaccounts)
+
+Or from the FIREBASE project
+[Open official firebase docs](https://sites.google.com/site/scriptsexamples/new-connectors-to-google-services/firebase/tutorials/authenticate-with-a-service-account)
+
+### WARNING (Password hashes of users)
+
+This API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
+[Open official firebase docs](https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users)
   
 ## LICENSE  
   
-MIT  
+Apache-2.0  

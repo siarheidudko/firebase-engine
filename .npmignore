@@ -1,7 +1,12 @@
 .gitignore
+.github
+.nyc_output
+.firebaserc
+firebase.json
 node_modules
 docs
 src
 *.backup
+*.log
 serviceAccount.json
 shell.js

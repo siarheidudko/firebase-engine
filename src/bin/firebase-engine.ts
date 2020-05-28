@@ -40,8 +40,8 @@ const arg: {
  */
 function errorHandler(){
     Logger.log("=========================EXAMPLES=========================")
-    Logger.log("backup-engine.js operations=\"clean, restore\", path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
-    Logger.log("backup-engine.js o=\"b, c\", p=\"./test/utils/vend-park-development.json\"")
+    Logger.log("backup-engine.js operations=\"clean, restore\" path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
+    Logger.log("backup-engine.js o=\"b, c\" p=\"./test/utils/vend-park-development.json\"")
     Logger.log("=========================ARGUMENTS========================")
     Logger.table(arg)
     Logger.log("===========================ERROR==========================")
