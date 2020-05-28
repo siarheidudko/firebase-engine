@@ -22,10 +22,6 @@ export class JobBackupStorage extends JobOneServiceTemplate {
         })
     }
     /**
-     * file counter
-     */
-    private counter: number = 0
-    /**
      * firebase storage app
      */
     private storage: Storage.Storage
@@ -50,7 +46,7 @@ export class JobBackupStorage extends JobOneServiceTemplate {
             return
         ++this.counter
         if((this.counter % 100) === 0)
-            Logger.log(" -- Storage Backup - "+this.counter+" files.")
+            Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
         const docString = StorageConverter.toString(buffer)
         const _doc: DataModel = {
             service: "storage",
@@ -69,11 +65,12 @@ export class JobBackupStorage extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await new Promise(async (res, rej) => {
             try {
                 this.stringiferStream.pipe(this.writer.gzipStream)
                 this.writer.gzipStream.once("unpipe", () => {
-                    Logger.log(" -- Storage Backup - "+this.counter+" files.")
+                    Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
                     Logger.log(" - Storage Backup Complete!")
                     res()
                 })

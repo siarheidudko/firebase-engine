@@ -61,10 +61,6 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
         })
     }
     /**
-     * user counter
-     */
-    private counter: number = 0
-    /**
      * firebase auth app
      */
     private auth: Auth.Auth
@@ -112,7 +108,11 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
          * write this buffer to project and clean it
          */
         commit: async () => {
-            await this.auth.importUsers(this.writeBuffer.batch)
+            const res = await this.auth.importUsers(this.writeBuffer.batch)
+            if(res.failureCount !== 0){
+                this.counter -= res.failureCount
+                Logger.warn(JSON.stringify(res.errors))
+            }
             await this.writeBuffer.clear()
             return this.writeBuffer
         },
@@ -122,7 +122,7 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
         set: async (ref: string, data: {uid: string, [key: string]: any}) => {
             ++this.counter
             if((this.counter % 100) === 0)
-                Logger.log(" -- Auth Restore - "+this.counter+" users.")
+                Logger.log(" -- Auth Restored - "+this.counter+" users in "+this.getWorkTime()+".")
             ++this.writeBuffer.iteration
             this.writeBuffer.batch.push(data)
             if(this.writeBuffer.iteration === this.writeBuffer.batchSize){
@@ -135,10 +135,11 @@ export class JobRestoreAuth extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
             this.writeStream.on("finish", () => {
-                Logger.log(" -- Auth Restore - "+this.counter+" users.")
+                Logger.log(" -- Auth Restored - "+this.counter+" users in "+this.getWorkTime()+".")
                 Logger.log(" - Auth Restore Complete!")
                 res()
             })

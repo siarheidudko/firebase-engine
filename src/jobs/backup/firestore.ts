@@ -21,10 +21,6 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
         })
     }
     /**
-     * documents counter
-     */
-    private counter: number = 0
-    /**
      * firebase firestore app
      */
     private firestore: Firestore.Firestore
@@ -42,7 +38,7 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
     private documentBackup = async (ref: Firestore.DocumentReference) => {
         ++this.counter
         if((this.counter % 100) === 0)
-            Logger.log(" -- Firestore Backup - "+this.counter+" docs.")
+            Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
         const docSnap = await ref.get()
         if(!docSnap.exists)
             return
@@ -80,12 +76,13 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {        
+    public run = async () => {
+        this.startTimestamp = Date.now()     
         await new Promise(async (res, rej) => {
             try {
                 this.stringiferStream.pipe(this.writer.gzipStream)
                 this.writer.gzipStream.once("unpipe", () => {
-                    Logger.log(" -- Firestore Backup - "+this.counter+" docs.")
+                    Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
                     Logger.log(" - Firestore Backup Complete!")
                     res()
                 })

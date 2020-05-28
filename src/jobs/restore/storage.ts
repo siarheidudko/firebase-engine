@@ -39,7 +39,7 @@ export class JobRestoreStorage extends JobOneServiceTemplate {
                     await fileRef.save(fileData)
                     ++self.counter
                     if((self.counter % 100) === 0)
-                        Logger.log(" -- Storage Restore - "+self.counter+" files.")
+                        Logger.log(" -- Storage Restored - "+self.counter+" files in "+self.getWorkTime()+".")
                     return
                 })().then(() => {
                     callback()
@@ -64,10 +64,6 @@ export class JobRestoreStorage extends JobOneServiceTemplate {
             Logger.warn(err)
         })
     }
-    /**
-     * file counter
-     */
-    private counter: number = 0
     /**
      * firebase storage app
      */
@@ -96,10 +92,11 @@ export class JobRestoreStorage extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
             this.writeStream.on("finish", () => {
-                Logger.log(" -- Storage Restore - "+this.counter+" files.")
+                Logger.log(" -- Storage Restored - "+this.counter+" files in "+this.getWorkTime()+".")
                 Logger.log(" - Storage Restore Complete!")
                 res()
             })

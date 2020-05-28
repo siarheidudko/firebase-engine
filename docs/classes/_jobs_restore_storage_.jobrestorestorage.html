@@ -97,11 +97,12 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_storage_.jobrestorestorage.html#admin" class="tsd-kind-icon">admin</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#bucket" class="tsd-kind-icon">bucket</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#counter" class="tsd-kind-icon">counter</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_storage_.jobrestorestorage.html#counter" class="tsd-kind-icon">counter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#filestream" class="tsd-kind-icon">file<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#gunzipstream" class="tsd-kind-icon">gunzip<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#parserstream" class="tsd-kind-icon">parser<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_storage_.jobrestorestorage.html#settings" class="tsd-kind-icon">settings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_storage_.jobrestorestorage.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#storage" class="tsd-kind-icon">storage</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_storage_.jobrestorestorage.html#writestream" class="tsd-kind-icon">write<wbr>Stream</a></li>
 							</ul>
@@ -109,6 +110,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_storage_.jobrestorestorage.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_jobs_restore_storage_.jobrestorestorage.html#run" class="tsd-kind-icon">run</a></li>
 							</ul>
 						</section>
@@ -128,7 +130,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L11">jobs/restore/storage.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L11">jobs/restore/storage.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -166,7 +168,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L24">utils/template.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L24">utils/template.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -181,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">bucket<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L78">jobs/restore/storage.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L74">jobs/restore/storage.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -190,18 +192,19 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="counter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> counter</h3>
+					<h3>counter</h3>
 					<div class="tsd-signature tsd-kind-icon">counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#counter">counter</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L70">jobs/restore/storage.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L76">utils/template.ts:76</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>file counter</p>
+							<p>operation counter</p>
 						</div>
 					</div>
 				</section>
@@ -211,7 +214,7 @@
 					<div class="tsd-signature tsd-kind-icon">file<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadStream</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L82">jobs/restore/storage.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L78">jobs/restore/storage.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -226,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">gunzip<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Gunzip</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L86">jobs/restore/storage.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L82">jobs/restore/storage.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -241,7 +244,7 @@
 					<div class="tsd-signature tsd-kind-icon">parser<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transform</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L90">jobs/restore/storage.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L86">jobs/restore/storage.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -257,12 +260,28 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L20">utils/template.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L20">utils/template.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>settings object</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="starttimestamp" class="tsd-anchor"></a>
+					<h3>start<wbr>Timestamp</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#starttimestamp">startTimestamp</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L91">utils/template.ts:91</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>start timestamp</p>
 						</div>
 					</div>
 				</section>
@@ -272,7 +291,7 @@
 					<div class="tsd-signature tsd-kind-icon">storage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Storage.Storage</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L74">jobs/restore/storage.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L70">jobs/restore/storage.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -287,7 +306,7 @@
 					<div class="tsd-signature tsd-kind-icon">write<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Writable</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L94">jobs/restore/storage.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L90">jobs/restore/storage.ts:90</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -299,6 +318,29 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getworktime" class="tsd-anchor"></a>
+					<h3>get<wbr>Work<wbr>Time</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Work<wbr>Time<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#getworktime">getWorkTime</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L80">utils/template.ts:80</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get work time</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="run" class="tsd-anchor"></a>
 					<h3>run</h3>
@@ -310,7 +352,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#run">run</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/storage.ts#L98">jobs/restore/storage.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/storage.ts#L94">jobs/restore/storage.ts:94</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -405,7 +447,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_jobs_restore_storage_.jobrestorestorage.html#bucket" class="tsd-kind-icon">bucket</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_restore_storage_.jobrestorestorage.html#counter" class="tsd-kind-icon">counter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -420,11 +462,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_restore_storage_.jobrestorestorage.html#settings" class="tsd-kind-icon">settings</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_restore_storage_.jobrestorestorage.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_jobs_restore_storage_.jobrestorestorage.html#storage" class="tsd-kind-icon">storage</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_jobs_restore_storage_.jobrestorestorage.html#writestream" class="tsd-kind-icon">write<wbr>Stream</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_restore_storage_.jobrestorestorage.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_jobs_restore_storage_.jobrestorestorage.html#run" class="tsd-kind-icon">run</a>

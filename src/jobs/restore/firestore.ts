@@ -60,10 +60,6 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
         })
     }
     /**
-     * document counter
-     */
-    private counter: number = 0
-    /**
      * firebase firestore app
      */
     private firestore: Firestore.Firestore = this.admin.firestore()
@@ -121,7 +117,7 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
         set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
             ++this.counter
             if((this.counter % 100) === 0)
-                Logger.log(" -- Firebase Restore - "+this.counter+" docs.")
+                Logger.log(" -- Firebase Restored - "+this.counter+" docs in "+this.getWorkTime()+".")
             ++this.writeBuffer.iteration
             this.writeBuffer.batch.set(ref, data)
             if(this.writeBuffer.iteration === this.writeBuffer.batchSize){
@@ -134,10 +130,11 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
             this.writeStream.on("finish", () => {
-                Logger.log(" -- Firebase Restore - "+this.counter+" docs.")
+                Logger.log(" -- Firebase Restored - "+this.counter+" docs in "+this.getWorkTime()+".")
                 Logger.log(" - Firestore Restore Complete!")
                 res()
             })

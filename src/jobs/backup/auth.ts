@@ -21,10 +21,6 @@ export class JobBackupAuth extends JobOneServiceTemplate {
         })
     }
     /**
-     * user counter
-     */
-    private counter: number = 0
-    /**
      * Writer streams in object
      */
     private writer: Writer
@@ -44,7 +40,7 @@ export class JobBackupAuth extends JobOneServiceTemplate {
         for(const userRecord of listUsers.users){
             ++this.counter
             if((this.counter % 100) === 0)
-                Logger.log(" -- Auth Backup - "+this.counter+" users.")
+                Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
             const docString = AuthConverter.toString(userRecord)
             const _doc: DataModel = {
                 service: "auth",
@@ -66,11 +62,12 @@ export class JobBackupAuth extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await new Promise(async (res, rej) => {
             try {
                 this.stringiferStream.pipe(this.writer.gzipStream)
                 this.writer.gzipStream.once("unpipe", () => {
-                    Logger.log(" -- Auth Backup - "+this.counter+" users.")
+                    Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
                     Logger.log(" - Auth Backup Complete!")
                     res()
                 })

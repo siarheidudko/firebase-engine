@@ -13,10 +13,6 @@ export class JobCleanAuth extends JobOneServiceTemplate {
         this.auth = this.admin.auth()
     }
     /**
-     * user counter
-     */
-    private counter: number = 0
-    /**
      * firebase auth app
      */
     private auth: Auth.Auth
@@ -28,7 +24,7 @@ export class JobCleanAuth extends JobOneServiceTemplate {
         for(const userRecord of listUsers.users){
             ++this.counter
             if((this.counter % 100) === 0)
-                Logger.log(" -- Auth Clean - "+this.counter+" users.")
+                Logger.log(" -- Auth Cleaned - "+this.counter+" users in "+this.getWorkTime()+".")
             await this.auth.deleteUser(userRecord.uid)
         }
         if(listUsers.pageToken)
@@ -39,8 +35,9 @@ export class JobCleanAuth extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await this.recursiveClean()
-        Logger.log(" -- Auth Clean - "+this.counter+" users.")
+        Logger.log(" -- Auth Cleaned - "+this.counter+" users in "+this.getWorkTime()+".")
         Logger.log(" - Auth Clean Complete!")
         return
     }

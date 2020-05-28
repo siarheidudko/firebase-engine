@@ -96,18 +96,20 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#admin" class="tsd-kind-icon">admin</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#counter" class="tsd-kind-icon">counter</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#counter" class="tsd-kind-icon">counter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#filestream" class="tsd-kind-icon">file<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#firestore" class="tsd-kind-icon">firestore</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#gunzipstream" class="tsd-kind-icon">gunzip<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#parserstream" class="tsd-kind-icon">parser<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#settings" class="tsd-kind-icon">settings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#writestream" class="tsd-kind-icon">write<wbr>Stream</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_jobs_restore_firestore_.jobrestorefirestore.html#run" class="tsd-kind-icon">run</a></li>
 							</ul>
 						</section>
@@ -133,7 +135,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L11">jobs/restore/firestore.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L11">jobs/restore/firestore.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -171,7 +173,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L24">utils/template.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L24">utils/template.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -180,18 +182,19 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="counter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> counter</h3>
+					<h3>counter</h3>
 					<div class="tsd-signature tsd-kind-icon">counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#counter">counter</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L65">jobs/restore/firestore.ts:65</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L76">utils/template.ts:76</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>document counter</p>
+							<p>operation counter</p>
 						</div>
 					</div>
 				</section>
@@ -201,7 +204,7 @@
 					<div class="tsd-signature tsd-kind-icon">file<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadStream</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L73">jobs/restore/firestore.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L69">jobs/restore/firestore.ts:69</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -216,7 +219,7 @@
 					<div class="tsd-signature tsd-kind-icon">firestore<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Firestore.Firestore</span><span class="tsd-signature-symbol"> = this.admin.firestore()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L69">jobs/restore/firestore.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L65">jobs/restore/firestore.ts:65</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -231,7 +234,7 @@
 					<div class="tsd-signature tsd-kind-icon">gunzip<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Gunzip</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L77">jobs/restore/firestore.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L73">jobs/restore/firestore.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -246,7 +249,7 @@
 					<div class="tsd-signature tsd-kind-icon">parser<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transform</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L81">jobs/restore/firestore.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L77">jobs/restore/firestore.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -262,12 +265,28 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L20">utils/template.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L20">utils/template.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>settings object</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="starttimestamp" class="tsd-anchor"></a>
+					<h3>start<wbr>Timestamp</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#starttimestamp">startTimestamp</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L91">utils/template.ts:91</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>start timestamp</p>
 						</div>
 					</div>
 				</section>
@@ -277,7 +296,7 @@
 					<div class="tsd-signature tsd-kind-icon">write<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Writable</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L85">jobs/restore/firestore.ts:85</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L81">jobs/restore/firestore.ts:81</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -289,6 +308,29 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getworktime" class="tsd-anchor"></a>
+					<h3>get<wbr>Work<wbr>Time</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Work<wbr>Time<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#getworktime">getWorkTime</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L80">utils/template.ts:80</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get work time</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="run" class="tsd-anchor"></a>
 					<h3>run</h3>
@@ -300,7 +342,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#run">run</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L136">jobs/restore/firestore.ts:136</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L132">jobs/restore/firestore.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -321,7 +363,7 @@
 					<div class="tsd-signature tsd-kind-icon">write<wbr>Buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L89">jobs/restore/firestore.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L85">jobs/restore/firestore.ts:85</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -335,7 +377,7 @@
 						<div class="tsd-signature tsd-kind-icon">batch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WriteBatch</span><span class="tsd-signature-symbol"> = this.firestore.batch()</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L101">jobs/restore/firestore.ts:101</a></li>
+								<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L97">jobs/restore/firestore.ts:97</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -350,7 +392,7 @@
 						<div class="tsd-signature tsd-kind-icon">batch<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 100</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L93">jobs/restore/firestore.ts:93</a></li>
+								<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L89">jobs/restore/firestore.ts:89</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -365,7 +407,7 @@
 						<div class="tsd-signature tsd-kind-icon">iteration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L97">jobs/restore/firestore.ts:97</a></li>
+								<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L93">jobs/restore/firestore.ts:93</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -384,7 +426,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L105">jobs/restore/firestore.ts:105</a></li>
+										<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L101">jobs/restore/firestore.ts:101</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -406,7 +448,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L113">jobs/restore/firestore.ts:113</a></li>
+										<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L109">jobs/restore/firestore.ts:109</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -428,7 +470,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/jobs/restore/firestore.ts#L121">jobs/restore/firestore.ts:121</a></li>
+										<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/jobs/restore/firestore.ts#L117">jobs/restore/firestore.ts:117</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -535,7 +577,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#admin" class="tsd-kind-icon">admin</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#counter" class="tsd-kind-icon">counter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -553,8 +595,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#settings" class="tsd-kind-icon">settings</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#writestream" class="tsd-kind-icon">write<wbr>Stream</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_jobs_restore_firestore_.jobrestorefirestore.html#run" class="tsd-kind-icon">run</a>

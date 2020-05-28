@@ -128,16 +128,19 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_utils_template_.joboneservicetemplate.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_utils_template_.joboneservicetemplate.html#admin" class="tsd-kind-icon">admin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_utils_template_.joboneservicetemplate.html#counter" class="tsd-kind-icon">counter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_utils_template_.joboneservicetemplate.html#settings" class="tsd-kind-icon">settings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_utils_template_.joboneservicetemplate.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_utils_template_.joboneservicetemplate.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_utils_template_.joboneservicetemplate.html#run" class="tsd-kind-icon">run</a></li>
 							</ul>
 						</section>
@@ -157,7 +160,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L64">utils/template.ts:64</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L64">utils/template.ts:64</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -186,7 +189,7 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="admin" class="tsd-anchor"></a>
@@ -195,12 +198,27 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L24">utils/template.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L24">utils/template.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>firebase app</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="counter" class="tsd-anchor"></a>
+					<h3>counter</h3>
+					<div class="tsd-signature tsd-kind-icon">counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L76">utils/template.ts:76</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>operation counter</p>
 						</div>
 					</div>
 				</section>
@@ -211,7 +229,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L20">utils/template.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L20">utils/template.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -220,9 +238,46 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="starttimestamp" class="tsd-anchor"></a>
+					<h3>start<wbr>Timestamp</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L91">utils/template.ts:91</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>start timestamp</p>
+						</div>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getworktime" class="tsd-anchor"></a>
+					<h3>get<wbr>Work<wbr>Time</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Work<wbr>Time<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L80">utils/template.ts:80</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get work time</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="run" class="tsd-anchor"></a>
 					<h3>run</h3>
@@ -233,7 +288,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/6dc8feb/src/utils/template.ts#L75">utils/template.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/193582f/src/utils/template.ts#L95">utils/template.ts:95</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -325,8 +380,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_utils_template_.joboneservicetemplate.html#admin" class="tsd-kind-icon">admin</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_utils_template_.joboneservicetemplate.html#counter" class="tsd-kind-icon">counter</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_utils_template_.joboneservicetemplate.html#settings" class="tsd-kind-icon">settings</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_utils_template_.joboneservicetemplate.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_utils_template_.joboneservicetemplate.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_utils_template_.joboneservicetemplate.html#run" class="tsd-kind-icon">run</a>

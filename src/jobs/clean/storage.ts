@@ -25,7 +25,9 @@ export class JobCleanStorage extends JobOneServiceTemplate {
      * job runner
      */
     public run = async () => {
+        this.startTimestamp = Date.now()
         await this.bucket.deleteFiles()
+        Logger.log(" -- Storage Cleaned docs in "+this.getWorkTime()+".")
         Logger.log(" - Storage Clean Complete!")
         return
     }

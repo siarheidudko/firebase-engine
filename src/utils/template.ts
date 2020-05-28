@@ -68,7 +68,27 @@ export class JobOneServiceTemplate extends JobTemplate{
      */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
+        this.startTimestamp = Date.now()
     }
+    /**
+     * operation counter
+     */
+    public counter: number = 0
+    /**
+     * get work time
+     */
+    public getWorkTime = () => {
+        const time = Date.now() - this.startTimestamp
+        if(time < 5000)
+            return time + " ms"
+        if(time < 300000)
+            return Number.parseInt((time/1000).toFixed()) + " sec"
+        return Number.parseInt((time/60000).toFixed()) + " min"       
+    }
+    /**
+     * start timestamp
+     */
+    public startTimestamp: number
     /**
      * Job runner
      */
