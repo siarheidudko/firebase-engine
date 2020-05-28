@@ -21,11 +21,11 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 ## Use
     
 ```
-	backup-engine operations="clean, restore", path="./test.json" services="firestore, storage" backup="test.backup"
+	firebase-engine operations="clean, restore", path="./test.json" services="firestore, storage" backup="test.backup"
 ```
 
 ```
-	backup-engine o="b, c", p="./test.json" b="test.backup"
+	firebase-engine o="b, c", p="./test.json" b="test.backup"
 ```
   
 ## LICENSE  
