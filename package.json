@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "rm -rf lib && tsc",
-    "doc": "typedoc src",
+    "doc": "typedoc src&&echo \"\">./docs/.nojekyll",
     "test": "firebase emulators:exec \"mocha --exit test/**/*.test.js\"",
     "cov": "firebase emulators:exec \"nyc mocha --exit test/**/*.test.js\""
   },

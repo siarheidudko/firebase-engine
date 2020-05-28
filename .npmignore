@@ -1,6 +1,5 @@
 .gitignore
 .github
-.nojekyll
 .nyc_output
 .firebaserc
 firebase.json
