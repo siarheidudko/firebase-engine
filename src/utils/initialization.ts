@@ -4,12 +4,29 @@ import { createGzip, Gzip } from "zlib"
 import { Logger } from "../utils/Logger"
 import { createHash } from "crypto"
 
+/**
+ * Module store (to prevent secondary initialization)
+ */
 const store: {
+    /**
+     * firebase app
+     */
     admin?: app.App,
+    /**
+     * settings object
+     */
     settings?: Settings
 } = {}
 
+/**
+ * write streams
+ */
 export const writers: {[key: string]: Writer} = {}
+/**
+ * Create write stream
+ * 
+ * @param path - path to file for write
+ */
 export const createWriteFileStream = (path: string) => {
     const hash = createHash("sha1")
     hash.update(path)
@@ -18,8 +35,14 @@ export const createWriteFileStream = (path: string) => {
         writers[key] = new Writer(path)
     return writers[key]
 }
-
+/**
+ * Writer Class for create write streams
+ */
 export class Writer {
+    /**
+     * 
+     * @param path - path to file for write
+     */
     constructor(path: string){
         this.fileStream = createWriteStream(path, {
             flags: "w", 
@@ -34,25 +57,62 @@ export class Writer {
         })
         this.gzipStream.pipe(this.fileStream)
     }
+    /**
+     * file write stream after gzipped
+     */
     public fileStream: WriteStream
+    /**
+     * gzip stream
+     */
     public gzipStream: Gzip
 }
 
-export interface Settings {
-    operations: string[],
+/**
+ * settings object before initialization
+ */
+export interface _Settings {
+    /**
+     * array of operations
+     */
+    operations: ("backup"|"clean"|"restore")[],
+    /**
+     * path to Firebase service account key (json)
+     */
+    path?: string,
+    /**
+     * path to backup file
+     */
+    backup?: string,
+    /**
+     * service for backup/clean/restore
+     */
+    services: ("firestore"|"auth"|"storage")[]
+}
+/**
+ * settings object after initialization
+ */
+export interface Settings extends _Settings {
+    /**
+     * path to Firebase service account key (json)
+     */
     path: string,
+    /**
+     * path to backup file
+     */
     backup: string,
-    services: string[],
+    /**
+     * Firebase service account key (object)
+     */
     serviceAccount: {[key: string]: any}
 }
-export interface _Settings {
-    operations: string[],
-    path?: string,
-    backup?: string,
-    services: string[]
-}
 
+/**
+ * Command Line Parser
+ */
 export const cmdParser = () => {
+    /**
+     * Settings object
+     */
     const settings: _Settings = {
         operations: [],
         path: undefined,
@@ -117,6 +177,11 @@ export const cmdParser = () => {
     return settings
 }
 
+/**
+ * App initialization
+ * 
+ * @param settings - settings object
+ */
 export const initialization = (settings: _Settings = {
     operations: [],
     path: undefined,

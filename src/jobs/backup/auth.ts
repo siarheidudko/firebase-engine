@@ -7,6 +7,10 @@ import { AuthConverter } from "../../utils/AuthConverter"
 import { Logger } from "../../utils/Logger"
 
 export class JobBackupAuth extends JobOneServiceTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.auth = this.admin.auth()
@@ -16,10 +20,25 @@ export class JobBackupAuth extends JobOneServiceTemplate {
             Logger.warn(err)
         })
     }
+    /**
+     * user counter
+     */
     private counter: number = 0
+    /**
+     * Writer streams in object
+     */
     private writer: Writer
+    /**
+     * object to string stream
+     */
     private stringiferStream: Transform
+    /**
+     * firebase auth app
+     */
     private auth: Auth.Auth
+    /**
+     * recursive backup function
+     */
     private recursiveBackup = async (nextPageToken?: string) => {
         const listUsers = await this.auth.listUsers(1000, nextPageToken)
         for(const userRecord of listUsers.users){
@@ -43,6 +62,9 @@ export class JobBackupAuth extends JobOneServiceTemplate {
             await this.recursiveBackup(listUsers.pageToken)
         return
     }
+    /**
+     * job runner
+     */
     public run = async () => {
         await new Promise(async (res, rej) => {
             try {

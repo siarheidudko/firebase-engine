@@ -7,6 +7,10 @@ import { FirestoreConverter } from "../../utils/FirestoreConverter"
 import { Logger } from "../../utils/Logger"
 
 export class JobBackupFirestore extends JobOneServiceTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.firestore = this.admin.firestore() 
@@ -16,10 +20,25 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
             Logger.warn(err)
         })
     }
+    /**
+     * documents counter
+     */
     private counter: number = 0
+    /**
+     * firebase firestore app
+     */
     private firestore: Firestore.Firestore
+    /**
+     * Writer streams in object
+     */
     private writer: Writer
+    /**
+     * object to string stream
+     */
     private stringiferStream: Transform
+    /**
+     * backup one document
+     */
     private documentBackup = async (ref: Firestore.DocumentReference) => {
         ++this.counter
         if((this.counter % 100) === 0)
@@ -44,6 +63,9 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
         })
         return
     }
+    /**
+     * recursive backup function
+     */
     private recursiveBackup = async (ref: Firestore.Firestore|Firestore.DocumentReference) => {
         const collections = await ref.listCollections()
         for(const collectionRef of collections){
@@ -55,6 +77,9 @@ export class JobBackupFirestore extends JobOneServiceTemplate {
         }
         return
     }
+    /**
+     * job runner
+     */
     public run = async () => {        
         await new Promise(async (res, rej) => {
             try {

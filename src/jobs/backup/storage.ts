@@ -7,6 +7,10 @@ import { StorageConverter } from "../../utils/StorageConverter"
 import { Logger } from "../../utils/Logger"
 
 export class JobBackupStorage extends JobOneServiceTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.storage = this.admin.storage()
@@ -17,11 +21,29 @@ export class JobBackupStorage extends JobOneServiceTemplate {
             Logger.warn(err)
         })
     }
+    /**
+     * file counter
+     */
     private counter: number = 0
+    /**
+     * firebase storage app
+     */
     private storage: Storage.Storage
+    /**
+     * storage bucket
+     */
     private bucket: any
+    /**
+     * Writer streams in object
+     */
     private writer: Writer
+    /**
+     * object to string stream
+     */
     private stringiferStream: Transform
+    /**
+     * backup one file function
+     */
     public backupFile = async (file: any) => {
         const [buffer] = await file.download()
         if(!buffer)
@@ -43,6 +65,9 @@ export class JobBackupStorage extends JobOneServiceTemplate {
         })
         return
     }
+    /**
+     * job runner
+     */
     public run = async () => {
         await new Promise(async (res, rej) => {
             try {

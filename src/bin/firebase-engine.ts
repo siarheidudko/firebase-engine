@@ -5,6 +5,9 @@ import { FirebaseEngine } from "../FirebaseEngine"
 import { app } from "firebase-admin"
 import { Logger } from "../utils/Logger"
 
+/**
+ * command line help table
+ */
 const arg: {
     "Name": string,
     "Short name": string,
@@ -32,6 +35,9 @@ const arg: {
     }
 ]
 
+/**
+ * command line error helper
+ */
 function errorHandler(){
     Logger.log("=========================EXAMPLES=========================")
     Logger.log("backup-engine.js operations=\"clean, restore\", path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
@@ -41,21 +47,20 @@ function errorHandler(){
     Logger.log("===========================ERROR==========================")
 }
 
+/**
+ * CLI
+ */
 ( async() => {
     const _settings: _Settings = cmdParser()
     const init: {
         settings: Settings,
         admin: app.App
     } = initialization(_settings)
-    const firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings, init.admin)
+    const firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings)
     const run = async() => {
         for(const operation of init.settings.operations) for(const service of init.settings.services){
             Logger.log(operation+"/"+service)
-            await firebaseEngine.jobs[
-                operation as "backup"|"clean"|"restore"
-            ][
-                service as "firestore"|"auth"|"storage"
-            ]()
+            await firebaseEngine.jobs[operation][service]()
         }
         return
     }

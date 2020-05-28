@@ -11,19 +11,42 @@ import { JobRestoreAuth } from "./restore/auth"
 import { JobRestoreFirestore } from "./restore/firestore"
 import { JobRestoreStorage } from "./restore/storage"
 
+/**
+ * Jobs Class
+ */
 export class Jobs extends JobTemplate{
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.backup = new JobsBackup(this.settings, this.admin)
         this.clean = new JobsClean(this.settings, this.admin)
         this.restore = new JobsRestore(this.settings, this.admin)
     }
+    /**
+     * backup jobs
+     */
     public backup: JobsBackup
+    /**
+     * clean jobs
+     */
     public clean: JobsClean
+    /**
+     * restore jobs
+     */
     public restore: JobsRestore
 }
 
+/**
+ * Backup Jobs Class
+ */
 class JobsBackup extends JobOneTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.auth = async () => {
@@ -44,7 +67,14 @@ class JobsBackup extends JobOneTemplate {
     }
 }
 
+/**
+ * Clean Jobs Class
+ */
 class JobsClean extends JobOneTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.auth = async () => {
@@ -65,7 +95,14 @@ class JobsClean extends JobOneTemplate {
     }
 }
 
+/**
+ * Restore Jobs Class
+ */
 class JobsRestore extends JobOneTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.auth = async () => {

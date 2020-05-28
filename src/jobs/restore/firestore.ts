@@ -9,6 +9,10 @@ import { FirestoreConverter } from "../../utils/FirestoreConverter"
 import { Logger } from "../../utils/Logger"
 
 export class JobRestoreFirestore extends JobOneServiceTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.fileStream = createReadStream(this.settings.backup, {
@@ -55,26 +59,65 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
             Logger.warn(err)
         })
     }
+    /**
+     * document counter
+     */
     private counter: number = 0
+    /**
+     * firebase firestore app
+     */
     private firestore: Firestore.Firestore = this.admin.firestore()
+    /**
+     * file read stream
+     */
     private fileStream: ReadStream
+    /**
+     * unzip stream
+     */
     private gunzipStream: Gunzip
+    /**
+     * string to object stream
+     */
     private parserStream: Transform
+    /**
+     * write document to project stream
+     */
     private writeStream: Writable
+    /**
+     * buffer for write to project
+     */
     private writeBuffer = {
+        /**
+         * batch size
+         */
         batchSize: 100,
+        /**
+         * iteration
+         */
         iteration: 0,
+        /**
+         * batch object
+         */
         batch: this.firestore.batch(),
+        /**
+         * clear this buffer
+         */
         clear: async () => {
             this.writeBuffer.iteration = 1
             this.writeBuffer.batch = this.firestore.batch()
             return this.writeBuffer
         },
+        /**
+         * write this buffer to project and clean it
+         */
         commit: async () => {
             await this.writeBuffer.batch.commit()
             await this.writeBuffer.clear()
             return this.writeBuffer
         },
+        /**
+         * add document to this buffer
+         */
         set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
             ++this.counter
             if((this.counter % 100) === 0)
@@ -87,6 +130,9 @@ export class JobRestoreFirestore extends JobOneServiceTemplate {
             return this.writeBuffer
         }
     }
+    /**
+     * job runner
+     */
     public run = async () => {
         await new Promise((res, rej) => {
             this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)

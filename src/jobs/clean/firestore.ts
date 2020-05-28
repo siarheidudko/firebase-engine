@@ -4,15 +4,34 @@ import { JobOneServiceTemplate } from "../../utils/template"
 import { Logger } from "../../utils/Logger"
 
 export class JobCleanFirestore extends JobOneServiceTemplate {
+    /**
+     * @param settings - settings object
+     * @param admin - firebase app
+     */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
         this.firestore = this.admin.firestore()
         this.batch = this.firestore.batch()
     }
+    /**
+     * document counter
+     */
     private counter: number = 0
+    /**
+     * document on one batch
+     */
     private static batchSize: number = 100
+    /**
+     * firebase firestore app
+     */
     private firestore: Firestore.Firestore
+    /**
+     * batch object
+     */
     private batch: Firestore.WriteBatch
+    /**
+     * commit batch and recreate
+     */
     private batchClean = async (arr: Firestore.DocumentReference[]) => {
         for(const ref of arr){
             this.batch.delete(ref)
@@ -22,6 +41,9 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
         this.batch = this.firestore.batch()
         return
     }
+    /**
+     * recursive clean function
+     */
     private recursiveClean = async (ref: Firestore.Firestore | Firestore.DocumentReference) => {
         const collections = await ref.listCollections()
         for(const collectionRef of collections){
@@ -43,6 +65,9 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
         }
         return
     }
+    /**
+     * job runner
+     */
     public run = async () => {
         await this.recursiveClean(this.firestore)
         Logger.log(" -- Firestore Clean - "+this.counter+" docs.")
