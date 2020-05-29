@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>_Settings | firebase-engine</title>
+	<title>SettingsBeforeInitialization | firebase-engine</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_utils_initialization_.html">&quot;utils/initialization&quot;</a>
 				</li>
 				<li>
-					<a href="_utils_initialization_._settings.html">_Settings</a>
+					<a href="_utils_initialization_.settingsbeforeinitialization.html">SettingsBeforeInitialization</a>
 				</li>
 			</ul>
-			<h1>Interface _Settings</h1>
+			<h1>Interface SettingsBeforeInitialization</h1>
 		</div>
 	</div>
 </header>
@@ -80,12 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">_Settings</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a>
-							</li>
-						</ul>
+						<span class="target">SettingsBeforeInitialization</span>
 					</li>
 				</ul>
 			</section>
@@ -96,10 +91,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_._settings.html#backup" class="tsd-kind-icon">backup</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_._settings.html#operations" class="tsd-kind-icon">operations</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_._settings.html#path" class="tsd-kind-icon">path</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_._settings.html#services" class="tsd-kind-icon">services</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.settingsbeforeinitialization.html#backup" class="tsd-kind-icon">backup</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.settingsbeforeinitialization.html#compress" class="tsd-kind-icon">compress</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.settingsbeforeinitialization.html#path" class="tsd-kind-icon">path</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,7 +107,7 @@
 					<div class="tsd-signature tsd-kind-icon">backup<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L85">utils/initialization.ts:85</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L116">utils/initialization.ts:116</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -123,17 +117,17 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="operations" class="tsd-anchor"></a>
-					<h3>operations</h3>
-					<div class="tsd-signature tsd-kind-icon">operations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"backup"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"clean"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"restore"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="compress" class="tsd-anchor"></a>
+					<h3>compress</h3>
+					<div class="tsd-signature tsd-kind-icon">compress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L77">utils/initialization.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L120">utils/initialization.ts:120</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>array of operations</p>
+							<p>use compress</p>
 						</div>
 					</div>
 				</section>
@@ -143,27 +137,12 @@
 					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L81">utils/initialization.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L112">utils/initialization.ts:112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>path to Firebase service account key (json)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="services" class="tsd-anchor"></a>
-					<h3>services</h3>
-					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"firestore"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"auth"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"storage"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L89">utils/initialization.ts:89</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>service for backup/clean/restore</p>
 						</div>
 					</div>
 				</section>
@@ -240,24 +219,24 @@
 						<a href="../classes/_utils_initialization_.writer.html" class="tsd-kind-icon">Writer</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_utils_initialization_.parsedsettings.html" class="tsd-kind-icon">Parsed<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_utils_initialization_.settings.html" class="tsd-kind-icon">Settings</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_utils_initialization_._settings.html" class="tsd-kind-icon">_<wbr>Settings</a>
+						<a href="_utils_initialization_.settingsbeforeinitialization.html" class="tsd-kind-icon">Settings<wbr>Before<wbr>Initialization</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_utils_initialization_._settings.html#backup" class="tsd-kind-icon">backup</a>
+								<a href="_utils_initialization_.settingsbeforeinitialization.html#backup" class="tsd-kind-icon">backup</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_utils_initialization_._settings.html#operations" class="tsd-kind-icon">operations</a>
+								<a href="_utils_initialization_.settingsbeforeinitialization.html#compress" class="tsd-kind-icon">compress</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_utils_initialization_._settings.html#path" class="tsd-kind-icon">path</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_utils_initialization_._settings.html#services" class="tsd-kind-icon">services</a>
+								<a href="_utils_initialization_.settingsbeforeinitialization.html#path" class="tsd-kind-icon">path</a>
 							</li>
 						</ul>
 					</li>

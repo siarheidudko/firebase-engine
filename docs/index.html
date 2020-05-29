@@ -108,6 +108,11 @@
 							<td>b</td>
 							<td>Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup</td>
 						</tr>
+						<tr>
+							<td>--nocompress</td>
+							<td>-nc</td>
+							<td>Do not use data compression</td>
+						</tr>
 				</tbody></table>
 				<a href="#use" id="use" style="color: inherit; text-decoration: none;">
 					<h2>Use</h2>
@@ -133,6 +138,10 @@
 				</a>
 				<p>This API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
 				<a href="https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users">Open official firebase docs</a></p>
+				<a href="#note" id="note" style="color: inherit; text-decoration: none;">
+					<h3>NOTE</h3>
+				</a>
+				<p>The library is currently not stable. There are a number of problems interacting with firebase, validation on big data is often unsuccessful. The stable version will be released under release 1.0.0.</p>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>LICENSE</h2>
 				</a>

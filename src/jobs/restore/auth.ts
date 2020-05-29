@@ -106,7 +106,17 @@ export class JobRestoreAuth extends JobBackupSRestoreTemplate {
     public run = async () => {
         this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
-            this.fileStream.pipe(this.gunzipStream).pipe(this.parserStream).pipe(this.writeStream)
+            if(this.gunzipStream){
+                const gunzip = this.gunzipStream
+                this.gunzipStream.on("unpipe", () => {
+                    gunzip.unpipe(this.parserStream)
+                    gunzip.close()
+                    this.parserStream.end()
+                })
+                this.fileStream.pipe(gunzip).pipe(this.parserStream).pipe(this.writeStream)
+            } else {
+                this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
+            }
             this.writeStream.on("finish", () => {
                 Logger.log(" -- Auth Restored - "+this.counter+" users in "+this.getWorkTime()+".")
                 Logger.log(" - Auth Restore Complete!")

@@ -3,6 +3,8 @@ import { Settings } from "../../utils/initialization"
 import { JobBackupServiceTemplate, DataModel } from "../../utils/template"
 import { AuthConverter } from "../../utils/AuthConverter"
 import { Logger } from "../../utils/Logger"
+import { Gzip } from "zlib"
+import { WriteStream } from "fs"
 
 export class JobBackupAuth extends JobBackupServiceTemplate {
     /**
@@ -50,14 +52,20 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
         this.startTimestamp = Date.now()
         await new Promise(async (res, rej) => {
             try {
-                this.stringiferStream.pipe(this.writer.gzipStream)
-                this.writer.gzipStream.once("unpipe", () => {
+                let _write: Gzip|WriteStream
+                if(this.writer.gzipStream){
+                    _write = this.writer.gzipStream
+                } else {
+                    _write = this.writer.fileStream
+                }
+                this.stringiferStream.pipe(_write)
+                _write.once("unpipe", () => {
                     Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
                     Logger.log(" - Auth Backup Complete!")
                     res()
                 })
                 await this.recursiveBackup()
-                this.stringiferStream.unpipe(this.writer.gzipStream)
+                this.stringiferStream.unpipe(_write)
             } catch (err) { 
                 rej(err) 
             }

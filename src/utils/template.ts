@@ -112,7 +112,7 @@ export class JobBackupServiceTemplate extends JobOneServiceTemplate{
      */
     constructor(settings: Settings, admin: app.App){
         super(settings, admin)
-        this.writer = createWriteFileStream(this.settings.backup)
+        this.writer = createWriteFileStream(this.settings.backup, this.settings.compress)
         this.stringiferStream = new Objectstream.Stringifer() as Transform
         this.stringiferStream.on("error", (err) => {
             Logger.warn(err)
@@ -140,20 +140,21 @@ export class JobBackupSRestoreTemplate extends JobOneServiceTemplate{
         super(settings, admin)
         this.fileStream = createReadStream(this.settings.backup, {
             flags: "r", 
-            mode: 0o600, 
-            highWaterMark: 64*1024
+            mode: 0o600
         })
-        this.gunzipStream = createGunzip()
         this.parserStream = new Objectstream.Parser() as Transform
         this.fileStream.on("error", (err) => {
-            Logger.warn(err)
-        })
-        this.gunzipStream.on("error", (err) => {
             Logger.warn(err)
         })
         this.parserStream.on("error", (err) => {
             Logger.warn(err)
         })
+        if(this.settings.compress){
+            this.gunzipStream = createGunzip()
+            this.gunzipStream.on("error", (err) => {
+                Logger.warn(err)
+            })
+        }
     }
     /**
      * file read stream
@@ -162,7 +163,7 @@ export class JobBackupSRestoreTemplate extends JobOneServiceTemplate{
     /**
      * unzip stream
      */
-    public gunzipStream: Gunzip
+    public gunzipStream?: Gunzip
     /**
      * string to object stream
      */

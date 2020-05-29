@@ -97,6 +97,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_utils_initialization_.writer.html#compress" class="tsd-kind-icon">compress</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_utils_initialization_.writer.html#filestream" class="tsd-kind-icon">file<wbr>Stream</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_utils_initialization_.writer.html#gzipstream" class="tsd-kind-icon">gzip<wbr>Stream</a></li>
 							</ul>
@@ -110,13 +111,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Writer<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_utils_initialization_.writer.html" class="tsd-signature-type">Writer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Writer<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, compress<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_utils_initialization_.writer.html" class="tsd-signature-type">Writer</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L41">utils/initialization.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L44">utils/initialization.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -131,6 +132,9 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>compress: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_utils_initialization_.writer.html" class="tsd-signature-type">Writer</a></h4>
 						</li>
@@ -140,12 +144,27 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="compress" class="tsd-anchor"></a>
+					<h3>compress</h3>
+					<div class="tsd-signature tsd-kind-icon">compress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L69">utils/initialization.ts:69</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>use compress</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="filestream" class="tsd-anchor"></a>
 					<h3>file<wbr>Stream</h3>
 					<div class="tsd-signature tsd-kind-icon">file<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WriteStream</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L63">utils/initialization.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L73">utils/initialization.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -156,11 +175,11 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="gzipstream" class="tsd-anchor"></a>
-					<h3>gzip<wbr>Stream</h3>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> gzip<wbr>Stream</h3>
 					<div class="tsd-signature tsd-kind-icon">gzip<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Gzip</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f884013/src/utils/initialization.ts#L67">utils/initialization.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/ca142a9/src/utils/initialization.ts#L77">utils/initialization.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -247,6 +266,9 @@
 								<a href="_utils_initialization_.writer.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_utils_initialization_.writer.html#compress" class="tsd-kind-icon">compress</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_utils_initialization_.writer.html#filestream" class="tsd-kind-icon">file<wbr>Stream</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -257,10 +279,13 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_utils_initialization_.parsedsettings.html" class="tsd-kind-icon">Parsed<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_utils_initialization_.settings.html" class="tsd-kind-icon">Settings</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_utils_initialization_._settings.html" class="tsd-kind-icon">_<wbr>Settings</a>
+						<a href="../interfaces/_utils_initialization_.settingsbeforeinitialization.html" class="tsd-kind-icon">Settings<wbr>Before<wbr>Initialization</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../modules/_utils_initialization_.html#store" class="tsd-kind-icon">store</a>

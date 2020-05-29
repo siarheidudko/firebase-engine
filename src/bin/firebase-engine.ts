@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cmdParser, _Settings, initialization, Settings } from "../utils/initialization"
+import { cmdParser, ParsedSettings, initialization, Settings } from "../utils/initialization"
 import { FirebaseEngine } from "../FirebaseEngine"
 import { app } from "firebase-admin"
 import { Logger } from "../utils/Logger"
@@ -32,6 +32,11 @@ const arg: {
         "Name": "backup",
         "Short name": "b",
         "Description": "Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup"
+    },
+    {
+        "Name": "--nocompress",
+        "Short name": "-nc",
+        "Description": "Do not use data compression (sometimes zlib throws an error, this will help)"
     }
 ]
 
@@ -51,14 +56,14 @@ function errorHandler(){
  * CLI
  */
 ( async() => {
-    const _settings: _Settings = cmdParser()
+    const _settings: ParsedSettings = cmdParser(process.argv)
     const init: {
         settings: Settings,
         admin: app.App
     } = initialization(_settings)
     const firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings)
     const run = async() => {
-        for(const operation of init.settings.operations) for(const service of init.settings.services){
+        for(const operation of _settings.operations) for(const service of _settings.services){
             Logger.log(operation+"/"+service)
             await firebaseEngine.jobs[operation][service]()
         }

@@ -1,5 +1,5 @@
 import { app } from "firebase-admin"
-import { _Settings, Settings, initialization, writers } from "./utils/initialization"
+import { SettingsBeforeInitialization, Settings, initialization, writers } from "./utils/initialization"
 import { Jobs } from "./jobs/Jobs"
 
 /**
@@ -9,7 +9,7 @@ export class FirebaseEngine {
     /**
      * @param settings - settings object
      */
-    constructor(settings: _Settings| Settings){
+    constructor(settings: SettingsBeforeInitialization|Settings){
         const init = initialization(settings)
         this.settings = init.settings
         this.admin = init.admin
@@ -31,14 +31,23 @@ export class FirebaseEngine {
      * Call this before exiting
      */
     public exit = async () => {
-        const arr: Promise<any>[] = [Promise.resolve()]
+        const arr: Promise<any>[] = []
         for(const key in writers){
             const writer = writers[key]
             const promise = new Promise((res,rej) => {  
-                writer.fileStream.on("finish", () => {
+                if(writer.fileStream.destroyed){
+                    res()
+                    return
+                }
+                writer.fileStream.once("finish", () => {
                     res()
                 })
-                writer.gzipStream.end()
+                if(writer.gzipStream && !writer.gzipStream.destroyed)
+                    writer.gzipStream.end()
+                else if(!writer.fileStream.destroyed)
+                    writer.fileStream.end()
+                else
+                    res()
             })
             arr.push(promise)
         }

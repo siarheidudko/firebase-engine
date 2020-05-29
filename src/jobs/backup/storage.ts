@@ -3,6 +3,8 @@ import { Settings } from "../../utils/initialization"
 import { JobBackupServiceTemplate, DataModel } from "../../utils/template"
 import { StorageConverter } from "../../utils/StorageConverter"
 import { Logger } from "../../utils/Logger"
+import { Gzip } from "zlib"
+import { WriteStream } from "fs"
 
 export class JobBackupStorage extends JobBackupServiceTemplate {
     /**
@@ -53,8 +55,14 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         this.startTimestamp = Date.now()
         await new Promise(async (res, rej) => {
             try {
-                this.stringiferStream.pipe(this.writer.gzipStream)
-                this.writer.gzipStream.once("unpipe", () => {
+                let _write: Gzip|WriteStream
+                if(this.writer.gzipStream){
+                    _write = this.writer.gzipStream
+                } else {
+                    _write = this.writer.fileStream
+                }
+                this.stringiferStream.pipe(_write)
+                _write.once("unpipe", () => {
                     Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
                     Logger.log(" - Storage Backup Complete!")
                     res()
@@ -62,7 +70,7 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
                 const [files] = await this.bucket.getFiles()
                 if(Array.isArray(files)) for(const file of files)
                     await this.backupFile(file)
-                this.stringiferStream.unpipe(this.writer.gzipStream)
+                this.stringiferStream.unpipe(_write)
             } catch (err) { 
                 rej(err) 
             }

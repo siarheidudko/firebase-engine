@@ -1,8 +1,8 @@
 import { readFileSync, createWriteStream, WriteStream } from "fs"
-import { initializeApp, app, credential } from "firebase-admin"
+import { initializeApp, app, credential, apps } from "firebase-admin"
 import { createGzip, Gzip } from "zlib"
 import { Logger } from "../utils/Logger"
-import { createHash } from "crypto"
+import { createHash, randomFillSync } from "crypto"
 
 /**
  * Module store (to prevent secondary initialization)
@@ -27,12 +27,15 @@ export const writers: {[key: string]: Writer} = {}
  * 
  * @param path - path to file for write
  */
-export const createWriteFileStream = (path: string) => {
+export const createWriteFileStream = (path: string, compress: boolean) => {
     const hash = createHash("sha1")
     hash.update(path)
     const key = hash.digest("hex")
-    if(!writers[key])
-        writers[key] = new Writer(path)
+    if(
+        !writers[key] ||
+        writers[key].fileStream.destroyed
+    )
+        writers[key] = new Writer(path, compress)
     return writers[key]
 }
 /**
@@ -43,20 +46,27 @@ export class Writer {
      * 
      * @param path - path to file for write
      */
-    constructor(path: string){
+    constructor(path: string, compress: boolean){
         this.fileStream = createWriteStream(path, {
             flags: "w", 
             mode: 0o600
         })
-        this.gzipStream = createGzip()
-        this.gzipStream.on("error", (err) => {
-            Logger.warn(err)
-        })
         this.fileStream.on("error", (err) => {
             Logger.warn(err)
         })
-        this.gzipStream.pipe(this.fileStream)
+        if(compress){
+            this.compress = true
+            this.gzipStream = createGzip()
+            this.gzipStream.on("error", (err) => {
+                Logger.warn(err)
+            })
+            this.gzipStream.pipe(this.fileStream)
+        }
     }
+    /**
+     * use compress
+     */
+    public compress: boolean = false
     /**
      * file write stream after gzipped
      */
@@ -64,13 +74,13 @@ export class Writer {
     /**
      * gzip stream
      */
-    public gzipStream: Gzip
+    public gzipStream?: Gzip
 }
 
 /**
- * settings object before initialization
+ * settings object from command line interface
  */
-export interface _Settings {
+export interface ParsedSettings {
     /**
      * array of operations
      */
@@ -86,12 +96,33 @@ export interface _Settings {
     /**
      * service for backup/clean/restore
      */
-    services: ("firestore"|"auth"|"storage")[]
+    services: ("firestore"|"auth"|"storage")[],
+    /**
+     * use compress
+     */
+    compress: boolean
+}
+/**
+ * settings object before initialization
+ */
+export interface SettingsBeforeInitialization {
+    /**
+     * path to Firebase service account key (json)
+     */
+    path?: string,
+    /**
+     * path to backup file
+     */
+    backup?: string,
+    /**
+     * use compress
+     */
+    compress: boolean
 }
 /**
  * settings object after initialization
  */
-export interface Settings extends _Settings {
+export interface Settings {
     /**
      * path to Firebase service account key (json)
      */
@@ -104,22 +135,27 @@ export interface Settings extends _Settings {
      * Firebase service account key (object)
      */
     serviceAccount: {[key: string]: any}
+    /**
+     * use compress
+     */
+    compress: boolean
 }
 
 /**
  * Command Line Parser
  */
-export const cmdParser = () => {
+export const cmdParser = (arg: string[]) => {
     /**
      * Settings object
      */
-    const settings: _Settings = {
+    const settings: ParsedSettings = {
         operations: [],
         path: undefined,
         backup: undefined,
-        services: []
+        services: [],
+        compress: true
     }
-    process.argv.forEach((val) => {
+    arg.forEach((val) => {
         if(val.match(/^path=/i) || val.match(/^p=/i))
             settings.path = val.replace(/^p=/i, "").replace(/^path=/i, "").replace(/"/g, "")
         if(val.match(/^backup=/i) || val.match(/^b=/i))
@@ -173,7 +209,17 @@ export const cmdParser = () => {
                     break
             }
         }
+        if(val.match(/^--nocompress/i) || val.match(/^-nc/i))
+            settings.compress = false
     })
+    if(settings.operations.length === 0)
+        settings.operations.push("backup")
+    if(settings.services.length === 0)
+        settings.services = [
+            "auth",
+            "firestore",
+            "storage"
+        ]
     return settings
 }
 
@@ -182,45 +228,50 @@ export const cmdParser = () => {
  * 
  * @param settings - settings object
  */
-export const initialization = (settings: _Settings = {
-    operations: [],
+export const initialization = (settings: SettingsBeforeInitialization = {
     path: undefined,
     backup: undefined,
-    services: []
+    compress: true
 }) =>  {
     if(store.settings && store.admin)
         return store as {
             settings: Settings,
             admin: app.App
         }
-    const _settings: {[key: string]: any} = {
-        operations: settings.operations,
+    const _settings: SettingsBeforeInitialization = {
         path: settings.path,
         backup: settings.backup,
-        services: settings.services
+        compress: settings.compress
     }
-    if(!_settings.path){
+    if(typeof(_settings.path) !== "string")
         throw new Error("Service account path not set.")
+    if(
+        (typeof(_settings.backup) !== "undefined") && 
+        (typeof(_settings.backup) !== "string")
+    )
+        throw new Error("Invalid backup argument.")
+    if(typeof(_settings.compress) !== "boolean")
+        throw new Error("Invalid backup argument.")
+    store.settings = {
+        ..._settings,
+        serviceAccount: JSON.parse(readFileSync(_settings.path).toString())
+    } as Settings
+    if(!store.settings.backup)
+        store.settings.backup = store.settings.serviceAccount.project_id+"_"+Date.now().toString()+".backup"
+    if(!store.admin){
+        const initializationConfig = {
+            databaseURL: "https://"+store.settings.serviceAccount.project_id+".firebaseio.com",
+            storageBucket: store.settings.serviceAccount.project_id+".appspot.com",
+            projectId: store.settings.serviceAccount.project_id,
+            credential: credential.cert(store.settings.serviceAccount)
+        }
+        if(apps.length > 0){
+            const appName = randomFillSync(Buffer.alloc(16)).toString("hex")
+            store.admin = initializeApp(initializationConfig, appName)
+        } else {
+            store.admin = initializeApp(initializationConfig)
+        }
     }
-    _settings.serviceAccount = JSON.parse(readFileSync(_settings.path).toString())
-    if(!_settings.backup)
-        _settings.backup = _settings.serviceAccount.project_id+"_"+Date.now().toString()+".backup"
-    if(!store.admin)
-        store.admin = initializeApp({
-            databaseURL: "https://"+_settings.serviceAccount.project_id+".firebaseio.com",
-            storageBucket: _settings.serviceAccount.project_id+".appspot.com",
-            projectId: _settings.serviceAccount.project_id,
-            credential: credential.cert(_settings.serviceAccount)
-        })
-    if(_settings.operations.length === 0)
-        _settings.operations.push("backup")
-    if(_settings.services.length === 0)
-        _settings.services = [
-            "auth",
-            "firestore",
-            "storage"
-        ]
-    store.settings = _settings as Settings
     return store as {
         settings: Settings,
         admin: app.App
