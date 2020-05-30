@@ -183,7 +183,7 @@ export const cmdParser = (arg: string[]) => {
         }
         if(val.match(/^services=/i) || val.match(/^s=/i)){
             const _service = val.replace(/^s=/i, "").replace(/^services=/i, "").replace(/"/g, "").replace(/\s/g, "").split(",")
-            serviceParser: for(const _s of _service) switch(_s){
+            for(const _s of _service) switch(_s){
                 case "firestore":
                 case "auth":
                 case "storage":
@@ -199,12 +199,10 @@ export const cmdParser = (arg: string[]) => {
                     settings.services.push("storage")
                     break
                 case "all":
-                    settings.services = [
-                        "auth",
-                        "firestore",
-                        "storage"
-                    ]
-                    break serviceParser
+                    settings.services.push("auth")
+                    settings.services.push("firestore")
+                    settings.services.push("storage")
+                    break
                 default:
                     break
             }

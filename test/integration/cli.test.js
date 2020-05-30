@@ -2,6 +2,7 @@
 require("mocha")
 const admin = require("firebase-admin")
 const path = require("path")
+const crypto = require("crypto")
 const settings = require("../utils/settings")
 const fsPromises = require("fs").promises
 Object.assign(global, require("../utils/global"))
@@ -24,8 +25,8 @@ const Storage = app.storage()
 const Bucket = Storage.bucket(serviceAccount.project_id+".appspot.com")
 
 describe("Integration test CLI", function() {
-    this.timeout(300000)
-    const backupPath = "./test.backup"
+    this.timeout(60000)
+    const backupPath = "./"+crypto.randomFillSync(Buffer.alloc(4)).toString("hex")+".backup"
     let newDoc
     const docData = {
         array: admin.firestore.FieldValue.arrayUnion("a","b"),
@@ -85,6 +86,7 @@ describe("Integration test CLI", function() {
         await Auth.deleteUser(userData.uid).catch((err)=>{})
         const f = Bucket.file(file.name)
         await f.delete().catch((err)=>{})
+        await fsPromises.unlink(backupPath).catch((err)=>{})
     })
     /*
         backup all
@@ -352,5 +354,34 @@ describe("Integration test CLI", function() {
         if(errors.length > 0)
             throw new Error(errors.join(", "))
         return
+    })
+    /*
+        Help message (invalid argument)
+    */
+    it("node ./lib/bin/firebase-engine.js", async function(){      
+        try{
+            const log = await childProcessPromise("node", [
+                "./lib/bin/firebase-engine.js"
+            ])
+            throw new Error("error")
+        } catch (err) {
+            console.log(err)
+            return
+        }
+    })
+    /*
+        Help message (invalid argument type)
+    */
+    it("node ./lib/bin/firebase-engine.js o=true", async function(){      
+        try{
+            const log = await childProcessPromise("node", [
+                "./lib/bin/firebase-engine.js",
+                "o=true"
+            ])
+            throw new Error("error")
+        } catch (err) {
+            console.log(err)
+            return
+        }
     })
 })

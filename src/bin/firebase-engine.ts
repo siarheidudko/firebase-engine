@@ -36,7 +36,7 @@ const arg: {
     {
         "Name": "--nocompress",
         "Short name": "-nc",
-        "Description": "Do not use data compression (sometimes zlib throws an error, this will help)"
+        "Description": "Do not use data compression"
     }
 ]
 
@@ -61,17 +61,27 @@ function errorHandler(){
         settings: Settings,
         admin: app.App
     } = initialization(_settings)
-    const firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings)
+    let firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings)
     const run = async() => {
-        for(const operation of _settings.operations) for(const service of _settings.services){
-            Logger.log(operation+"/"+service)
-            await firebaseEngine.jobs[operation][service]()
+        for(const operation of _settings.operations){
+            if(operation === "backup")
+                firebaseEngine = new FirebaseEngine(init.settings)
+            for(const service of _settings.services){
+                const startMsg = operation[0].toUpperCase()
+                    + operation.substr(1)
+                    + "/"
+                    + service[0].toUpperCase()
+                    + service.substr(1)
+                    + " Start"
+                Logger.log(startMsg)
+                await firebaseEngine.jobs[operation][service]()
+            }
+            if(operation === "backup")
+                await firebaseEngine.exit()
         }
         return
     }
-    run().then(()=>{
-        return firebaseEngine.exit()
-    }).then(() => {
+    run().then(() => {
         Logger.log("All Jobs Complete!")
         setTimeout(process.exit, 1, 0)
     }).catch((err) => {

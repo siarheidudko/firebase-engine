@@ -54,9 +54,6 @@ Or from the FIREBASE project
 
 This API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
 [Open official firebase docs](https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users)
-
-### NOTE
-The library is currently not stable. There are a number of problems interacting with firebase, validation on big data is often unsuccessful. The stable version will be released under release 1.0.0.
   
 ## LICENSE  
   

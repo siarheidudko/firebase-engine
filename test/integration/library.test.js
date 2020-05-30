@@ -2,6 +2,7 @@
 require("mocha")
 const admin = require("firebase-admin")
 const path = require("path")
+const crypto = require("crypto")
 const settings = require("../utils/settings")
 const fsPromises = require("fs").promises
 Object.assign(global, require("../utils/global"))
@@ -25,8 +26,8 @@ const Storage = app.storage()
 const Bucket = Storage.bucket(serviceAccount.project_id+".appspot.com")
 
 describe("Integration test Library", function() {
-    this.timeout(300000)
-    const backupPath = "./test.backup"
+    this.timeout(60000)
+    const backupPath = "./"+crypto.randomFillSync(Buffer.alloc(4)).toString("hex")+".backup"
     let newDoc
     const docData = {
         array: admin.firestore.FieldValue.arrayUnion("a","b"),
@@ -86,14 +87,15 @@ describe("Integration test Library", function() {
         await Auth.deleteUser(userData.uid).catch((err)=>{})
         const f = Bucket.file(file.name)
         await f.delete().catch((err)=>{})
+        await fsPromises.unlink(backupPath).catch((err)=>{})
     })
     /*
         Firebase.Auth: Backup, Clean, Restore
     */
     it("Backup, Clean, Restore - Auth", async function(){
         const firebaseEngine = new FirebaseEngine({
-            path: "./serviceAccount.json",
-            backup: "./test.backup",
+            path: settings.serviceAccountPath,
+            backup: backupPath,
             compress: false
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
@@ -152,8 +154,8 @@ describe("Integration test Library", function() {
     */
     it("Backup, Clean, Restore - Firestore", async function(){
         const firebaseEngine = new FirebaseEngine({
-            path: "./serviceAccount.json",
-            backup: "./test.backup",
+            path: settings.serviceAccountPath,
+            backup: backupPath,
             compress: false
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
@@ -215,8 +217,8 @@ describe("Integration test Library", function() {
     */
     it("Backup, Clean, Restore - Storage", async function(){
         const firebaseEngine = new FirebaseEngine({
-            path: "./serviceAccount.json",
-            backup: "./test.backup",
+            path: settings.serviceAccountPath,
+            backup: backupPath,
             compress: false
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
@@ -260,7 +262,7 @@ describe("Integration test Library", function() {
     it("Backup, Clean, Restore - Auth, Firestore, Storage", async function(){
         const firebaseEngine = new FirebaseEngine({
             path: "./serviceAccount.json",
-            backup: "./test.backup",
+            backup: backupPath,
             compress: true
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
