@@ -114,6 +114,43 @@
 							<td>Do not use data compression</td>
 						</tr>
 				</tbody></table>
+				<a href="#launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" id="launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" style="color: inherit; text-decoration: none;">
+					<h2>Launch parameters (only for password recovery for users in Firebase.Auth)</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Short name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>algorithm</td>
+							<td>alg</td>
+							<td>The password hashing information (algorithm, only SCRYPT). Default: SCRYPT</td>
+						</tr>
+						<tr>
+							<td>base64_signer_key</td>
+							<td>bsk</td>
+							<td>The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set.</td>
+						</tr>
+						<tr>
+							<td>base64_salt_separator</td>
+							<td>bss</td>
+							<td>The password hashing information (salt separator in base64). Default: Bw==</td>
+						</tr>
+						<tr>
+							<td>rounds</td>
+							<td>rnd</td>
+							<td>The password hashing information (rounds). Default: 8</td>
+						</tr>
+						<tr>
+							<td>mem_cost</td>
+							<td>mc</td>
+							<td>The password hashing information (memory cost). Default: 14</td>
+						</tr>
+				</tbody></table>
 				<a href="#use" id="use" style="color: inherit; text-decoration: none;">
 					<h2>Use</h2>
 				</a>
@@ -121,6 +158,8 @@
 				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"clean, restore"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore, storage"</span> backup=<span class="hljs-string">"test.backup"</span></code></pre>
 				<p>With short names</p>
 				<pre><code class="language-bash">    firebase-engine o=<span class="hljs-string">"b, c"</span> p=<span class="hljs-string">"./test.json"</span> b=<span class="hljs-string">"test.backup"</span></code></pre>
+				<p>With password recovery for users</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"restore"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore, auth"</span> backup=<span class="hljs-string">"test.backup"</span> bsk=<span class="hljs-string">"nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="</span></code></pre>
 				<a href="#open-source" id="open-source" style="color: inherit; text-decoration: none;">
 					<h2>Open Source</h2>
 				</a>

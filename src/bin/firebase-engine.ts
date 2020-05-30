@@ -37,6 +37,31 @@ const arg: {
         "Name": "--nocompress",
         "Short name": "-nc",
         "Description": "Do not use data compression"
+    },
+    {
+        "Name": "algorithm",
+        "Short name": "alg",
+        "Description": "The password hashing information (algorithm). Default: SCRYPT"
+    },
+    {
+        "Name": "base64_signer_key",
+        "Short name": "bsk",
+        "Description": "The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set."
+    },
+    {
+        "Name": "base64_salt_separator",
+        "Short name": "bss",
+        "Description": "The password hashing information (salt separator in base64). Default: Bw=="
+    },
+    {
+        "Name": "rounds",
+        "Short name": "rnd",
+        "Description": "The password hashing information (rounds). Default: 8"
+    },
+    {
+        "Name": "mem_cost",
+        "Short name": "mc",
+        "Description": "The password hashing information (memory cost). Default: 14"
     }
 ]
 

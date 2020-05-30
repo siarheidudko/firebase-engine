@@ -1,6 +1,6 @@
 {
   "name": "firebase-engine",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tools  for firebase (backup, clean,  restore)",
   "main": "./lib/index.js",
   "scripts": {
@@ -28,7 +28,9 @@
     "clean",
     "restore",
     "copy",
-    "move"
+    "move",
+    "cli",
+    "mobile"
   ],
   "author": "Siarhei Dudko <slavianich@gmail.com>",
   "license": "Apache-2.0",

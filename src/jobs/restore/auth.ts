@@ -24,7 +24,11 @@ export class JobRestoreAuth extends JobBackupSRestoreTemplate {
                     )
                         return
                     const userRef = object.path
-                    const userData = AuthConverter.fromString(object.data)
+                    let userData
+                    if(self.settings.hash_config)
+                        userData = AuthConverter.fromString(object.data, true)
+                    else
+                        userData = AuthConverter.fromString(object.data, false)
                     await self.writeBuffer.set(userRef, userData)
                     return
                 })().then(() => {
@@ -77,7 +81,13 @@ export class JobRestoreAuth extends JobBackupSRestoreTemplate {
          * write this buffer to project and clean it
          */
         commit: async () => {
-            const res = await this.auth.importUsers(this.writeBuffer.batch)
+            let res
+            if(this.settings.hash_config)
+                res = await this.auth.importUsers(this.writeBuffer.batch, {
+                    hash: this.settings.hash_config
+                })
+            else
+                res = await this.auth.importUsers(this.writeBuffer.batch)
             if(res.failureCount !== 0){
                 this.counter -= res.failureCount
                 Logger.warn(JSON.stringify(res.errors))

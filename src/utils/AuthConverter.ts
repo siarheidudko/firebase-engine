@@ -41,8 +41,15 @@ export class AuthConverter {
      * Convert string to object
      * @param d - String to convert
      */
-    public static fromString(d: string){
+    public static fromString(d: string, restorePassword: boolean = false){
         const _obj: {[key: string]: any} = JSON.parse(d)
+        if(restorePassword){
+            if(_obj.passwordHash) _obj.passwordHash = Buffer.from(_obj.passwordHash, "base64")
+            if(_obj.passwordSalt) _obj.passwordSalt = Buffer.from(_obj.passwordSalt, "base64")
+        } else {
+            if(_obj.passwordHash) _obj.passwordHash = undefined
+            if(_obj.passwordSalt) _obj.passwordSalt = undefined
+        }
         return _obj as {uid: string, [key: string]: any}
     }
 }

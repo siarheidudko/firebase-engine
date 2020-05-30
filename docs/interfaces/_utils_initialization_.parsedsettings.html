@@ -93,6 +93,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.parsedsettings.html#backup" class="tsd-kind-icon">backup</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.parsedsettings.html#compress" class="tsd-kind-icon">compress</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.parsedsettings.html#hash_config" class="tsd-kind-icon">hash_<wbr>config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.parsedsettings.html#operations" class="tsd-kind-icon">operations</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.parsedsettings.html#path" class="tsd-kind-icon">path</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_utils_initialization_.parsedsettings.html#services" class="tsd-kind-icon">services</a></li>
@@ -109,7 +110,7 @@
 					<div class="tsd-signature tsd-kind-icon">backup<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/2428345/src/utils/initialization.ts#L95">utils/initialization.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/d23cbe9/src/utils/initialization.ts#L95">utils/initialization.ts:95</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -124,7 +125,7 @@
 					<div class="tsd-signature tsd-kind-icon">compress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/2428345/src/utils/initialization.ts#L103">utils/initialization.ts:103</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/d23cbe9/src/utils/initialization.ts#L103">utils/initialization.ts:103</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -134,12 +135,47 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hash_config" class="tsd-anchor"></a>
+					<h3>hash_<wbr>config</h3>
+					<div class="tsd-signature tsd-kind-icon">hash_<wbr>config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>algorithm<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">auth.HashAlgorithmType</span><span class="tsd-signature-symbol">; </span>base64_salt_separator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">; </span>base64_signer_key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">; </span>mem_cost<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>rounds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/d23cbe9/src/utils/initialization.ts#L107">utils/initialization.ts:107</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>password hash config</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> algorithm<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">auth.HashAlgorithmType</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> base64_<wbr>salt_<wbr>separator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> base64_<wbr>signer_<wbr>key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> mem_<wbr>cost<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> rounds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="operations" class="tsd-anchor"></a>
 					<h3>operations</h3>
 					<div class="tsd-signature tsd-kind-icon">operations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"backup"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"clean"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"restore"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/2428345/src/utils/initialization.ts#L87">utils/initialization.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/d23cbe9/src/utils/initialization.ts#L87">utils/initialization.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/2428345/src/utils/initialization.ts#L91">utils/initialization.ts:91</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/d23cbe9/src/utils/initialization.ts#L91">utils/initialization.ts:91</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -169,7 +205,7 @@
 					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"firestore"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"auth"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"storage"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/2428345/src/utils/initialization.ts#L99">utils/initialization.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/d23cbe9/src/utils/initialization.ts#L99">utils/initialization.ts:99</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,6 +296,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_utils_initialization_.parsedsettings.html#compress" class="tsd-kind-icon">compress</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_utils_initialization_.parsedsettings.html#hash_config" class="tsd-kind-icon">hash_<wbr>config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_utils_initialization_.parsedsettings.html#operations" class="tsd-kind-icon">operations</a>

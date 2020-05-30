@@ -119,4 +119,81 @@ describe("CLI parser", function() {
             throw new Error("error")
         return
     })
+    it('firebase-engine o="restore" path="./serviceAccount.json" bsk="c2pibmtqa2pua25ubg=="', async () => {
+        const o = cmdParser([
+            'firebase-engine',
+            'o="restore"',
+            'path="./serviceAccount.json"',
+            'bsk="c2pibmtqa2pua25ubg=="'
+        ])
+        if(
+            (typeof(o) !== "object") ||
+            (!Array.isArray(o.operations)) ||
+            (o.operations[0] !== "restore") ||
+            (!Array.isArray(o.services)) ||
+            (o.services.indexOf("auth") === -1) ||
+            (o.services.indexOf("firestore") === -1) ||
+            (o.services.indexOf("storage") === -1) ||
+            (o.path !== "./serviceAccount.json") ||
+            (o.compress !== true) ||
+            (typeof(o.hash_config) !== "object") ||
+            (o.hash_config.base64_signer_key.toString("base64") !== "c2pibmtqa2pua25ubg==")
+        )
+            throw new Error("error")
+        return
+    })
+    it('firebase-engine o="restore" path="./serviceAccount.json" algorithm="BCRYPT"', async () => {
+        const o = cmdParser([
+            'firebase-engine',
+            'o="restore"',
+            'path="./serviceAccount.json"',
+            'algorithm="BCRYPT"',
+        ])
+        if(
+            (typeof(o) !== "object") ||
+            (!Array.isArray(o.operations)) ||
+            (o.operations[0] !== "restore") ||
+            (!Array.isArray(o.services)) ||
+            (o.services.indexOf("auth") === -1) ||
+            (o.services.indexOf("firestore") === -1) ||
+            (o.services.indexOf("storage") === -1) ||
+            (o.path !== "./serviceAccount.json") ||
+            (o.compress !== true) ||
+            (typeof(o.hash_config) !== "object") ||
+            (o.hash_config.algorithm !== "BCRYPT")
+        )
+            throw new Error("error")
+        return
+    })
+    it('firebase-engine o="restore" path="./serviceAccount.json" bsk="c2pibmtqa2pua25ubg==" bss="ZHNmZHNkc2Zkc2ZzZHNmc2Q=" alg="SCRYPT" rnd=9 mc=13', async () => {
+        const o = cmdParser([
+            'firebase-engine',
+            'o="restore"',
+            'path="./serviceAccount.json"',
+            'bsk="c2pibmtqa2pua25ubg=="',
+            'bss="ZHNmZHNkc2Zkc2ZzZHNmc2Q="',
+            'alg="SCRYPT"',
+            'rnd=9',
+            'mc=13'
+        ])
+        if(
+            (typeof(o) !== "object") ||
+            (!Array.isArray(o.operations)) ||
+            (o.operations[0] !== "restore") ||
+            (!Array.isArray(o.services)) ||
+            (o.services.indexOf("auth") === -1) ||
+            (o.services.indexOf("firestore") === -1) ||
+            (o.services.indexOf("storage") === -1) ||
+            (o.path !== "./serviceAccount.json") ||
+            (o.compress !== true) ||
+            (typeof(o.hash_config) !== "object") ||
+            (o.hash_config.algorithm !== "SCRYPT") ||
+            (o.hash_config.base64_signer_key.toString("base64") !== "c2pibmtqa2pua25ubg==") ||
+            (o.hash_config.base64_salt_separator.toString("base64")  !== "ZHNmZHNkc2Zkc2ZzZHNmc2Q=") ||
+            (o.hash_config.rounds !== 9) ||
+            (o.hash_config.mem_cost !== 13)
+        )
+            throw new Error("error")
+        return
+    })
 })

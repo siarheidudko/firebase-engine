@@ -24,6 +24,17 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 |    backup    |     b      |   Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup   |
 | --nocompress |    -nc     |                          Do not use data compression                             |
 
+## Launch parameters (only for password recovery for users in Firebase.Auth)
+
+|     Name              | Short name |                                   Description                                    |
+|-----------------------|------------|----------------------------------------------------------------------------------|
+|       algorithm       |    alg     | The password hashing information (algorithm, only SCRYPT). Default: SCRYPT       |
+|   base64_signer_key   |    bsk     | The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set. |
+| base64_salt_separator |    bss     | The password hashing information (salt separator in base64). Default: Bw==       |
+|        rounds         |    rnd     | The password hashing information (rounds). Default: 8                            |
+|       mem_cost        |     mc     | The password hashing information (memory cost). Default: 14                      |
+
+
 ## Use
 
 With full names
@@ -34,6 +45,11 @@ With full names
 With short names
 ```bash
 	firebase-engine o="b, c" p="./test.json" b="test.backup"
+```
+
+With password recovery for users
+```bash
+	firebase-engine operations="restore" path="./test.json" services="firestore, auth" backup="test.backup" bsk="nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="
 ```
 
 ## Open Source
