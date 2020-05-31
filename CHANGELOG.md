@@ -1,3 +1,8 @@
+# 1.1.1 / 2020-05-31
+
+## :bug: Fixes
+- Work with the Timestamp type is unified with Firestore (previously values up to milliseconds were saved)
+
 # 1.1.0 / 2020-05-31
 
 ## :tada: Enhancements
