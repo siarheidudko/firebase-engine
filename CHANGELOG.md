@@ -1,3 +1,8 @@
+# 1.2.2 / 2020-06-01
+
+## :tada: Enhancements
+- Code optimization
+
 # 1.2.1 / 2020-05-31
 
 ## :tada: Enhancements
