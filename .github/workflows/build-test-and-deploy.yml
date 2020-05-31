@@ -130,7 +130,7 @@ jobs:
         with:
           name: lib
           path: ${{ github.workspace }}/lib
-       - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
