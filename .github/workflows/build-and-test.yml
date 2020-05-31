@@ -1,8 +1,8 @@
-name: Build, test and deploy
+name: Build and test
 on:
   push:
-    tags:
-      - 'v1.*.*'
+    tags-ignore:
+      - 'v*.*.*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -116,62 +116,3 @@ jobs:
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
         run: npm run cov
-  deploy:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: [build, node10, node12]
-    env:
-      NODE_VERSION: 10
-    steps:
-      - name: Сheckout repo
-        uses: actions/checkout@v2
-      - name: Unarchiving lib directory
-        uses: actions/download-artifact@v2
-        with:
-          name: lib
-          path: ${{ github.workspace }}/lib
-       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache node modules
-        uses: actions/cache@v1
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install modules
-        run: npm ci
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
-          draft: false
-          prerelease: false
-      - name: Set registry npm packages
-        uses: actions/setup-node@v1
-        with:
-          registry-url: 'https://registry.npmjs.org'
-      - name: Publish package to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Set registry github packages
-        uses: actions/setup-node@v1
-        with:
-          registry-url: 'https://npm.pkg.github.com'
-      - name: Publish package to GITHUB
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
