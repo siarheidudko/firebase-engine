@@ -26,7 +26,7 @@ export class FirestoreConverter {
         if(d === null)
             return { data: d, type: "null" }
         if(d instanceof Firestore.Timestamp)
-            return { data: d.toMillis(), type: "timestamp" }
+            return { data: {sec: d.seconds, nano: d.nanoseconds}, type: "timestamp" }
         if(d instanceof Firestore.DocumentReference)
             return { data: d.path, type: "document" }
         if(d instanceof Firestore.GeoPoint)
@@ -76,7 +76,7 @@ export class FirestoreConverter {
         if(d.type === "null")
             return null
         if(d.type === "timestamp")
-            return Firestore.Timestamp.fromMillis(d.data)
+            return new Firestore.Timestamp(d.data.seconds, d.data.nanoseconds)
         if(d.type === "document")
             return Firestore().doc(d.data)
         if(d.type === "geopoint")

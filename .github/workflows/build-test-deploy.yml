@@ -1,22 +1,23 @@
-name: Lint, Build and Test in Emulator
+name: Build, test and deploy
 on:
   push:
     branches:
       - master
+    tags:
+      - 'v1.*.*'
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
+    env:
+      NODE_VERSION: 10
     steps:
       - name: Сheckout repo
         uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
         uses: actions/cache@v1
         env:
@@ -36,15 +37,26 @@ jobs:
         run: npm run lint
       - name: Run builder
         run: npm run build
+      - name: Archiving lib directory
+        uses: actions/upload-artifact@v2
+        with:
+          name: lib
+          path: ${{ github.workspace }}/lib
   node10:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    needs: build
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       NODE_VERSION: 10
     steps:
       - name: Сheckout repo
         uses: actions/checkout@v2
+      - name: Unarchiving lib directory
+        uses: actions/download-artifact@v2
+        with:
+          name: lib
+          path: ${{ github.workspace }}/lib
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
@@ -71,13 +83,18 @@ jobs:
   node12:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: node10
+    needs: [build, node10]
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       NODE_VERSION: 12
     steps:
       - name: Сheckout repo
         uses: actions/checkout@v2
+      - name: Unarchiving lib directory
+        uses: actions/download-artifact@v2
+        with:
+          name: lib
+          path: ${{ github.workspace }}/lib
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
@@ -101,3 +118,49 @@ jobs:
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
         run: npm run cov
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [build, node10, node12]
+    env:
+      NODE_VERSION: 10
+    steps:
+      - name: Сheckout repo
+        uses: actions/checkout@v2
+      - name: Unarchiving lib directory
+        uses: actions/download-artifact@v2
+        with:
+          name: lib
+          path: ${{ github.workspace }}/lib
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install dependencies
+        run: npm ci
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
+          draft: false
+          prerelease: false
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}
