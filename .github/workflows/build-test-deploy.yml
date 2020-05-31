@@ -130,7 +130,7 @@ jobs:
         with:
           name: lib
           path: ${{ github.workspace }}/lib
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -145,7 +145,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Install dependencies
+      - name: Install modules
         run: npm ci
       - name: Create Release
         id: create_release
@@ -159,6 +159,19 @@ jobs:
             see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
           draft: false
           prerelease: false
-      - run: npm publish --access public
+      - name: Set registry npm packages
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://registry.npmjs.org'
+      - name: Publish package to NPM
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Set registry github packages
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Publish package to GITHUB
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

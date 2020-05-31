@@ -1,3 +1,8 @@
+# 1.1.2 / 2020-05-31
+
+## :nut_and_bolt: Other
+- Fix github CI (auto publish)
+
 # 1.1.1 / 2020-05-31
 
 ## :bug: Fixes
