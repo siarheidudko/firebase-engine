@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build, test and deploy
 on:
   push:
     tags:
