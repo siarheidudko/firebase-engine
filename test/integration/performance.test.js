@@ -35,7 +35,8 @@ describe("Performance test CLI", function() {
             boolean: true,
             timestamp: admin.firestore.Timestamp.fromMillis(Date.now()),
             ref: Firestore.collection("test").doc(),
-            geopoint: new admin.firestore.GeoPoint(1, 11)
+            geopoint: new admin.firestore.GeoPoint(1, 11),
+            binary: Buffer.from("Test data")
         }
     }
     this.beforeAll(async () => {
@@ -138,7 +139,9 @@ describe("Performance test CLI", function() {
                 (_docData.map.timestamp.toMillis() !== docData.map.timestamp.toMillis()) ||
                 (_docData.map.ref.id !== docData.map.ref.id) ||
                 (_docData.map.geopoint.latitude !== docData.map.geopoint.latitude) ||
-                (_docData.map.geopoint.longitude !== docData.map.geopoint.longitude)
+                (_docData.map.geopoint.longitude !== docData.map.geopoint.longitude) ||
+                (!(_docData.map.binary instanceof Buffer)) ||
+                (docData.map.binary.equals(_docData.map.binary) !== true)
             )
                 errors.push("User data not equal!")
         }

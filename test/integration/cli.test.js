@@ -37,7 +37,8 @@ describe("Integration test CLI", function() {
             boolean: true,
             timestamp: admin.firestore.Timestamp.fromMillis(Date.now()),
             ref: Firestore.collection("test").doc(),
-            geopoint: new admin.firestore.GeoPoint(1, 11)
+            geopoint: new admin.firestore.GeoPoint(1, 11),
+            binary: Buffer.from("Test data")
         }
     }
     const userData = { 
@@ -175,7 +176,9 @@ describe("Integration test CLI", function() {
                 (_docData.map.timestamp.toMillis() !== docData.map.timestamp.toMillis()) ||
                 (_docData.map.ref.id !== docData.map.ref.id) ||
                 (_docData.map.geopoint.latitude !== docData.map.geopoint.latitude) ||
-                (_docData.map.geopoint.longitude !== docData.map.geopoint.longitude)
+                (_docData.map.geopoint.longitude !== docData.map.geopoint.longitude) ||
+                (!(_docData.map.binary instanceof Buffer)) ||
+                (docData.map.binary.equals(_docData.map.binary) !== true)
             )
                 errors.push("User data not equal!")
         }
@@ -214,7 +217,7 @@ describe("Integration test CLI", function() {
             const [buffer] = await _file.download()
             if(_file.name !== file.name)
                 errors.push("File path not equal!")
-            if(Buffer.compare(buffer, file.data) !== 0)
+            if(file.data.equals(buffer) !== true)
                 errors.push("File data not equal!")
         }
         if(errors.length > 0)
@@ -309,7 +312,9 @@ describe("Integration test CLI", function() {
                 (_docData.map.timestamp.toMillis() !== docData.map.timestamp.toMillis()) ||
                 (_docData.map.ref.id !== docData.map.ref.id) ||
                 (_docData.map.geopoint.latitude !== docData.map.geopoint.latitude) ||
-                (_docData.map.geopoint.longitude !== docData.map.geopoint.longitude)
+                (_docData.map.geopoint.longitude !== docData.map.geopoint.longitude) ||
+                (!(_docData.map.binary instanceof Buffer)) ||
+                (docData.map.binary.equals(_docData.map.binary) !== true)
             )
                 errors.push("User data not equal!")
         }
@@ -348,7 +353,7 @@ describe("Integration test CLI", function() {
             const [buffer] = await _file.download()
             if(_file.name !== file.name)
                 errors.push("File path not equal!")
-            if(Buffer.compare(buffer, file.data) !== 0)
+            if(file.data.equals(buffer) !== true)
                 errors.push("File data not equal!")
         }
         if(errors.length > 0)

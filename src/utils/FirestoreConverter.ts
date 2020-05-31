@@ -25,6 +25,8 @@ export class FirestoreConverter {
             return { data: d, type: "boolean" }
         if(d === null)
             return { data: d, type: "null" }
+        if(d instanceof Buffer)
+            return { data: d.toString("base64"), type: "binary" }
         if(d instanceof Firestore.Timestamp)
             return { data: {sec: d.seconds, nano: d.nanoseconds}, type: "timestamp" }
         if(d instanceof Firestore.DocumentReference)
@@ -75,6 +77,8 @@ export class FirestoreConverter {
             return d.data
         if(d.type === "null")
             return null
+        if(d.type === "binary")
+            return Buffer.from(d.data, "base64")
         if(d.type === "timestamp")
             return new Firestore.Timestamp(d.data.sec, d.data.nano)
         if(d.type === "document")
