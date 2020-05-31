@@ -1,5 +1,6 @@
 $ cat .gitignore
 node_modules
+lib
 .nyc_output
 *.backup
 *.log
