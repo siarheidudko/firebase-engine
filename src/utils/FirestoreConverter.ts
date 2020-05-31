@@ -76,7 +76,7 @@ export class FirestoreConverter {
         if(d.type === "null")
             return null
         if(d.type === "timestamp")
-            return new Firestore.Timestamp(d.data.seconds, d.data.nanoseconds)
+            return new Firestore.Timestamp(d.data.sec, d.data.nano)
         if(d.type === "document")
             return Firestore().doc(d.data)
         if(d.type === "geopoint")
