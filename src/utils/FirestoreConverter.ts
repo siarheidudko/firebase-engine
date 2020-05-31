@@ -54,7 +54,7 @@ export class FirestoreConverter {
                 _obj.data[key] = FirestoreConverter.toObject(d[key])
             return _obj
         }
-        return { data: JSON.stringify(d), type: "custom" }
+        throw new Error("Invalid data type.")
     }
     /**
      * Convert string to object
@@ -69,35 +69,33 @@ export class FirestoreConverter {
      * @param d - Object for serialization
      */
     private static fromObject(d: any){
-        if(d.type === "string")
-            return d.data
-        if(d.type === "number")
-            return d.data
-        if(d.type === "boolean")
-            return d.data
-        if(d.type === "null")
-            return null
-        if(d.type === "binary")
-            return Buffer.from(d.data, "base64")
-        if(d.type === "timestamp")
-            return new Firestore.Timestamp(d.data.sec, d.data.nano)
-        if(d.type === "document")
-            return Firestore().doc(d.data)
-        if(d.type === "geopoint")
-            return new Firestore.GeoPoint(d.data.lat, d.data.long)
-        if(d.type === "array"){
-            const _arr: any[] = []
-            for(const val of d.data)
-                _arr.push(FirestoreConverter.fromObject(val))
-            return _arr
+        switch(d.type){
+            case "string":
+            case "number":
+            case "boolean":
+                return d.data
+            case "null":
+                return null
+            case "binary":
+                return Buffer.from(d.data, "base64")
+            case "timestamp":
+                return new Firestore.Timestamp(d.data.sec, d.data.nano)
+            case "document":
+                return Firestore().doc(d.data)
+            case "geopoint":
+                return new Firestore.GeoPoint(d.data.lat, d.data.long)
+            case "array":
+                const _arr: any[] = []
+                for(const val of d.data)
+                    _arr.push(FirestoreConverter.fromObject(val))
+                return _arr
+            case "map":
+                const _obj: {[key: string]: any} = {}
+                for(const key in d.data)
+                    _obj[key] = FirestoreConverter.fromObject(d.data[key])
+                return _obj
+            default:
+                throw new Error("Invalid data type.")
         }
-        if(d.type === "map"){
-            const _obj: {[key: string]: any} = {}
-            for(const key in d.data)
-                _obj[key] = FirestoreConverter.fromObject(d.data[key])
-            return _obj
-        }
-        if(d.type === "custom")
-            return JSON.parse(d.data)
     }
 }
