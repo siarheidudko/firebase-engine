@@ -1,4 +1,4 @@
-# 1.2.0 / 2020-05-31
+# 1.2.1 / 2020-05-31
 
 ## :tada: Enhancements
 - Added type of binary to firestore converter (full support types of firestore)
