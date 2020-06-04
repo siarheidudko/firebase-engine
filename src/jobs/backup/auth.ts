@@ -5,14 +5,16 @@ import { AuthConverter } from "../../utils/AuthConverter"
 import { Logger } from "../../utils/Logger"
 import { Gzip } from "zlib"
 import { WriteStream } from "fs"
+import { Storage } from "@google-cloud/storage"
 
 export class JobBackupAuth extends JobBackupServiceTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         this.auth = this.admin.auth()
     }
     /**

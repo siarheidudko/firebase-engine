@@ -1,17 +1,19 @@
 import { app, auth as Auth } from "firebase-admin"
 import { Settings } from "../../utils/initialization"
-import { JobBackupSRestoreTemplate, DataModel } from "../../utils/template"
+import { JobBackupServiceRestoreTemplate, DataModel } from "../../utils/template"
 import { Writable } from "stream"
 import { AuthConverter } from "../../utils/AuthConverter"
 import { Logger } from "../../utils/Logger"
+import { Storage } from "@google-cloud/storage"
 
-export class JobRestoreAuth extends JobBackupSRestoreTemplate {
+export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         this.auth = this.admin.auth()
         const self = this
         this.writeStream = new Writable({

@@ -2,14 +2,16 @@ import { app, auth as Auth } from "firebase-admin"
 import { Settings } from "../../utils/initialization"
 import { JobOneServiceTemplate } from "../../utils/template"
 import { Logger } from "../../utils/Logger"
+import { Storage } from "@google-cloud/storage"
 
 export class JobCleanAuth extends JobOneServiceTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         this.auth = this.admin.auth()
     }
     /**

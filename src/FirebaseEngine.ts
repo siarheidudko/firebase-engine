@@ -1,6 +1,7 @@
 import { app } from "firebase-admin"
 import { SettingsBeforeInitialization, Settings, initialization, writers } from "./utils/initialization"
 import { Jobs } from "./jobs/Jobs"
+import { Storage } from "@google-cloud/storage"
 
 /**
  * Firebase Engine to copy data
@@ -13,7 +14,8 @@ export class FirebaseEngine {
         const init = initialization(settings)
         this.settings = init.settings
         this.admin = init.admin
-        this.jobs = new Jobs(this.settings, this.admin)
+        this.store = init.store
+        this.jobs = new Jobs(this.settings, this.admin, this.store)
     }
     /**
      * settings object
@@ -27,6 +29,10 @@ export class FirebaseEngine {
      * Firebase Engine Jobs
      */
     public jobs: Jobs
+    /**
+     * Google cloud storage app
+     */
+    private store: Storage
     /**
      * Call this before exiting
      */

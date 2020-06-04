@@ -3,6 +3,7 @@ import { initializeApp, app, credential, apps, auth } from "firebase-admin"
 import { createGzip, Gzip } from "zlib"
 import { Logger } from "../utils/Logger"
 import { createHash, randomFillSync } from "crypto"
+import { Storage } from "@google-cloud/storage"
 
 /**
  * Module store (to prevent secondary initialization)
@@ -16,6 +17,10 @@ const store: {
      * settings object
      */
     settings?: Settings
+    /**
+     * Google cloud storage app
+     */
+    store?: Storage
 } = {}
 
 /**
@@ -294,10 +299,11 @@ export const initialization = (settings: SettingsBeforeInitialization = {
         (settings.hash_config.algorithm !== "SCRYPT")
     )
         throw new Error("Only SCRYPT algorithm implemented.")
-    if(store.settings && store.admin)
+    if(store.settings && store.admin && store.store)
         return store as {
             settings: Settings,
-            admin: app.App
+            admin: app.App,
+            store: Storage
         }
     const _settings: SettingsBeforeInitialization = {
         path: settings.path,
@@ -353,8 +359,18 @@ export const initialization = (settings: SettingsBeforeInitialization = {
             store.admin = initializeApp(initializationConfig)
         }
     }
+    if(!store.store){
+        store.store = new Storage({
+            projectId: store.settings.serviceAccount.project_id,
+            credentials: {
+                client_email: store.settings.serviceAccount.client_email,
+                private_key: store.settings.serviceAccount.private_key
+            }
+        })
+    }
     return store as {
         settings: Settings,
-        admin: app.App
+        admin: app.App,
+        store: Storage
     }
 }

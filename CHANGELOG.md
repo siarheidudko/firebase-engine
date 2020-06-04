@@ -1,3 +1,8 @@
+# 1.2.3 / 2020-06-04
+
+## :tada: Enhancements
+- Added support many buckets in Google storage (custom bucket)
+
 # 1.2.2 / 2020-06-01
 
 ## :tada: Enhancements

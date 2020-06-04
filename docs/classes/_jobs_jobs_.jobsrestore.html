@@ -104,6 +104,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_jobs_jobs_.jobsrestore.html#admin" class="tsd-kind-icon">admin</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_jobs_jobs_.jobsrestore.html#settings" class="tsd-kind-icon">settings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="_jobs_jobs_.jobsrestore.html#store" class="tsd-kind-icon">store</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited tsd-is-not-exported">
@@ -123,14 +124,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Jobs<wbr>Restore<span class="tsd-signature-symbol">(</span>settings<span class="tsd-signature-symbol">: </span><a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a>, admin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">App</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jobs_jobs_.jobsrestore.html" class="tsd-signature-type">JobsRestore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Jobs<wbr>Restore<span class="tsd-signature-symbol">(</span>settings<span class="tsd-signature-symbol">: </span><a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a>, admin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">App</span>, store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Storage</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jobs_jobs_.jobsrestore.html" class="tsd-signature-type">JobsRestore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.jobonetemplate.html">JobOneTemplate</a>.<a href="_utils_template_.jobonetemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/jobs/Jobs.ts#L101">jobs/Jobs.ts:101</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/jobs/Jobs.ts#L105">jobs/Jobs.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -153,6 +154,14 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>store: <span class="tsd-signature-type">Storage</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>google cloud storage app</p>
+										</div>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_jobs_jobs_.jobsrestore.html" class="tsd-signature-type">JobsRestore</a></h4>
 						</li>
@@ -168,7 +177,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L28">utils/template.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L31">utils/template.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,12 +193,28 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L24">utils/template.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L27">utils/template.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>settings object</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+					<a name="store" class="tsd-anchor"></a>
+					<h3>store</h3>
+					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Storage</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#store">store</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L35">utils/template.ts:35</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Google cloud storage app</p>
 						</div>
 					</div>
 				</section>
@@ -207,7 +232,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.jobonetemplate.html">JobOneTemplate</a>.<a href="_utils_template_.jobonetemplate.html#auth">auth</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L52">utils/template.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L60">utils/template.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -230,7 +255,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.jobonetemplate.html">JobOneTemplate</a>.<a href="_utils_template_.jobonetemplate.html#firestore">firestore</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L45">utils/template.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L53">utils/template.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -253,7 +278,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.jobonetemplate.html">JobOneTemplate</a>.<a href="_utils_template_.jobonetemplate.html#storage">storage</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L59">utils/template.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L67">utils/template.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -356,6 +381,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
 								<a href="_jobs_jobs_.jobsrestore.html#settings" class="tsd-kind-icon">settings</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+								<a href="_jobs_jobs_.jobsrestore.html#store" class="tsd-kind-icon">store</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
 								<a href="_jobs_jobs_.jobsrestore.html#auth" class="tsd-kind-icon">auth</a>

@@ -5,6 +5,7 @@ import { createReadStream, ReadStream } from "fs"
 import { createGunzip, Gunzip } from "zlib"
 import { Settings, Writer, createWriteFileStream } from "./initialization"
 import { Logger } from "./Logger"
+import { Storage } from "@google-cloud/storage"
 
 /**
  * Job Template Class
@@ -13,19 +14,25 @@ export class JobTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App  ){       
+    constructor(settings: Settings, admin: app.App, store: Storage){       
         this.settings = settings
         this.admin = admin
+        this.store = store
     }
     /**
      * settings object
      */
-    settings: Settings
+    public settings: Settings
     /**
      * firebase app
      */
-    admin: app.App
+    public admin: app.App
+    /**
+     * Google cloud storage app
+     */
+    public store: Storage
 }
 
 /**
@@ -35,9 +42,10 @@ export class JobOneTemplate extends JobTemplate{
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
     }
     /**
      * Jobs for Firebase.Firestore
@@ -69,9 +77,10 @@ export class JobOneServiceTemplate extends JobTemplate{
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         this.startTimestamp = Date.now()
     }
     /**
@@ -109,9 +118,10 @@ export class JobBackupServiceTemplate extends JobOneServiceTemplate{
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         this.writer = createWriteFileStream(this.settings.backup, this.settings.compress)
         this.stringiferStream = new Objectstream.Stringifer() as Transform
         this.stringiferStream.on("error", (err) => {
@@ -131,13 +141,14 @@ export class JobBackupServiceTemplate extends JobOneServiceTemplate{
 /**
  * Job restore
  */
-export class JobBackupSRestoreTemplate extends JobOneServiceTemplate{
+export class JobBackupServiceRestoreTemplate extends JobOneServiceTemplate{
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         this.fileStream = createReadStream(this.settings.backup, {
             flags: "r", 
             mode: 0o600

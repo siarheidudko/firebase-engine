@@ -92,15 +92,14 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_jobs_clean_storage_.jobcleanstorage.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_clean_storage_.jobcleanstorage.html#admin" class="tsd-kind-icon">admin</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_clean_storage_.jobcleanstorage.html#bucket" class="tsd-kind-icon">bucket</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_clean_storage_.jobcleanstorage.html#counter" class="tsd-kind-icon">counter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_clean_storage_.jobcleanstorage.html#settings" class="tsd-kind-icon">settings</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_clean_storage_.jobcleanstorage.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_jobs_clean_storage_.jobcleanstorage.html#storage" class="tsd-kind-icon">storage</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_clean_storage_.jobcleanstorage.html#store" class="tsd-kind-icon">store</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -119,14 +118,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Job<wbr>Clean<wbr>Storage<span class="tsd-signature-symbol">(</span>settings<span class="tsd-signature-symbol">: </span><a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a>, admin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">App</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jobs_clean_storage_.jobcleanstorage.html" class="tsd-signature-type">JobCleanStorage</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Job<wbr>Clean<wbr>Storage<span class="tsd-signature-symbol">(</span>settings<span class="tsd-signature-symbol">: </span><a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a>, admin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">App</span>, store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Storage</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jobs_clean_storage_.jobcleanstorage.html" class="tsd-signature-type">JobCleanStorage</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/jobs/clean/storage.ts#L6">jobs/clean/storage.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/jobs/clean/storage.ts#L7">jobs/clean/storage.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -149,13 +148,21 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>store: <span class="tsd-signature-type">Storage</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>google cloud storage app</p>
+										</div>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_jobs_clean_storage_.jobcleanstorage.html" class="tsd-signature-type">JobCleanStorage</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="admin" class="tsd-anchor"></a>
@@ -164,27 +171,12 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L28">utils/template.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L31">utils/template.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>firebase app</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="bucket" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> bucket</h3>
-					<div class="tsd-signature tsd-kind-icon">bucket<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/jobs/clean/storage.ts#L23">jobs/clean/storage.ts:23</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>bucket object</p>
 						</div>
 					</div>
 				</section>
@@ -195,7 +187,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#counter">counter</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L80">utils/template.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L89">utils/template.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -211,7 +203,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L24">utils/template.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L27">utils/template.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -227,7 +219,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#starttimestamp">startTimestamp</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L95">utils/template.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L104">utils/template.ts:104</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -236,18 +228,19 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="storage" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> storage</h3>
-					<div class="tsd-signature tsd-kind-icon">storage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Storage.Storage</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="store" class="tsd-anchor"></a>
+					<h3>store</h3>
+					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Storage</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#store">store</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/jobs/clean/storage.ts#L19">jobs/clean/storage.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L35">utils/template.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>firebase storage app</p>
+							<p>Google cloud storage app</p>
 						</div>
 					</div>
 				</section>
@@ -265,7 +258,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#getworktime">getWorkTime</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/utils/template.ts#L84">utils/template.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/utils/template.ts#L93">utils/template.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -288,7 +281,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#run">run</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/b2f1497/src/jobs/clean/storage.ts#L27">jobs/clean/storage.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/fe5eb96/src/jobs/clean/storage.ts#L19">jobs/clean/storage.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -380,9 +373,6 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_clean_storage_.jobcleanstorage.html#admin" class="tsd-kind-icon">admin</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_jobs_clean_storage_.jobcleanstorage.html#bucket" class="tsd-kind-icon">bucket</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_clean_storage_.jobcleanstorage.html#counter" class="tsd-kind-icon">counter</a>
 							</li>
@@ -392,8 +382,8 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_clean_storage_.jobcleanstorage.html#starttimestamp" class="tsd-kind-icon">start<wbr>Timestamp</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_jobs_clean_storage_.jobcleanstorage.html#storage" class="tsd-kind-icon">storage</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_clean_storage_.jobcleanstorage.html#store" class="tsd-kind-icon">store</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_jobs_clean_storage_.jobcleanstorage.html#getworktime" class="tsd-kind-icon">get<wbr>Work<wbr>Time</a>

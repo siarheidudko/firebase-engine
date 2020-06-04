@@ -1,33 +1,26 @@
-import { app, storage as Storage } from "firebase-admin"
+import { app } from "firebase-admin"
 import { Settings } from "../../utils/initialization"
 import { JobBackupServiceTemplate, DataModel } from "../../utils/template"
 import { StorageConverter } from "../../utils/StorageConverter"
 import { Logger } from "../../utils/Logger"
 import { Gzip } from "zlib"
 import { WriteStream } from "fs"
+import { Storage, Bucket, File } from "@google-cloud/storage"
 
 export class JobBackupStorage extends JobBackupServiceTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
-        this.storage = this.admin.storage()
-        this.bucket = this.storage.bucket(this.settings.serviceAccount.project_id+".appspot.com")
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
     }
-    /**
-     * firebase storage app
-     */
-    private storage: Storage.Storage
-    /**
-     * storage bucket
-     */
-    private bucket: any
     /**
      * backup one file function
      */
-    public backupFile = async (file: any) => {
+    private backupFile = async (bucket: Bucket, file: File) => {
+        const bName = bucket.name.replace(new RegExp(this.settings.serviceAccount.project_id, "g"), "{default}")
         const [buffer] = await file.download()
         if(!buffer)
             return
@@ -37,7 +30,7 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         const docString = StorageConverter.toString(buffer)
         const _doc: DataModel = {
             service: "storage",
-            path: file.name,
+            path: bName+"://"+file.name,
             data: docString
         }
         await new Promise((res, rej) => {
@@ -52,6 +45,7 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
      * job runner
      */
     public run = async () => {
+        const [buckets] = await this.store.getBuckets()
         this.startTimestamp = Date.now()
         await new Promise(async (res, rej) => {
             try {
@@ -67,9 +61,11 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
                     Logger.log(" - Storage Backup Complete!")
                     res()
                 })
-                const [files] = await this.bucket.getFiles()
-                if(Array.isArray(files)) for(const file of files)
-                    await this.backupFile(file)
+                for(const bucket of buckets){
+                    const [files] = await bucket.getFiles()
+                    if(Array.isArray(files)) for(const file of files)
+                        await this.backupFile(bucket, file)
+                }
                 this.stringiferStream.unpipe(_write)
             } catch (err) { 
                 rej(err) 

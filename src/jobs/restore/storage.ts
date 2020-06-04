@@ -1,20 +1,21 @@
-import { app, storage as Storage } from "firebase-admin"
+import { app } from "firebase-admin"
 import { Settings } from "../../utils/initialization"
-import { JobBackupSRestoreTemplate, DataModel } from "../../utils/template"
+import { JobBackupServiceRestoreTemplate, DataModel } from "../../utils/template"
 import { Writable } from "stream"
 import { StorageConverter } from "../../utils/StorageConverter"
 import { Logger } from "../../utils/Logger"
+import { Storage } from "@google-cloud/storage"
 
-export class JobRestoreStorage extends JobBackupSRestoreTemplate {
+export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
     /**
      * @param settings - settings object
      * @param admin - firebase app
+     * @param store - google cloud storage app
      */
-    constructor(settings: Settings, admin: app.App){
-        super(settings, admin)
-        this.storage = this.admin.storage()
-        this.bucket = this.storage.bucket(this.settings.serviceAccount.project_id+".appspot.com")
+    constructor(settings: Settings, admin: app.App, store: Storage){
+        super(settings, admin, store)
         const self = this
+        this.buckets = []
         this.writeStream = new Writable({
             write(object: DataModel, encoding, callback) { 
                 (async () => {
@@ -24,7 +25,16 @@ export class JobRestoreStorage extends JobBackupSRestoreTemplate {
                         (typeof(object.data) !== "string")
                     )
                         return
-                    const fileRef = await self.bucket.file(object.path)
+                    const fArg = object.path.split("://")
+                    if(fArg.length !== 2) throw new Error("Invalid path")
+                    const bName = fArg[0].replace(new RegExp("{default}", "g"), self.settings.serviceAccount.project_id)
+                    const bucket = self.store.bucket(bName)
+                    if(self.buckets.indexOf(bucket.name) === -1){
+                        const [f] = await bucket.exists()
+                        if(!f) await bucket.create()
+                        self.buckets.push(bName)
+                    }
+                    const fileRef = bucket.file(fArg[1])
                     const fileData = StorageConverter.fromString(object.data)
                     await fileRef.save(fileData)
                     ++self.counter
@@ -46,13 +56,9 @@ export class JobRestoreStorage extends JobBackupSRestoreTemplate {
         })
     }
     /**
-     * firebase storage app
+     * Array of google storage bucket name
      */
-    private storage: Storage.Storage
-    /**
-     * bucket object
-     */
-    private bucket: any
+    private buckets: string[]
     /**
      * write file to project stream
      */

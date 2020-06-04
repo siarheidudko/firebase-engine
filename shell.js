@@ -14,6 +14,7 @@ const fastcommands  = []
 const readline = require("readline")
 const admin = require("firebase-admin")
 const serviceAccount = require("./serviceAccount.json")
+const Gstorage = require("@google-cloud/storage")
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -42,11 +43,24 @@ fastcommands.push({
     "alias": "admin.firestore()"
 })
 
-const bucket = admin.storage().bucket(serviceAccount.project_id+".appspot.com")
+const storage = new Gstorage.Storage({
+    projectId: serviceAccount.project_id,
+    credentials: {
+        client_email: serviceAccount.client_email,
+        private_key: serviceAccount.private_key
+    }
+})
+fastcommands.push({
+    "command": "storage",
+    "title": "Сall google cloud storage interface",
+    "alias": "---"
+})
+
+const bucket = storage.bucket(serviceAccount.project_id+".appspot.com")
 fastcommands.push({
     "command": "bucket",
     "title": "Сall firebase storage/bucket interface",
-    "alias": "admin.storage().bucket(serviceAccount.project_id+\".appspot.com\")"
+    "alias": "---"
 })
 
 const types = admin.firestore
