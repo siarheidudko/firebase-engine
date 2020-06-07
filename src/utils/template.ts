@@ -123,7 +123,7 @@ export class JobBackupServiceTemplate extends JobOneServiceTemplate{
     constructor(settings: Settings, admin: app.App, store: Storage){
         super(settings, admin, store)
         this.writer = createWriteFileStream(this.settings.backup, this.settings.compress)
-        this.stringiferStream = new Stringifer() as Transform
+        this.stringiferStream = new Stringifer()
         this.stringiferStream.on("error", (err) => {
             Logger.warn(err)
         })
@@ -153,7 +153,7 @@ export class JobBackupServiceRestoreTemplate extends JobOneServiceTemplate{
             flags: "r", 
             mode: 0o600
         })
-        this.parserStream = new Parser() as Transform
+        this.parserStream = new Parser()
         this.fileStream.on("error", (err) => {
             Logger.warn(err)
         })
