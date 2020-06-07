@@ -1,11 +1,11 @@
 {
   "name": "firebase-engine",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Tools  for firebase (backup, clean,  restore)",
   "main": "./lib/index.js",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "build": "rm -rf lib && tsc",
+    "build": "rm -rf lib && tsc --declaration --declarationMap --sourceMap",
     "doc": "typedoc src&&echo \"\">./docs/.nojekyll",
     "test": "firebase emulators:exec \"mocha --exit test/**/*.test.js\"",
     "cov": "firebase emulators:exec \"nyc mocha --exit test/**/*.test.js\""
@@ -36,7 +36,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^5.0.1",
-    "@sergdudko/objectstream": "^1.7.7",
+    "@sergdudko/objectstream": "^2.0.2",
     "firebase-admin": "^8.12.1"
   },
   "devDependencies": {

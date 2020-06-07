@@ -1,5 +1,5 @@
 import { app } from "firebase-admin"
-const Objectstream = require("@sergdudko/objectstream")
+import { Stringifer, Parser } from "@sergdudko/objectstream"
 import { Transform } from "stream"
 import { createReadStream, ReadStream } from "fs"
 import { createGunzip, Gunzip } from "zlib"
@@ -123,7 +123,7 @@ export class JobBackupServiceTemplate extends JobOneServiceTemplate{
     constructor(settings: Settings, admin: app.App, store: Storage){
         super(settings, admin, store)
         this.writer = createWriteFileStream(this.settings.backup, this.settings.compress)
-        this.stringiferStream = new Objectstream.Stringifer() as Transform
+        this.stringiferStream = new Stringifer() as Transform
         this.stringiferStream.on("error", (err) => {
             Logger.warn(err)
         })
@@ -153,7 +153,7 @@ export class JobBackupServiceRestoreTemplate extends JobOneServiceTemplate{
             flags: "r", 
             mode: 0o600
         })
-        this.parserStream = new Objectstream.Parser() as Transform
+        this.parserStream = new Parser() as Transform
         this.fileStream.on("error", (err) => {
             Logger.warn(err)
         })

@@ -10,7 +10,7 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
   
 ## Install  
   
-```
+```bash
 	npm i firebase-engine -g
 ```
 
