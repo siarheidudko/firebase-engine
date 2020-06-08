@@ -116,6 +116,14 @@ export interface ParsedSettings {
         rounds?: number,
         mem_cost?: number
     }
+    /**
+     * buckets for processing
+     */
+    buckets: string[]
+    /**
+     * collections for processing
+     */
+    collections: string[]
 }
 /**
  * settings object before initialization
@@ -143,6 +151,14 @@ export interface SettingsBeforeInitialization {
         rounds?: number,
         mem_cost?: number
     }
+    /**
+     * buckets for processing
+     */
+    buckets: string[]
+    /**
+     * collections for processing
+     */
+    collections: string[]
 }
 /**
  * settings object after initialization
@@ -174,6 +190,14 @@ export interface Settings {
         rounds: number,
         memoryCost: number
     }
+    /**
+     * buckets for processing
+     */
+    buckets: string[]
+    /**
+     * collections for processing
+     */
+    collections: string[]
 }
 
 /**
@@ -189,7 +213,9 @@ export const cmdParser = (arg: string[]) => {
         backup: undefined,
         services: [],
         compress: true,
-        hash_config: {}
+        hash_config: {},
+        buckets: [],
+        collections: []
     }
     arg.forEach((val) => {
         if(val.match(/^path=/i) || val.match(/^p=/i))
@@ -271,6 +297,18 @@ export const cmdParser = (arg: string[]) => {
                 val.replace(/^mc=/i, "")
                 .replace(/^mem_cost=/i, "")
                 .replace(/"/g, ""))
+        if(val.match(/^buckets=/i) || val.match(/^buck=/i))
+            settings.buckets = val.replace(/^buckets=/i, "")
+                .replace(/^buck=/i, "")
+                .replace(/"/g, "")
+                .replace(/\s/g, "")
+                .split(",")
+        if(val.match(/^collections=/i) || val.match(/^coll=/i))
+            settings.collections = val.replace(/^collections=/i, "")
+                .replace(/^coll=/i, "")
+                .replace(/"/g, "")
+                .replace(/\s/g, "")
+                .split(",")
     })
     if(settings.operations.length === 0)
         settings.operations.push("backup")
@@ -291,7 +329,9 @@ export const cmdParser = (arg: string[]) => {
 export const initialization = (settings: SettingsBeforeInitialization = {
     path: undefined,
     backup: undefined,
-    compress: true
+    compress: true,
+    buckets: [],
+    collections: []
 }) =>  {
     if(
         settings.hash_config &&
@@ -308,7 +348,9 @@ export const initialization = (settings: SettingsBeforeInitialization = {
     const _settings: SettingsBeforeInitialization = {
         path: settings.path,
         backup: settings.backup,
-        compress: settings.compress
+        compress: settings.compress,
+        buckets: settings.buckets,
+        collections: settings.collections
     }
     if(typeof(_settings.path) !== "string")
         throw new Error("Service account path not set.")

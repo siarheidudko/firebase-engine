@@ -23,6 +23,10 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 |   services   |     s      |  firestore (f), storage (s), auth (a), can be separated by commas. Default: all  |
 |    backup    |     b      |   Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup   |
 | --nocompress |    -nc     |                          Do not use data compression                             |
+|  collections |   coll     |    Apply to Collections (in Firestore service). Default: all, if it is not set   |
+|    buckets   |   buck     |       Apply to Buckets (in Storage service). Default: all, if it is not set      |
+
+- collections - the rule also applies to all nested collections and documents
 
 ## Launch parameters (only for password recovery for users in Firebase.Auth)
 
@@ -40,6 +44,16 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 With full names
 ```bash
 	firebase-engine operations="clean, restore" path="./test.json" services="firestore, storage" backup="test.backup"
+```
+
+With one bucket
+```bash
+	firebase-engine operations="clean" path="./test.json" services="storage" buckets="test.appspott.com"
+```
+
+With collection & subcollection
+```bash
+	firebase-engine operations="backup" path="./test.json" services="firestore" collections="authors,books.pages"
 ```
 
 With short names

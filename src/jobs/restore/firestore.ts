@@ -24,6 +24,20 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
                         (typeof(object.data) !== "string")
                     )
                         return
+                    if(self.settings.collections.length !== 0){
+                        const arr: string[] = object.path.split("/")
+                        let str: string = ""
+                        let denied: boolean = true
+                        for(let i = 0; i < arr.length; i++)if((i % 2) === 0){
+                            str += arr[i]
+                            if(self.settings.collections.indexOf(str) !== -1){
+                                denied = false
+                                break
+                            }
+                            str +="."
+                        }
+                        if(denied) return
+                    }
                     const docRef = self.firestore.doc(object.path)
                     const docData = FirestoreConverter.fromString(object.data)
                     await self.writeBuffer.set(docRef, docData)

@@ -33,10 +33,12 @@ describe("CLI parser", function() {
             throw new Error("error")
         return
     })
-    it('firebase-engine services="storage,auth,firestore" operations="backup,clean,restore" p="./serviceAccount.json" backup="./test/test.backup" --nocompress', async () => {
+    it('firebase-engine services="storage,auth,firestore" buck="test.appspot.com,test2" coll="authors,books.pages" operations="backup,clean,restore" p="./serviceAccount.json" backup="./test/test.backup" --nocompress', async () => {
         const o = cmdParser([
             'firebase-engine',
             'services="storage,auth,firestore"',
+            'buck="test.appspot.com, test2"',
+            'coll="authors,books.pages"',
             'operations="backup,clean,restore"',
             'p="./serviceAccount.json"',
             'backup="./test/test.backup"',
@@ -54,7 +56,13 @@ describe("CLI parser", function() {
             (o.services[2] !== "firestore") ||
             (o.path !== "./serviceAccount.json") ||
             (o.backup !== "./test/test.backup") ||
-            (o.compress !== false)
+            (o.compress !== false) ||
+            (!Array.isArray(o.buckets)) ||
+            (o.buckets[0] !== "test.appspot.com") ||
+            (o.buckets[1] !== "test2") ||
+            (!Array.isArray(o.collections)) ||
+            (o.collections[0] !== "authors") ||
+            (o.collections[1] !== "books.pages")
         )
             throw new Error("error")
         return
@@ -76,6 +84,35 @@ describe("CLI parser", function() {
             (o.path !== "./serviceAccount.json") ||
             (o.backup !== "./test.backup") ||
             (o.compress !== true)
+        )
+            throw new Error("error")
+        return
+    })
+    it('firebase-engine services="firestore, storage" buckets="test" collections="test, test1.test2" operations="backup" p="./serviceAccount.json" backup="./test.backup"', async () => {
+        const o = cmdParser([
+            'firebase-engine',
+            'services="firestore, storage"',
+            'buckets="test"',
+            'collections="test, test1.test2"',
+            'operations="backup"',
+            'p="./serviceAccount.json"',
+            'backup="./test.backup"'
+        ])
+        if(
+            (typeof(o) !== "object") ||
+            (!Array.isArray(o.operations)) ||
+            (o.operations[0] !== "backup") ||
+            (!Array.isArray(o.services)) ||
+            (o.services[0] !==  "firestore") ||
+            (o.services[1] !==  "storage") ||
+            (o.path !== "./serviceAccount.json") ||
+            (o.backup !== "./test.backup") ||
+            (o.compress !== true)||
+            (!Array.isArray(o.buckets)) ||
+            (o.buckets[0] !== "test") ||
+            (!Array.isArray(o.collections)) ||
+            (o.collections[0] !== "test") ||
+            (o.collections[1] !== "test1.test2")
         )
             throw new Error("error")
         return

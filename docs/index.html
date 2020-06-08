@@ -113,7 +113,20 @@
 							<td>-nc</td>
 							<td>Do not use data compression</td>
 						</tr>
+						<tr>
+							<td>collections</td>
+							<td>coll</td>
+							<td>Apply to Collections (in Firestore service). Default: all, if it is not set</td>
+						</tr>
+						<tr>
+							<td>buckets</td>
+							<td>buck</td>
+							<td>Apply to Buckets (in Storage service). Default: all, if it is not set</td>
+						</tr>
 				</tbody></table>
+				<ul>
+					<li>collections - the rule also applies to all nested collections and documents</li>
+				</ul>
 				<a href="#launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" id="launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" style="color: inherit; text-decoration: none;">
 					<h2>Launch parameters (only for password recovery for users in Firebase.Auth)</h2>
 				</a>
@@ -156,6 +169,10 @@
 				</a>
 				<p>With full names</p>
 				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"clean, restore"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore, storage"</span> backup=<span class="hljs-string">"test.backup"</span></code></pre>
+				<p>With one bucket</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"clean"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"storage"</span> buckets=<span class="hljs-string">"test.appspott.com"</span></code></pre>
+				<p>With collection &amp; subcollection</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"backup"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore"</span> collections=<span class="hljs-string">"authors,books.pages"</span></code></pre>
 				<p>With short names</p>
 				<pre><code class="language-bash">    firebase-engine o=<span class="hljs-string">"b, c"</span> p=<span class="hljs-string">"./test.json"</span> b=<span class="hljs-string">"test.backup"</span></code></pre>
 				<p>With password recovery for users</p>

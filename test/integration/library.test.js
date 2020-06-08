@@ -97,7 +97,9 @@ describe("Integration test Library", function() {
         const firebaseEngine = new FirebaseEngine({
             path: settings.serviceAccountPath,
             backup: backupPath,
-            compress: false
+            compress: false,
+            buckets: [],
+            collections: []
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
         //backup
@@ -157,7 +159,9 @@ describe("Integration test Library", function() {
         const firebaseEngine = new FirebaseEngine({
             path: settings.serviceAccountPath,
             backup: backupPath,
-            compress: false
+            compress: false,
+            buckets: [],
+            collections: []
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
         //backup
@@ -222,7 +226,9 @@ describe("Integration test Library", function() {
         const firebaseEngine = new FirebaseEngine({
             path: settings.serviceAccountPath,
             backup: backupPath,
-            compress: false
+            compress: false,
+            buckets: [],
+            collections: []
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
         //backup
@@ -266,7 +272,9 @@ describe("Integration test Library", function() {
         const firebaseEngine = new FirebaseEngine({
             path: "./serviceAccount.json",
             backup: backupPath,
-            compress: true
+            compress: true,
+            buckets: [serviceAccount.project_id+".appspot.com"],
+            collections: ["test"]
         })   
         await fsPromises.unlink(backupPath).catch((err)=>{})
         //backup

@@ -28,6 +28,11 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
                     const fArg = object.path.split("://")
                     if(fArg.length !== 2) throw new Error("Invalid path")
                     const bName = fArg[0].replace(new RegExp("{default}", "g"), self.settings.serviceAccount.project_id)
+                    if(
+                        (self.settings.buckets.length !== 0) &&
+                        (self.settings.buckets.indexOf(bName) === -1)
+                    )
+                        return
                     const bucket = self.store.bucket(bName)
                     if(self.buckets.indexOf(bucket.name) === -1){
                         const [f] = await bucket.exists()

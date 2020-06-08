@@ -61,7 +61,10 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
                     Logger.log(" - Storage Backup Complete!")
                     res()
                 })
-                for(const bucket of buckets){
+                for(const bucket of buckets)if(
+                    (this.settings.buckets.length === 0) ||
+                    (this.settings.buckets.indexOf(bucket.name) !== -1)
+                ){
                     const [files] = await bucket.getFiles()
                     if(Array.isArray(files)) for(const file of files)
                         await this.backupFile(bucket, file)

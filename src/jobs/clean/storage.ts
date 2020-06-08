@@ -19,12 +19,15 @@ export class JobCleanStorage extends JobOneServiceTemplate {
     public run = async () => {
         const [buckets] = await this.store.getBuckets()
         this.startTimestamp = Date.now()
-        for(const bucket of buckets){
+        for(const bucket of buckets)if(
+            (this.settings.buckets.length === 0) ||
+            (this.settings.buckets.indexOf(bucket.name) !== -1)
+        ){
             await bucket.deleteFiles()
             if(bucket.name.indexOf(this.admin.options.storageBucket as string))
             await bucket.delete()
         }
-        Logger.log(" -- Storage Cleaned docs in "+this.getWorkTime()+".")
+        Logger.log(" -- Storage Cleaned files in "+this.getWorkTime()+".")
         Logger.log(" - Storage Clean Complete!")
         return
     }

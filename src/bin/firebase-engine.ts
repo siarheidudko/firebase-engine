@@ -41,7 +41,7 @@ const arg: {
     {
         "Name": "algorithm",
         "Short name": "alg",
-        "Description": "The password hashing information (algorithm). Default: SCRYPT"
+        "Description": "The password hashing information (algorithm, only SCRYPT). Default: SCRYPT"
     },
     {
         "Name": "base64_signer_key",
@@ -62,6 +62,16 @@ const arg: {
         "Name": "mem_cost",
         "Short name": "mc",
         "Description": "The password hashing information (memory cost). Default: 14"
+    },
+    {
+        "Name": "collections",
+        "Short name": "coll",
+        "Description": "Apply to Collections (in Firestore service). Example for a subcollection of a pages inside a books collection: collections=\"books.pages\" Default: all, if it is not set"
+    },
+    {
+        "Name": "buckets",
+        "Short name": "buck",
+        "Description": "Apply to Buckets (in Storage service). Default: all, if it is not set"
     }
 ]
 

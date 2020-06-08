@@ -92,11 +92,13 @@ describe("Integration test CLI", function() {
     /*
         backup all
     */
-    it("node ./lib/bin/firebase-engine.js operations=\"backup\" service=\"firestore, storage, auth\" path=\""+settings.serviceAccountPath+"\" backup=\""+backupPath+"\"", async function(){      
+    it("node ./lib/bin/firebase-engine.js operations=\"backup\" buckets=\""+serviceAccount.project_id+".appspot.com\" collections=\"test\" service=\"firestore, storage, auth\" path=\""+settings.serviceAccountPath+"\" backup=\""+backupPath+"\"", async function(){      
         await fsPromises.unlink(backupPath).catch((err)=>{})
         const log = await childProcessPromise("node", [
             "./lib/bin/firebase-engine.js",
             "operations=\"backup\"",
+            "buckets=\""+serviceAccount.project_id+".appspot.com\"",
+            "collections=\"test\"",
             "service=\"firestore, storage, auth\"",
             "path=\""+settings.serviceAccountPath+"\"",
             "backup=\""+backupPath+"\""
@@ -113,10 +115,12 @@ describe("Integration test CLI", function() {
     /*
         clean all
     */
-    it("node ./lib/bin/firebase-engine.js operations=\"clean\" service=\"all\" path=\""+settings.serviceAccountPath+"\"", async function(){      
+    it("node ./lib/bin/firebase-engine.js operations=\"clean\" buckets=\""+serviceAccount.project_id+".appspot.com\" collections=\"test\" service=\"all\" path=\""+settings.serviceAccountPath+"\"", async function(){      
         const log = await childProcessPromise("node", [
             "./lib/bin/firebase-engine.js",
             "operations=\"clean\"",
+            "buckets=\""+serviceAccount.project_id+".appspot.com\"",
+            "collections=\"test\"",
             "service=\"all\"",
             "path=\""+settings.serviceAccountPath+"\""
         ])
@@ -138,13 +142,15 @@ describe("Integration test CLI", function() {
     /*
         restore all
     */
-    it("node ./lib/bin/firebase-engine.js operations=\"restore\" path=\""+settings.serviceAccountPath+"\" backup=\""+backupPath+"\"", async function(){      
+    it("node ./lib/bin/firebase-engine.js operations=\"restore\" buckets=\""+serviceAccount.project_id+".appspot.com\" collections=\"test\" path=\""+settings.serviceAccountPath+"\" backup=\""+backupPath+"\"", async function(){      
         const _files = await fsPromises.readdir("./")
         if(_files.indexOf(path.basename(backupPath)) === -1)
             throw new Error("Backup file not found!")
         const log = await childProcessPromise("node", [
             "./lib/bin/firebase-engine.js",
             "operations=\"restore\"",
+            "buckets=\""+serviceAccount.project_id+".appspot.com\"",
+            "collections=\"test\"",
             "path=\""+settings.serviceAccountPath+"\"",
             "backup=\""+backupPath+"\""
         ])

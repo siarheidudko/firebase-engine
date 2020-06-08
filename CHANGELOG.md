@@ -1,3 +1,9 @@
+# 1.2.6 / 2020-06-08
+
+## :tada: Enhancements
+- Added options for working with specific buckets
+- Added options for working with specific collections
+
 # 1.2.5 / 2020-06-08
 
 ## :tada: Enhancements
