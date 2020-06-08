@@ -45,7 +45,10 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
                     str +="."
                 }
             } else denied = false
-            if(!denied) this.batch.delete(ref)
+            if(!denied){
+                ++this.counter
+                this.batch.delete(ref)
+            }
             await this.recursiveClean(ref)
         }
         await this.batch.commit()
@@ -61,7 +64,6 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
             const collectionSnap = await collectionRef.get()
             let arr: Firestore.DocumentReference[] = []
             for(let i = 1; i <= collectionSnap.docs.length; i++){
-                ++this.counter
                 if((this.counter % 100) === 0)
                     Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
                     arr.push(collectionSnap.docs[i-1].ref)
