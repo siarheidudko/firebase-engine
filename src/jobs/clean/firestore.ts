@@ -32,7 +32,20 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
      */
     private batchClean = async (arr: Firestore.DocumentReference[]) => {
         for(const ref of arr){
-            this.batch.delete(ref)
+            let denied: boolean = true
+            if(this.settings.collections.length !== 0){
+                const _arr: string[] = ref.path.split("/")
+                let str: string = ""
+                for(let i = 0; i < _arr.length; i++)if((i % 2) === 0){
+                    str += _arr[i]
+                    if(this.settings.collections.indexOf(str) !== -1){
+                        denied = false
+                        break
+                    }
+                    str +="."
+                }
+            } else denied = false
+            if(!denied) this.batch.delete(ref)
             await this.recursiveClean(ref)
         }
         await this.batch.commit()
@@ -45,33 +58,19 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     private recursiveClean = async (ref: Firestore.Firestore | Firestore.DocumentReference) => {
         const collections = await ref.listCollections()
         for(const collectionRef of collections){
-            if(this.settings.collections.length !== 0){
-                const arr: string[] = collectionRef.path.split("/")
-                let str: string = ""
-                let denied: boolean = true
-                for(let i = 0; i < arr.length; i++)if((i % 2) === 0){
-                    str += arr[i]
-                    if(this.settings.collections.indexOf(str) !== -1){
-                        denied = false
-                        break
-                    }
-                    str +="."
-                }
-                if(denied) continue
-            }
             const collectionSnap = await collectionRef.get()
-            let _arr: Firestore.DocumentReference[] = []
+            let arr: Firestore.DocumentReference[] = []
             for(let i = 1; i <= collectionSnap.docs.length; i++){
                 ++this.counter
                 if((this.counter % 100) === 0)
                     Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
-                    _arr.push(collectionSnap.docs[i-1].ref)
+                    arr.push(collectionSnap.docs[i-1].ref)
                 if(
                     ((i % JobCleanFirestore.batchSize) === 0) || 
                     (i === collectionSnap.docs.length)
                 ){
-                    await this.batchClean(_arr)
-                    _arr = []
+                    await this.batchClean(arr)
+                    arr = []
                 }
             }
         }

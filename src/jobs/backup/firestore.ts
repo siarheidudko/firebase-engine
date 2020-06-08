@@ -51,10 +51,10 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
     private recursiveBackup = async (ref: Firestore.Firestore|Firestore.DocumentReference) => {
         const collections = await ref.listCollections()
         for(const collectionRef of collections){
+            let denied: boolean = true
             if(this.settings.collections.length !== 0){
                 const arr: string[] = collectionRef.path.split("/")
                 let str: string = ""
-                let denied: boolean = true
                 for(let i = 0; i < arr.length; i++)if((i % 2) === 0){
                     str += arr[i]
                     if(this.settings.collections.indexOf(str) !== -1){
@@ -63,11 +63,10 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
                     }
                     str +="."
                 }
-                if(denied) continue
-            }            
+            } else denied = false           
             const collectionSnap = await collectionRef.get()
             for(let i = 1; i <= collectionSnap.docs.length; i++){
-                await this.documentBackup(collectionSnap.docs[i-1])
+                if(!denied)  await this.documentBackup(collectionSnap.docs[i-1])
                 await this.recursiveBackup(collectionSnap.docs[i-1].ref)
             }           
         }

@@ -22,9 +22,9 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 |     path     |     p      |                        Path to service account JSON file                         |
 |   services   |     s      |  firestore (f), storage (s), auth (a), can be separated by commas. Default: all  |
 |    backup    |     b      |   Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup   |
-| --nocompress |    -nc     |                          Do not use data compression                             |
 |  collections |   coll     |    Apply to Collections (in Firestore service). Default: all, if it is not set   |
 |    buckets   |   buck     |       Apply to Buckets (in Storage service). Default: all, if it is not set      |
+| --nocompress |    -nc     |                          Do not use data compression                             |
 
 - collections - the rule also applies to all nested collections and documents
 
@@ -84,6 +84,13 @@ Or from the FIREBASE project
 
 Firebase API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
 [Open official firebase docs](https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users)
+
+### WARNING (restoration of subcollections)
+I recommend using only the top collection level in the collections parameter. Because you can get shadow document by restoring a subcollection in a non-existent document.
+To a full database cleanup, including shadow documents, use the command in firebase tools
+```bash
+	firebase firestore:delete -r
+```
   
 ## LICENSE  
   
