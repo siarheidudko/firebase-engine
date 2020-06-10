@@ -57,37 +57,19 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
         })
         this.firestore = this.admin.firestore()
         this.writeBuffer = {
-            /**
-             * batch size
-             */
             batchSize: 100,
-            /**
-             * iteration
-             */
             iteration: 0,
-            /**
-             * batch object
-             */
             batch: self.firestore.batch(),
-            /**
-             * clear this buffer
-             */
             clear: async () => {
                 self.writeBuffer.iteration = 1
                 self.writeBuffer.batch = self.firestore.batch()
                 return self.writeBuffer
             },
-            /**
-             * write this buffer to project and clean it
-             */
             commit: async () => {
                 await self.writeBuffer.batch.commit()
                 await self.writeBuffer.clear()
                 return self.writeBuffer
             },
-            /**
-             * add document to this buffer
-             */
             set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
                 ++self.counter
                 if((self.counter % 100) === 0)
@@ -113,11 +95,29 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
      * buffer for write to project
      */
     private writeBuffer: {
+        /**
+         * batch size
+         */
         batchSize: number,
+        /**
+         * iteration
+         */
         iteration: number,
+        /**
+         * Firestore Writebatch
+         */
         batch: Firestore.WriteBatch,
+        /**
+         * clean this buffer
+         */
         clear: Function,
+        /**
+         * write this buffer to project and clean it
+         */
         commit: Function,
+        /**
+         * add document to this buffer
+         */
         set: Function
     }
     /**

@@ -47,29 +47,14 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
             Logger.warn(err)
         })
         this.writeBuffer = {
-            /**
-             * batch size
-             */
             batchSize: 100,
-            /**
-             * iteration
-             */
             iteration: 0,
-            /**
-             * array of user
-             */
             batch: [],
-            /**
-             * clear this buffer
-             */
             clear: async () => {
                 self.writeBuffer.iteration = 1
                 self.writeBuffer.batch = []
                 return self.writeBuffer
-            },
-            /**
-             * write this buffer to project and clean it
-             */
+            } ,
             commit: async () => {
                 let res
                 if(self.settings.hash_config)
@@ -85,9 +70,6 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
                 await self.writeBuffer.clear()
                 return self.writeBuffer
             },
-            /**
-             * add user to this buffer
-             */
             set: async (ref: string, data: {uid: string, [key: string]: any}) => {
                 ++self.counter
                 if((self.counter % 100) === 0)
@@ -113,11 +95,29 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
      * buffer for write to project
      */
     private writeBuffer: {
+        /**
+         * batch size
+         */
         batchSize: number,
+        /**
+         * iteration
+         */
         iteration: number,
+        /**
+         * array of user
+         */
         batch: {uid: string, [key: string]: any}[],
+        /**
+         * clean this buffer
+         */
         clear: Function,
+        /**
+         * write this buffer to project and clean it
+         */
         commit: Function,
+        /**
+         * add user to this buffer
+         */
         set: Function
     }
     /**
