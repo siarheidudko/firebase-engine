@@ -1,3 +1,9 @@
+# 1.2.7 / 2020-06-10
+
+## :tada: Enhancements
+- Replaced tslint with eslint
+- Moved homepage to https://firebase-engine.ml
+
 # 1.2.6 / 2020-06-08
 
 ## :tada: Enhancements

@@ -24,7 +24,7 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
     /**
      * backup one document function
      */
-    private documentBackup = async (docSnap: Firestore.DocumentData) => {
+    private async documentBackup(docSnap: Firestore.DocumentData){
         ++this.counter
         if((this.counter % 100) === 0)
             Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
@@ -48,7 +48,7 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
     /**
      * recursive backup function
      */
-    private recursiveBackup = async (ref: Firestore.Firestore|Firestore.DocumentReference) => {
+    private async recursiveBackup(ref: Firestore.Firestore|Firestore.DocumentReference){
         const collections = await ref.listCollections()
         for(const collectionRef of collections){
             let denied: boolean = true
@@ -75,28 +75,25 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {
-        this.startTimestamp = Date.now()     
-        await new Promise(async (res, rej) => {
-            try {
-                let _write: Gzip|WriteStream
-                if(this.writer.gzipStream){
-                    _write = this.writer.gzipStream
-                } else {
-                    _write = this.writer.fileStream
-                }
-                this.stringiferStream.pipe(_write)
-                _write.once("unpipe", () => {
-                    Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
-                    Logger.log(" - Firestore Backup Complete!")
-                    res()
-                })
-                await this.recursiveBackup(this.firestore)
-                this.stringiferStream.unpipe(_write)
-            } catch (err) { 
-                rej(err) 
-            }
+    public async run(){
+        this.startTimestamp = Date.now()
+        let _write: Gzip|WriteStream
+        if(this.writer.gzipStream){
+            _write = this.writer.gzipStream
+        } else {
+            _write = this.writer.fileStream
+        }
+        const unpipe = new Promise((res, rej) => {
+            _write.once("unpipe", () => {
+                Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
+                Logger.log(" - Firestore Backup Complete!")
+                res()
+            })
         })
+        this.stringiferStream.pipe(_write)
+        await this.recursiveBackup(this.firestore)
+        this.stringiferStream.unpipe(_write)
+        await unpipe
         return
     }
 }

@@ -69,6 +69,8 @@ export class FirestoreConverter {
      * @param d - Object for serialization
      */
     private static fromObject(d: any){
+        const _arr: any[] = []
+        const _obj: {[key: string]: any} = {}
         switch(d.type){
             case "string":
             case "number":
@@ -85,12 +87,10 @@ export class FirestoreConverter {
             case "geopoint":
                 return new Firestore.GeoPoint(d.data.lat, d.data.long)
             case "array":
-                const _arr: any[] = []
                 for(const val of d.data)
                     _arr.push(FirestoreConverter.fromObject(val))
                 return _arr
-            case "map":
-                const _obj: {[key: string]: any} = {}
+            case "map":               
                 for(const key in d.data)
                     _obj[key] = FirestoreConverter.fromObject(d.data[key])
                 return _obj

@@ -16,7 +16,7 @@ export class JobCleanStorage extends JobOneServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         const [buckets] = await this.store.getBuckets()
         this.startTimestamp = Date.now()
         for(const bucket of buckets)if(

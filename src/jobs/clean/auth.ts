@@ -21,7 +21,7 @@ export class JobCleanAuth extends JobOneServiceTemplate {
     /**
      * recursive clean function
      */
-    private recursiveClean = async (nextPageToken?: string) => {
+    private async recursiveClean(nextPageToken?: string){
         const listUsers = await this.auth.listUsers(1000, nextPageToken)
         for(const userRecord of listUsers.users){
             ++this.counter
@@ -36,7 +36,7 @@ export class JobCleanAuth extends JobOneServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         this.startTimestamp = Date.now()
         await this.recursiveClean()
         Logger.log(" -- Auth Cleaned - "+this.counter+" users in "+this.getWorkTime()+".")

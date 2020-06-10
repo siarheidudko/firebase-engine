@@ -24,7 +24,7 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
     /**
      * recursive backup function
      */
-    private recursiveBackup = async (nextPageToken?: string) => {
+    private async recursiveBackup(nextPageToken?: string){
         const listUsers = await this.auth.listUsers(1000, nextPageToken)
         for(const userRecord of listUsers.users){
             ++this.counter
@@ -50,28 +50,25 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         this.startTimestamp = Date.now()
-        await new Promise(async (res, rej) => {
-            try {
-                let _write: Gzip|WriteStream
-                if(this.writer.gzipStream){
-                    _write = this.writer.gzipStream
-                } else {
-                    _write = this.writer.fileStream
-                }
-                this.stringiferStream.pipe(_write)
-                _write.once("unpipe", () => {
-                    Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
-                    Logger.log(" - Auth Backup Complete!")
-                    res()
-                })
-                await this.recursiveBackup()
-                this.stringiferStream.unpipe(_write)
-            } catch (err) { 
-                rej(err) 
-            }
+        let _write: Gzip|WriteStream
+        if(this.writer.gzipStream){
+            _write = this.writer.gzipStream
+        } else {
+            _write = this.writer.fileStream
+        }
+        const unpipe = new Promise((res, rej) => {
+            _write.once("unpipe", () => {
+                Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
+                Logger.log(" - Auth Backup Complete!")
+                res()
+            })
         })
+        this.stringiferStream.pipe(_write)
+        await this.recursiveBackup()
+        this.stringiferStream.unpipe(_write)
+        await unpipe
         return
     }
 }

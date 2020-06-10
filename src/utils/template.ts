@@ -50,21 +50,21 @@ export class JobOneTemplate extends JobTemplate{
     /**
      * Jobs for Firebase.Firestore
      */
-    public firestore = async () => { 
+    public async firestore(){ 
         Logger.warn("Not supported.")
         return
     }
     /**
      * Jobs for Firebase.Auth
      */
-    public auth = async () => { 
+    public async auth(){ 
         Logger.warn("Not supported.")
         return
     }
     /**
      * Jobs for Firebase.Storage
      */
-    public storage = async () => { 
+    public async storage(){ 
         Logger.warn("Not supported.")
         return
     }
@@ -90,7 +90,7 @@ export class JobOneServiceTemplate extends JobTemplate{
     /**
      * get work time
      */
-    public getWorkTime = () => {
+    public getWorkTime(){
         const time = Date.now() - this.startTimestamp
         if(time < 5000)
             return time + " ms"
@@ -105,7 +105,7 @@ export class JobOneServiceTemplate extends JobTemplate{
     /**
      * Job runner
      */
-    public run = async () => { 
+    public async run(){ 
         Logger.warn("Not supported.")
         return
     }

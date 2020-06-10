@@ -23,7 +23,7 @@ export class AuthConverter {
         "photoURL",
         "providerData",
         "tenantId",
-        "uid",
+        "uid"
     ]
     /**
      * Convert an object to a string

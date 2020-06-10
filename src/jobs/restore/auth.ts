@@ -46,6 +46,60 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
         this.writeStream.on("error", (err) => {
             Logger.warn(err)
         })
+        this.writeBuffer = {
+            /**
+             * batch size
+             */
+            batchSize: 100,
+            /**
+             * iteration
+             */
+            iteration: 0,
+            /**
+             * array of user
+             */
+            batch: [],
+            /**
+             * clear this buffer
+             */
+            clear: async () => {
+                self.writeBuffer.iteration = 1
+                self.writeBuffer.batch = []
+                return self.writeBuffer
+            },
+            /**
+             * write this buffer to project and clean it
+             */
+            commit: async () => {
+                let res
+                if(self.settings.hash_config)
+                    res = await self.auth.importUsers(self.writeBuffer.batch, {
+                        hash: self.settings.hash_config
+                    })
+                else
+                    res = await self.auth.importUsers(self.writeBuffer.batch)
+                if(res.failureCount !== 0){
+                    self.counter -= res.failureCount
+                    Logger.warn(JSON.stringify(res.errors))
+                }
+                await self.writeBuffer.clear()
+                return self.writeBuffer
+            },
+            /**
+             * add user to this buffer
+             */
+            set: async (ref: string, data: {uid: string, [key: string]: any}) => {
+                ++self.counter
+                if((self.counter % 100) === 0)
+                    Logger.log(" -- Auth Restored - "+self.counter+" users in "+self.getWorkTime()+".")
+                ++self.writeBuffer.iteration
+                self.writeBuffer.batch.push(data)
+                if(self.writeBuffer.iteration === self.writeBuffer.batchSize){
+                    await self.writeBuffer.commit()
+                }
+                return self.writeBuffer
+            }
+        }
     }
     /**
      * firebase auth app
@@ -58,64 +112,18 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
     /**
      * buffer for write to project
      */
-    private writeBuffer = {
-        /**
-         * batch size
-         */
-        batchSize: 100,
-        /**
-         * iteration
-         */
-        iteration: 0,
-        /**
-         * array of user
-         */
-        batch: [] as {uid: string, [key: string]: any}[],
-        /**
-         * clear this buffer
-         */
-        clear: async () => {
-            this.writeBuffer.iteration = 1
-            this.writeBuffer.batch = []
-            return this.writeBuffer
-        },
-        /**
-         * write this buffer to project and clean it
-         */
-        commit: async () => {
-            let res
-            if(this.settings.hash_config)
-                res = await this.auth.importUsers(this.writeBuffer.batch, {
-                    hash: this.settings.hash_config
-                })
-            else
-                res = await this.auth.importUsers(this.writeBuffer.batch)
-            if(res.failureCount !== 0){
-                this.counter -= res.failureCount
-                Logger.warn(JSON.stringify(res.errors))
-            }
-            await this.writeBuffer.clear()
-            return this.writeBuffer
-        },
-        /**
-         * add user to this buffer
-         */
-        set: async (ref: string, data: {uid: string, [key: string]: any}) => {
-            ++this.counter
-            if((this.counter % 100) === 0)
-                Logger.log(" -- Auth Restored - "+this.counter+" users in "+this.getWorkTime()+".")
-            ++this.writeBuffer.iteration
-            this.writeBuffer.batch.push(data)
-            if(this.writeBuffer.iteration === this.writeBuffer.batchSize){
-                await this.writeBuffer.commit()
-            }
-            return this.writeBuffer
-        }
+    private writeBuffer: {
+        batchSize: number,
+        iteration: number,
+        batch: {uid: string, [key: string]: any}[],
+        clear: Function,
+        commit: Function,
+        set: Function
     }
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
             if(this.gunzipStream){

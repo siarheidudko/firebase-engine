@@ -19,7 +19,7 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
     /**
      * backup one file function
      */
-    private backupFile = async (bucket: Bucket, file: File) => {
+    private async backupFile(bucket: Bucket, file: File){
         const bName = bucket.name.replace(new RegExp(this.settings.serviceAccount.project_id, "g"), "{default}")
         const [buffer] = await file.download()
         if(!buffer)
@@ -44,36 +44,33 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         const [buckets] = await this.store.getBuckets()
         this.startTimestamp = Date.now()
-        await new Promise(async (res, rej) => {
-            try {
-                let _write: Gzip|WriteStream
-                if(this.writer.gzipStream){
-                    _write = this.writer.gzipStream
-                } else {
-                    _write = this.writer.fileStream
-                }
-                this.stringiferStream.pipe(_write)
-                _write.once("unpipe", () => {
-                    Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
-                    Logger.log(" - Storage Backup Complete!")
-                    res()
-                })
-                for(const bucket of buckets)if(
-                    (this.settings.buckets.length === 0) ||
-                    (this.settings.buckets.indexOf(bucket.name) !== -1)
-                ){
-                    const [files] = await bucket.getFiles()
-                    if(Array.isArray(files)) for(const file of files)
-                        await this.backupFile(bucket, file)
-                }
-                this.stringiferStream.unpipe(_write)
-            } catch (err) { 
-                rej(err) 
-            }
+        let _write: Gzip|WriteStream
+        if(this.writer.gzipStream){
+            _write = this.writer.gzipStream
+        } else {
+            _write = this.writer.fileStream
+        }
+        const unpipe = new Promise((res, rej) => {
+            _write.once("unpipe", () => {
+                Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
+                Logger.log(" - Storage Backup Complete!")
+                res()
+            })
         })
+        this.stringiferStream.pipe(_write)
+        for(const bucket of buckets)if(
+            (this.settings.buckets.length === 0) ||
+            (this.settings.buckets.indexOf(bucket.name) !== -1)
+        ){
+            const [files] = await bucket.getFiles()
+            if(Array.isArray(files)) for(const file of files)
+                await this.backupFile(bucket, file)
+        }
+        this.stringiferStream.unpipe(_write)
+        await unpipe
         return
     }
 }

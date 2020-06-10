@@ -55,11 +55,56 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
         this.writeStream.on("error", (err) => {
             Logger.warn(err)
         })
+        this.firestore = this.admin.firestore()
+        this.writeBuffer = {
+            /**
+             * batch size
+             */
+            batchSize: 100,
+            /**
+             * iteration
+             */
+            iteration: 0,
+            /**
+             * batch object
+             */
+            batch: self.firestore.batch(),
+            /**
+             * clear this buffer
+             */
+            clear: async () => {
+                self.writeBuffer.iteration = 1
+                self.writeBuffer.batch = self.firestore.batch()
+                return self.writeBuffer
+            },
+            /**
+             * write this buffer to project and clean it
+             */
+            commit: async () => {
+                await self.writeBuffer.batch.commit()
+                await self.writeBuffer.clear()
+                return self.writeBuffer
+            },
+            /**
+             * add document to this buffer
+             */
+            set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
+                ++self.counter
+                if((self.counter % 100) === 0)
+                    Logger.log(" -- Firebase Restored - "+self.counter+" docs in "+self.getWorkTime()+".")
+                ++self.writeBuffer.iteration
+                self.writeBuffer.batch.set(ref, data)
+                if(self.writeBuffer.iteration === self.writeBuffer.batchSize){
+                    await self.writeBuffer.commit()
+                }
+                return self.writeBuffer
+            }
+        }
     }
     /**
      * firebase firestore app
      */
-    private firestore: Firestore.Firestore = this.admin.firestore()
+    private firestore: Firestore.Firestore
     /**
      * write document to project stream
      */
@@ -67,54 +112,18 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
     /**
      * buffer for write to project
      */
-    private writeBuffer = {
-        /**
-         * batch size
-         */
-        batchSize: 100,
-        /**
-         * iteration
-         */
-        iteration: 0,
-        /**
-         * batch object
-         */
-        batch: this.firestore.batch(),
-        /**
-         * clear this buffer
-         */
-        clear: async () => {
-            this.writeBuffer.iteration = 1
-            this.writeBuffer.batch = this.firestore.batch()
-            return this.writeBuffer
-        },
-        /**
-         * write this buffer to project and clean it
-         */
-        commit: async () => {
-            await this.writeBuffer.batch.commit()
-            await this.writeBuffer.clear()
-            return this.writeBuffer
-        },
-        /**
-         * add document to this buffer
-         */
-        set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
-            ++this.counter
-            if((this.counter % 100) === 0)
-                Logger.log(" -- Firebase Restored - "+this.counter+" docs in "+this.getWorkTime()+".")
-            ++this.writeBuffer.iteration
-            this.writeBuffer.batch.set(ref, data)
-            if(this.writeBuffer.iteration === this.writeBuffer.batchSize){
-                await this.writeBuffer.commit()
-            }
-            return this.writeBuffer
-        }
+    private writeBuffer: {
+        batchSize: number,
+        iteration: number,
+        batch: Firestore.WriteBatch,
+        clear: Function,
+        commit: Function,
+        set: Function
     }
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
             if(this.gunzipStream){

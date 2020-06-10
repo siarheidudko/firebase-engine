@@ -36,7 +36,7 @@ export class FirebaseEngine {
     /**
      * Call this before exiting
      */
-    public exit = async () => {
+    public async exit(){
         const arr: Promise<any>[] = []
         for(const key in writers){
             const writer = writers[key]

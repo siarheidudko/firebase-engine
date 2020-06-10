@@ -30,7 +30,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     /**
      * commit batch and recreate
      */
-    private batchClean = async (arr: Firestore.DocumentReference[]) => {
+    private async batchClean(arr: Firestore.DocumentReference[]){
         for(const ref of arr){
             let denied: boolean = true
             if(this.settings.collections.length !== 0){
@@ -58,7 +58,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     /**
      * recursive clean function
      */
-    private recursiveClean = async (ref: Firestore.Firestore | Firestore.DocumentReference) => {
+    private async recursiveClean(ref: Firestore.Firestore | Firestore.DocumentReference){
         const collections = await ref.listCollections()
         for(const collectionRef of collections){
             const collectionSnap = await collectionRef.get()
@@ -81,7 +81,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         this.startTimestamp = Date.now()
         await this.recursiveClean(this.firestore)
         Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")

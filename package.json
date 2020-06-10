@@ -1,13 +1,13 @@
 {
   "name": "firebase-engine",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Tools  for firebase (backup, clean,  restore)",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "lint": "tslint --project tsconfig.json",
-    "build": "rm -rf lib && tsc --declaration --declarationMap --sourceMap",
-    "doc": "typedoc src&&echo \"\">./docs/.nojekyll",
+    "lint": "eslint -c .eslintrc.js --ext .ts src",
+    "build": "rm -rf lib && tsc --declaration",
+    "doc": "typedoc src&&echo \"\">./docs/.nojekyll&&echo \"firebase-engine.ml\">./docs/CNAME",
     "test": "firebase emulators:exec \"mocha --exit test/**/*.test.js\"",
     "cov": "firebase emulators:exec \"nyc mocha --exit test/**/*.test.js\""
   },
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "github:siarheidudko/firebase-engine"
   },
-  "homepage": "https://siarheidudko.github.io/firebase-engine/",
+  "homepage": "https://firebase-engine.ml",
   "engines": {
     "node": ">=10.12"
   },
@@ -37,13 +37,18 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^5.0.1",
-    "@sergdudko/objectstream": "^2.0.4",
+    "@sergdudko/objectstream": "^2.0.5",
     "firebase-admin": "^8.12.1"
   },
   "devDependencies": {
-    "@types/node": "^14.0.5",
+    "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.2.0",
+    "@typescript-eslint/parser": "^3.2.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
     "mocha": "^7.2.0",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.5"
   }
 }

@@ -71,7 +71,7 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
     /**
      * job runner
      */
-    public run = async () => {
+    public async run(){
         this.startTimestamp = Date.now()
         await new Promise((res, rej) => {
             if(this.gunzipStream){

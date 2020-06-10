@@ -5,7 +5,7 @@ export class Logger {
     /**
      * Log level
      */
-    public static log = (d: any) => {
+    public static log(d: any){
         setTimeout(()=>{
             console.log(d)
         }, 0)
@@ -13,7 +13,7 @@ export class Logger {
     /**
      * Warning level
      */
-    public static warn = (d: any) => {
+    public static warn(d: any){
         setTimeout(()=>{
             console.warn(d)
         }, 0)
@@ -21,7 +21,7 @@ export class Logger {
     /**
      * Error level
      */
-    public static error = (d: any) => {
+    public static error(d: any){
         setTimeout(()=>{
             console.error(d)
         }, 0)
