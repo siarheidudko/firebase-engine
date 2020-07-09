@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint -c .eslintrc.js --ext .ts src",
     "build": "rm -rf lib && tsc --declaration",
-    "doc": "typedoc src&&rsync -ra hosting/ docs",
+    "doc": "bash hosting.sh",
     "test": "firebase emulators:exec \"mocha --exit test/**/*.test.js\"",
     "cov": "firebase emulators:exec \"nyc mocha --exit test/**/*.test.js\""
   },

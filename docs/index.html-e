@@ -1,0 +1,354 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Firebase Engine - v1.2.8</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Firebase Engine - v1.2.8</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>Firebase Engine - v1.2.8</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#firebase-engine" id="firebase-engine" style="color: inherit; text-decoration: none;">
+					<h1>firebase-engine</h1>
+				</a>
+				<p>Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage, Firebase.Auth </p>
+				<p><a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/v/firebase-engine.svg" alt="npm"></a>
+					<a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/dy/firebase-engine.svg" alt="npm"></a>
+					<a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/l/firebase-engine.svg" alt="NpmLicense"></a>
+					<img src="https://img.shields.io/github/last-commit/siarheidudko/firebase-engine.svg" alt="GitHub last commit">
+				<img src="https://img.shields.io/github/release/siarheidudko/firebase-engine.svg" alt="GitHub release"></p>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<pre><code class="language-bash">    npm i firebase-engine -g</code></pre>
+				<a href="#launch-parameters" id="launch-parameters" style="color: inherit; text-decoration: none;">
+					<h2>Launch parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Short name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>operations</td>
+							<td>o</td>
+							<td>backup (b), restore (r) or clean (c). Default: backup</td>
+						</tr>
+						<tr>
+							<td>path</td>
+							<td>p</td>
+							<td>Path to service account JSON file</td>
+						</tr>
+						<tr>
+							<td>services</td>
+							<td>s</td>
+							<td>firestore (f), storage (s), auth (a), can be separated by commas. Default: all</td>
+						</tr>
+						<tr>
+							<td>backup</td>
+							<td>b</td>
+							<td>Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup</td>
+						</tr>
+						<tr>
+							<td>collections</td>
+							<td>coll</td>
+							<td>Apply to Collections (in Firestore service). Default: all, if it is not set</td>
+						</tr>
+						<tr>
+							<td>buckets</td>
+							<td>buck</td>
+							<td>Apply to Buckets (in Storage service). Default: all, if it is not set</td>
+						</tr>
+						<tr>
+							<td>--nocompress</td>
+							<td>-nc</td>
+							<td>Do not use data compression</td>
+						</tr>
+				</tbody></table>
+				<ul>
+					<li>collections - the rule also applies to all nested collections and documents</li>
+				</ul>
+				<a href="#launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" id="launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" style="color: inherit; text-decoration: none;">
+					<h2>Launch parameters (only for password recovery for users in Firebase.Auth)</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Short name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>algorithm</td>
+							<td>alg</td>
+							<td>The password hashing information (algorithm, only SCRYPT). Default: SCRYPT</td>
+						</tr>
+						<tr>
+							<td>base64_signer_key</td>
+							<td>bsk</td>
+							<td>The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set.</td>
+						</tr>
+						<tr>
+							<td>base64_salt_separator</td>
+							<td>bss</td>
+							<td>The password hashing information (salt separator in base64). Default: Bw==</td>
+						</tr>
+						<tr>
+							<td>rounds</td>
+							<td>rnd</td>
+							<td>The password hashing information (rounds). Default: 8</td>
+						</tr>
+						<tr>
+							<td>mem_cost</td>
+							<td>mc</td>
+							<td>The password hashing information (memory cost). Default: 14</td>
+						</tr>
+				</tbody></table>
+				<a href="#use" id="use" style="color: inherit; text-decoration: none;">
+					<h2>Use</h2>
+				</a>
+				<p>With full names</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"clean, restore"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore, storage"</span> backup=<span class="hljs-string">"test.backup"</span></code></pre>
+				<p>With one bucket</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"clean"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"storage"</span> buckets=<span class="hljs-string">"test.appspott.com"</span></code></pre>
+				<p>With collection &amp; subcollection</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"backup"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore"</span> collections=<span class="hljs-string">"authors,books.pages"</span></code></pre>
+				<p>With short names</p>
+				<pre><code class="language-bash">    firebase-engine o=<span class="hljs-string">"b, c"</span> p=<span class="hljs-string">"./test.json"</span> b=<span class="hljs-string">"test.backup"</span></code></pre>
+				<p>With password recovery for users</p>
+				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"restore"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore, auth"</span> backup=<span class="hljs-string">"test.backup"</span> bsk=<span class="hljs-string">"nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="</span></code></pre>
+				<a href="#open-source" id="open-source" style="color: inherit; text-decoration: none;">
+					<h2>Open Source</h2>
+				</a>
+				<p><a href="https://siarheidudko.github.io/firebase-engine">See source docs</a></p>
+				<p><a href="https://github.com/siarheidudko/firebase-engine">See source</a></p>
+				<a href="#service-account-key" id="service-account-key" style="color: inherit; text-decoration: none;">
+					<h2>Service Account Key</h2>
+				</a>
+				<p>Get your service account key from IAM
+				<a href="https://console.cloud.google.com/iam-admin/serviceaccounts">Open google IAM</a></p>
+				<p>Or from the FIREBASE project
+				<a href="https://sites.google.com/site/scriptsexamples/new-connectors-to-google-services/firebase/tutorials/authenticate-with-a-service-account">Open official firebase docs</a></p>
+				<a href="#warning-password-hashes-of-users" id="warning-password-hashes-of-users" style="color: inherit; text-decoration: none;">
+					<h3>WARNING (Password hashes of users)</h3>
+				</a>
+				<p>Firebase API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
+				<a href="https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users">Open official firebase docs</a></p>
+				<a href="#warning-restoration-of-subcollections" id="warning-restoration-of-subcollections" style="color: inherit; text-decoration: none;">
+					<h3>WARNING (restoration of subcollections)</h3>
+				</a>
+				<p>I recommend using only the top collection level in the collections parameter. Because you can get shadow document by restoring a subcollection in a non-existent document.
+				To a full database cleanup, including shadow documents, use the command in firebase tools</p>
+				<pre><code class="language-bash">    firebase firestore:delete -r</code></pre>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>LICENSE</h2>
+				</a>
+				<p>Apache-2.0  </p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_firebaseengine_.html">&quot;<wbr>Firebase<wbr>Engine&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bin_firebase_engine_.html">&quot;bin/firebase-<wbr>engine&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_jobs_.html">&quot;jobs/<wbr>Jobs&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_backup_auth_.html">&quot;jobs/backup/auth&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_backup_firestore_.html">&quot;jobs/backup/firestore&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_backup_storage_.html">&quot;jobs/backup/storage&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_clean_auth_.html">&quot;jobs/clean/auth&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_clean_firestore_.html">&quot;jobs/clean/firestore&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_clean_storage_.html">&quot;jobs/clean/storage&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_restore_auth_.html">&quot;jobs/restore/auth&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_restore_firestore_.html">&quot;jobs/restore/firestore&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_jobs_restore_storage_.html">&quot;jobs/restore/storage&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_authconverter_.html">&quot;utils/<wbr>Auth<wbr>Converter&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_firestoreconverter_.html">&quot;utils/<wbr>Firestore<wbr>Converter&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_logger_.html">&quot;utils/<wbr>Logger&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_storageconverter_.html">&quot;utils/<wbr>Storage<wbr>Converter&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_initialization_.html">&quot;utils/initialization&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_template_.html">&quot;utils/template&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '234199319', 'firebase-engine.ml');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

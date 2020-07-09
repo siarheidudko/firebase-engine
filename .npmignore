@@ -2,6 +2,8 @@
 .nyc_output
 docs
 hosting
+hosting.sh
+hosting.html
 node_modules
 src
 test

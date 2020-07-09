@@ -139,7 +139,8 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
                 res()
             })
         })
-        await this.writeBuffer.commit()
+        if((this.writeBuffer.iteration % this.writeBuffer.batchSize) !== 0)
+            await this.writeBuffer.commit()
         return
     }
 }
