@@ -57,26 +57,24 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
         })
         this.firestore = this.admin.firestore()
         this.writeBuffer = {
-            batchSize: 100,
+            batchSize: 500,
             iteration: 0,
             batch: self.firestore.batch(),
             clear: async () => {
-                self.writeBuffer.iteration = 1
                 self.writeBuffer.batch = self.firestore.batch()
                 return self.writeBuffer
             },
             commit: async () => {
-                await self.writeBuffer.batch.commit()
+                const result = await self.writeBuffer.batch.commit()
+                self.counter += result.length
+                Logger.log(" -- Firebase Restored - "+self.counter+" docs in "+self.getWorkTime()+".")
                 await self.writeBuffer.clear()
                 return self.writeBuffer
             },
             set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
-                ++self.counter
-                if((self.counter % 100) === 0)
-                    Logger.log(" -- Firebase Restored - "+self.counter+" docs in "+self.getWorkTime()+".")
-                ++self.writeBuffer.iteration
                 self.writeBuffer.batch.set(ref, data)
-                if(self.writeBuffer.iteration === self.writeBuffer.batchSize){
+                ++self.writeBuffer.iteration
+                if((self.writeBuffer.iteration % self.writeBuffer.batchSize) === 0){
                     await self.writeBuffer.commit()
                 }
                 return self.writeBuffer
@@ -125,20 +123,20 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
      */
     public async run(){
         this.startTimestamp = Date.now()
+        const self = this
         await new Promise((res, rej) => {
-            if(this.gunzipStream){
-                const gunzip = this.gunzipStream
-                this.gunzipStream.on("unpipe", () => {
-                    gunzip.unpipe(this.parserStream)
+            if(self.gunzipStream){
+                const gunzip = self.gunzipStream
+                self.gunzipStream.on("unpipe", () => {
+                    gunzip.unpipe(self.parserStream)
                     gunzip.close()
-                    this.parserStream.end()
+                    self.parserStream.end()
                 })
-                this.fileStream.pipe(gunzip).pipe(this.parserStream).pipe(this.writeStream)
+                self.fileStream.pipe(gunzip).pipe(self.parserStream).pipe(self.writeStream)
             } else {
-                this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
+                self.fileStream.pipe(self.parserStream).pipe(self.writeStream)
             }
-            this.writeStream.on("finish", () => {
-                Logger.log(" -- Firebase Restored - "+this.counter+" docs in "+this.getWorkTime()+".")
+            self.writeStream.on("finish", () => {
                 Logger.log(" - Firestore Restore Complete!")
                 res()
             })

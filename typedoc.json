@@ -11,5 +11,10 @@
     "stripInternal": "true",
     "suppressExcessPropertyErrors": "true",
     "suppressImplicitAnyIndexErrors": "true",
-    "module": "commonjs"
+    "module": "commonjs",
+    "name": "Firebase Engine",
+    "includeVersion": true,
+    "hideGenerator": true,
+    "gaID": "234199319",
+    "gaSite": "firebase-engine.ml"
 }

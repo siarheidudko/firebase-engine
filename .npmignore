@@ -1,6 +1,7 @@
 .github
 .nyc_output
 docs
+hosting
 node_modules
 src
 test

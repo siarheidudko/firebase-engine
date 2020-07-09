@@ -25,9 +25,6 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
      * backup one document function
      */
     private async documentBackup(docSnap: Firestore.DocumentData){
-        ++this.counter
-        if((this.counter % 100) === 0)
-            Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
         const docData = docSnap.data()
         if(!docData)
             return
@@ -37,12 +34,16 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
             path: docSnap.ref.path,
             data: docString
         }
+        const self = this
         await new Promise((res, rej) => {
-            this.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
+            self.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
                 if(err) Logger.warn(err)
                 res()
             })
         })
+        ++this.counter
+        if((this.counter % 500) === 0)
+            Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
         return
     }
     /**
@@ -83,9 +84,11 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
+        const self = this
         const unpipe = new Promise((res, rej) => {
             _write.once("unpipe", () => {
-                Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
+                if((self.counter % 500) !== 0)
+                    Logger.log(" -- Firestore Backuped - "+self.counter+" docs in "+self.getWorkTime()+".")
                 Logger.log(" - Firestore Backup Complete!")
                 res()
             })

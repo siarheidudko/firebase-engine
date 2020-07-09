@@ -23,12 +23,9 @@ export class JobCleanAuth extends JobOneServiceTemplate {
      */
     private async recursiveClean(nextPageToken?: string){
         const listUsers = await this.auth.listUsers(1000, nextPageToken)
-        for(const userRecord of listUsers.users){
-            ++this.counter
-            if((this.counter % 100) === 0)
-                Logger.log(" -- Auth Cleaned - "+this.counter+" users in "+this.getWorkTime()+".")
-            await this.auth.deleteUser(userRecord.uid)
-        }
+        const result = await this.auth.deleteUsers(listUsers.users.map((user) => { return user.uid }))
+        this.counter += result.successCount
+        Logger.log(" -- Auth Cleaned - "+this.counter+" users in "+this.getWorkTime()+".")
         if(listUsers.pageToken)
             await this.recursiveClean(listUsers.pageToken)
         return
@@ -39,7 +36,6 @@ export class JobCleanAuth extends JobOneServiceTemplate {
     public async run(){
         this.startTimestamp = Date.now()
         await this.recursiveClean()
-        Logger.log(" -- Auth Cleaned - "+this.counter+" users in "+this.getWorkTime()+".")
         Logger.log(" - Auth Clean Complete!")
         return
     }

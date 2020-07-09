@@ -27,21 +27,22 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
     private async recursiveBackup(nextPageToken?: string){
         const listUsers = await this.auth.listUsers(1000, nextPageToken)
         for(const userRecord of listUsers.users){
-            ++this.counter
-            if((this.counter % 100) === 0)
-                Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
             const docString = AuthConverter.toString(userRecord)
             const _doc: DataModel = {
                 service: "auth",
                 path: userRecord.uid,
                 data: docString
             }
+            const self = this
             await new Promise((res, rej) => {
-                this.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
+                self.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
                     if(err) Logger.warn(err)
                     res()
                 })
             })
+            ++this.counter
+            if((this.counter % 1000) === 0)
+                Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
         }
         if(listUsers.pageToken)
             await this.recursiveBackup(listUsers.pageToken)
@@ -58,9 +59,11 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
+        const self = this
         const unpipe = new Promise((res, rej) => {
             _write.once("unpipe", () => {
-                Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
+                if((self.counter % 1000) !== 0)
+                    Logger.log(" -- Auth Backuped - "+self.counter+" users in "+self.getWorkTime()+".")
                 Logger.log(" - Auth Backup Complete!")
                 res()
             })

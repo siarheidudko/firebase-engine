@@ -47,11 +47,10 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
             Logger.warn(err)
         })
         this.writeBuffer = {
-            batchSize: 100,
+            batchSize: 1000,
             iteration: 0,
             batch: [],
             clear: async () => {
-                self.writeBuffer.iteration = 1
                 self.writeBuffer.batch = []
                 return self.writeBuffer
             } ,
@@ -63,20 +62,17 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
                     })
                 else
                     res = await self.auth.importUsers(self.writeBuffer.batch)
-                if(res.failureCount !== 0){
-                    self.counter -= res.failureCount
+                self.counter += res.successCount
+                Logger.log(" -- Auth Restored - "+self.counter+" users in "+self.getWorkTime()+".")
+                if(res.failureCount !== 0)
                     Logger.warn(JSON.stringify(res.errors))
-                }
                 await self.writeBuffer.clear()
                 return self.writeBuffer
             },
-            set: async (ref: string, data: {uid: string, [key: string]: any}) => {
-                ++self.counter
-                if((self.counter % 100) === 0)
-                    Logger.log(" -- Auth Restored - "+self.counter+" users in "+self.getWorkTime()+".")
-                ++self.writeBuffer.iteration
+            set: async (ref: string, data: {uid: string, [key: string]: any}) => {  
                 self.writeBuffer.batch.push(data)
-                if(self.writeBuffer.iteration === self.writeBuffer.batchSize){
+                ++self.writeBuffer.iteration
+                if((self.writeBuffer.iteration % self.writeBuffer.batchSize) === 0){
                     await self.writeBuffer.commit()
                 }
                 return self.writeBuffer
@@ -125,20 +121,20 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
      */
     public async run(){
         this.startTimestamp = Date.now()
+        const self = this
         await new Promise((res, rej) => {
-            if(this.gunzipStream){
-                const gunzip = this.gunzipStream
-                this.gunzipStream.on("unpipe", () => {
-                    gunzip.unpipe(this.parserStream)
+            if(self.gunzipStream){
+                const gunzip = self.gunzipStream
+                self.gunzipStream.on("unpipe", () => {
+                    gunzip.unpipe(self.parserStream)
                     gunzip.close()
-                    this.parserStream.end()
+                    self.parserStream.end()
                 })
-                this.fileStream.pipe(gunzip).pipe(this.parserStream).pipe(this.writeStream)
+                self.fileStream.pipe(gunzip).pipe(self.parserStream).pipe(self.writeStream)
             } else {
-                this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
+                self.fileStream.pipe(self.parserStream).pipe(self.writeStream)
             }
-            this.writeStream.on("finish", () => {
-                Logger.log(" -- Auth Restored - "+this.counter+" users in "+this.getWorkTime()+".")
+            self.writeStream.on("finish", () => {
                 Logger.log(" - Auth Restore Complete!")
                 res()
             })

@@ -18,7 +18,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     /**
      * document on one batch
      */
-    private static batchSize: number = 100
+    private static batchSize: number = 500
     /**
      * firebase firestore app
      */
@@ -45,13 +45,13 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
                     str +="."
                 }
             } else denied = false
-            if(!denied){
-                ++this.counter
+            if(!denied)
                 this.batch.delete(ref)
-            }
             await this.recursiveClean(ref)
         }
-        await this.batch.commit()
+        const result = await this.batch.commit()
+        this.counter += result.length
+        Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
         this.batch = this.firestore.batch()
         return
     }
@@ -64,9 +64,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
             const collectionSnap = await collectionRef.get()
             let arr: Firestore.DocumentReference[] = []
             for(let i = 1; i <= collectionSnap.docs.length; i++){
-                if((this.counter % 100) === 0)
-                    Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
-                    arr.push(collectionSnap.docs[i-1].ref)
+                arr.push(collectionSnap.docs[i-1].ref)
                 if(
                     ((i % JobCleanFirestore.batchSize) === 0) || 
                     (i === collectionSnap.docs.length)
@@ -84,7 +82,6 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     public async run(){
         this.startTimestamp = Date.now()
         await this.recursiveClean(this.firestore)
-        Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
         Logger.log(" - Firestore Clean Complete!")
         return
     }

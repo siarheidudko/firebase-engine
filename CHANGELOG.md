@@ -1,3 +1,8 @@
+# 1.2.8 / 2020-07-09
+
+## :tada: Enhancements
+- Update libs and code optimization
+
 # 1.2.7 / 2020-06-10
 
 ## :tada: Enhancements

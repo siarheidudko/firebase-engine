@@ -73,20 +73,22 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
      */
     public async run(){
         this.startTimestamp = Date.now()
+        const self = this
         await new Promise((res, rej) => {
-            if(this.gunzipStream){
-                const gunzip = this.gunzipStream
-                this.gunzipStream.on("unpipe", () => {
-                    gunzip.unpipe(this.parserStream)
+            if(self.gunzipStream){
+                const gunzip = self.gunzipStream
+                self.gunzipStream.on("unpipe", () => {
+                    gunzip.unpipe(self.parserStream)
                     gunzip.close()
-                    this.parserStream.end()
+                    self.parserStream.end()
                 })
-                this.fileStream.pipe(gunzip).pipe(this.parserStream).pipe(this.writeStream)
+                self.fileStream.pipe(gunzip).pipe(self.parserStream).pipe(self.writeStream)
             } else {
-                this.fileStream.pipe(this.parserStream).pipe(this.writeStream)
+                self.fileStream.pipe(self.parserStream).pipe(self.writeStream)
             }
-            this.writeStream.on("finish", () => {
-                Logger.log(" -- Storage Restored - "+this.counter+" files in "+this.getWorkTime()+".")
+            self.writeStream.on("finish", () => {
+                if((self.counter % 100) !== 0)
+                    Logger.log(" -- Storage Restored - "+self.counter+" files in "+self.getWorkTime()+".")
                 Logger.log(" - Storage Restore Complete!")
                 res()
             })

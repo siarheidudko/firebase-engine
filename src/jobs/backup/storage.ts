@@ -24,21 +24,22 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         const [buffer] = await file.download()
         if(!buffer)
             return
-        ++this.counter
-        if((this.counter % 100) === 0)
-            Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
         const docString = StorageConverter.toString(buffer)
         const _doc: DataModel = {
             service: "storage",
             path: bName+"://"+file.name,
             data: docString
         }
+        const self = this
         await new Promise((res, rej) => {
-            this.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
+            self.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
                 if(err) Logger.warn(err)
                 res()
             })
         })
+        ++this.counter
+        if((this.counter % 100) === 0)
+            Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
         return
     }
     /**
@@ -53,9 +54,11 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
+        const self = this
         const unpipe = new Promise((res, rej) => {
             _write.once("unpipe", () => {
-                Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
+                if((self.counter % 100) !== 0)
+                    Logger.log(" -- Storage Backuped - "+self.counter+" files in "+self.getWorkTime()+".")
                 Logger.log(" - Storage Backup Complete!")
                 res()
             })
