@@ -24,6 +24,7 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 |  collections |   coll     |    Apply to Collections (in Firestore service). Default: all, if it is not set   |
 |    buckets   |   buck     |       Apply to Buckets (in Storage service). Default: all, if it is not set      |
 | --nocompress |    -nc     |                          Do not use data compression                             |
+|  --emulators |    -em     |                  Use firebase emulators (work for firestore)                     |
 
 - collections - the rule also applies to all nested collections and documents
 

@@ -6,14 +6,15 @@ Object.assign(global, require("../utils/global"))
 const cmdParser = require("../../lib/utils/initialization").cmdParser
 
 describe("CLI parser", function() {
-    it('firebase-engine o="c, r, b, c" s="f, a, s" p="./test/serviceAccount.json" b="./test.backup" -nc', async () => {
+    it('firebase-engine o="c, r, b, c" s="f, a, s" p="./test/serviceAccount.json" b="./test.backup" -nc -em', async () => {
         const o = cmdParser([
             'firebase-engine',
             'o="c, r, b, c"',
             's="f, a, s"',
             'p="./test/serviceAccount.json"',
             'b="./test.backup"',
-            '-nc'
+            '-nc',
+            '-em'
         ])
         if(
             (typeof(o) !== "object") ||
@@ -28,12 +29,13 @@ describe("CLI parser", function() {
             (o.services[2] !== "storage") ||
             (o.path !== "./test/serviceAccount.json") ||
             (o.backup !== "./test.backup") ||
-            (o.compress !== false)
+            (o.compress !== false) ||
+            (o.emulators !== true)
         )
             throw new Error("error")
         return
     })
-    it('firebase-engine services="storage,auth,firestore" buck="test.appspot.com,test2" coll="authors,books.pages" operations="backup,clean,restore" p="./serviceAccount.json" backup="./test/test.backup" --nocompress', async () => {
+    it('firebase-engine services="storage,auth,firestore" buck="test.appspot.com,test2" coll="authors,books.pages" operations="backup,clean,restore" p="./serviceAccount.json" backup="./test/test.backup" --nocompress --emulators', async () => {
         const o = cmdParser([
             'firebase-engine',
             'services="storage,auth,firestore"',
@@ -42,7 +44,8 @@ describe("CLI parser", function() {
             'operations="backup,clean,restore"',
             'p="./serviceAccount.json"',
             'backup="./test/test.backup"',
-            '--nocompress'
+            '--nocompress',
+            '--emulators'
         ])
         if(
             (typeof(o) !== "object") ||
@@ -57,6 +60,7 @@ describe("CLI parser", function() {
             (o.path !== "./serviceAccount.json") ||
             (o.backup !== "./test/test.backup") ||
             (o.compress !== false) ||
+            (o.emulators !== true) ||
             (!Array.isArray(o.buckets)) ||
             (o.buckets[0] !== "test.appspot.com") ||
             (o.buckets[1] !== "test2") ||
@@ -83,7 +87,8 @@ describe("CLI parser", function() {
             (o.services[0] !== "auth") ||
             (o.path !== "./serviceAccount.json") ||
             (o.backup !== "./test.backup") ||
-            (o.compress !== true)
+            (o.compress !== true) ||
+            (o.emulators !== false)
         )
             throw new Error("error")
         return
@@ -108,6 +113,7 @@ describe("CLI parser", function() {
             (o.path !== "./serviceAccount.json") ||
             (o.backup !== "./test.backup") ||
             (o.compress !== true)||
+            (o.emulators !== false) ||
             (!Array.isArray(o.buckets)) ||
             (o.buckets[0] !== "test") ||
             (!Array.isArray(o.collections)) ||
@@ -132,7 +138,8 @@ describe("CLI parser", function() {
             (o.services.indexOf("firestore") === -1) ||
             (o.services.indexOf("storage") === -1) ||
             (o.path !== "./serviceAccount.json") ||
-            (o.compress !== true)
+            (o.compress !== true) ||
+            (o.emulators !== false)
         )
             throw new Error("error")
         return
@@ -151,7 +158,8 @@ describe("CLI parser", function() {
             (o.services.indexOf("firestore") === -1) ||
             (o.services.indexOf("storage") === -1) ||
             (o.path !== "./serviceAccount.json") ||
-            (o.compress !== true)
+            (o.compress !== true) ||
+            (o.emulators !== false)
         )
             throw new Error("error")
         return
@@ -173,6 +181,7 @@ describe("CLI parser", function() {
             (o.services.indexOf("storage") === -1) ||
             (o.path !== "./serviceAccount.json") ||
             (o.compress !== true) ||
+            (o.emulators !== false) ||
             (typeof(o.hash_config) !== "object") ||
             (o.hash_config.base64_signer_key.toString("base64") !== "c2pibmtqa2pua25ubg==")
         )
@@ -196,6 +205,7 @@ describe("CLI parser", function() {
             (o.services.indexOf("storage") === -1) ||
             (o.path !== "./serviceAccount.json") ||
             (o.compress !== true) ||
+            (o.emulators !== false) ||
             (typeof(o.hash_config) !== "object") ||
             (o.hash_config.algorithm !== "BCRYPT")
         )
@@ -223,6 +233,7 @@ describe("CLI parser", function() {
             (o.services.indexOf("storage") === -1) ||
             (o.path !== "./serviceAccount.json") ||
             (o.compress !== true) ||
+            (o.emulators !== false) ||
             (typeof(o.hash_config) !== "object") ||
             (o.hash_config.algorithm !== "SCRYPT") ||
             (o.hash_config.base64_signer_key.toString("base64") !== "c2pibmtqa2pua25ubg==") ||

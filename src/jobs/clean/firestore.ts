@@ -13,6 +13,11 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     constructor(settings: Settings, admin: app.App, store: Storage){
         super(settings, admin, store)
         this.firestore = this.admin.firestore()
+        if(this.settings.emulators)
+            this.firestore.settings({
+                host: "localhost:8080",
+                ssl: false
+            })
         this.batch = this.firestore.batch()
     }
     /**

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;utils/initialization&quot; | Firebase Engine - v1.2.8</title>
+	<title>&quot;utils/initialization&quot; | Firebase Engine - v1.3.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Firebase Engine - v1.2.8</a>
+					<a href="../index.html" class="title">Firebase Engine - v1.3.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -110,7 +110,7 @@
 					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>admin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">app.App</span><span class="tsd-signature-symbol">; </span>settings<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a><span class="tsd-signature-symbol">; </span>store<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Storage</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/4f478f5/src/utils/initialization.ts#L11">utils/initialization.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/initialization.ts#L11">utils/initialization.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,7 +154,7 @@
 					<div class="tsd-signature tsd-kind-icon">writers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/4f478f5/src/utils/initialization.ts#L29">utils/initialization.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/initialization.ts#L29">utils/initialization.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,7 +184,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/4f478f5/src/utils/initialization.ts#L206">utils/initialization.ts:206</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/initialization.ts#L218">utils/initialization.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -212,7 +212,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/4f478f5/src/utils/initialization.ts#L35">utils/initialization.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/initialization.ts#L35">utils/initialization.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -248,7 +248,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/4f478f5/src/utils/initialization.ts#L329">utils/initialization.ts:329</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/initialization.ts#L344">utils/initialization.ts:344</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -259,7 +259,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> settings: <a href="../interfaces/_utils_initialization_.settingsbeforeinitialization.html" class="tsd-signature-type">SettingsBeforeInitialization</a><span class="tsd-signature-symbol"> = {path: undefined,backup: undefined,compress: true,buckets: [],collections: []}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> settings: <a href="../interfaces/_utils_initialization_.settingsbeforeinitialization.html" class="tsd-signature-type">SettingsBeforeInitialization</a><span class="tsd-signature-symbol"> = {path: undefined,backup: undefined,compress: true,emulators: false,buckets: [],collections: []}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>settings object</p>

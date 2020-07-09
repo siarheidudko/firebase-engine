@@ -1,3 +1,8 @@
+# 1.3.0 / 2020-07-10
+
+## :tada: Enhancements
+- Add firebase emulators for firestore (see --emulators param)
+
 # 1.2.8 / 2020-07-09
 
 ## :tada: Enhancements

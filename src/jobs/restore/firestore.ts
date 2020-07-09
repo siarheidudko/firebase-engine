@@ -56,6 +56,11 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
             Logger.warn(err)
         })
         this.firestore = this.admin.firestore()
+        if(this.settings.emulators)
+            this.firestore.settings({
+                host: "localhost:8080",
+                ssl: false
+            })
         this.writeBuffer = {
             batchSize: 500,
             iteration: 0,

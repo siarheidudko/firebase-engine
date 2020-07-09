@@ -49,6 +49,11 @@ const arg: {
         "Description": "Do not use data compression"
     },
     {
+        "Name": "--emulators",
+        "Short name": "-em",
+        "Description": "Use firebase emulators (work for firestore)"
+    },
+    {
         "Name": "algorithm",
         "Short name": "alg",
         "Description": "The password hashing information (algorithm, only SCRYPT). Default: SCRYPT"

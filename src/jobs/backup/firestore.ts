@@ -15,7 +15,12 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
      */
     constructor(settings: Settings, admin: app.App, store: Storage){
         super(settings, admin, store)
-        this.firestore = this.admin.firestore() 
+        this.firestore = this.admin.firestore()
+        if(this.settings.emulators)
+            this.firestore.settings({
+                host: "localhost:8080",
+                ssl: false
+            })
     }
     /**
      * firebase firestore app

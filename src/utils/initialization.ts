@@ -107,6 +107,10 @@ export interface ParsedSettings {
      */
     compress: boolean
     /**
+     * use emulators
+     */
+    emulators: boolean
+    /**
      * password hash config
      */
     hash_config: {
@@ -140,7 +144,11 @@ export interface SettingsBeforeInitialization {
     /**
      * use compress
      */
-    compress: boolean
+    compress?: boolean
+    /**
+     * use emulators
+     */
+    emulators?: boolean
     /**
      * password hash config
      */
@@ -154,11 +162,11 @@ export interface SettingsBeforeInitialization {
     /**
      * buckets for processing
      */
-    buckets: string[]
+    buckets?: string[]
     /**
      * collections for processing
      */
-    collections: string[]
+    collections?: string[]
 }
 /**
  * settings object after initialization
@@ -180,6 +188,10 @@ export interface Settings {
      * use compress
      */
     compress: boolean
+    /**
+     * use emulators
+     */
+    emulators: boolean
     /**
      * password hash config
      */
@@ -213,6 +225,7 @@ export const cmdParser = (arg: string[]) => {
         backup: undefined,
         services: [],
         compress: true,
+        emulators: false,
         hash_config: {},
         buckets: [],
         collections: []
@@ -271,6 +284,8 @@ export const cmdParser = (arg: string[]) => {
         }
         if(val.match(/^--nocompress/i) || val.match(/^-nc/i))
             settings.compress = false
+        if(val.match(/^--emulators/i) || val.match(/^-em/i))
+            settings.emulators = true
         if(val.match(/^algorithm=/i) || val.match(/^alg=/i))
             settings.hash_config.algorithm = val.replace(/^alg=/i, "")
                 .replace(/^algorithm=/i, "")
@@ -330,6 +345,7 @@ export const initialization = (settings: SettingsBeforeInitialization = {
     path: undefined,
     backup: undefined,
     compress: true,
+    emulators: false,
     buckets: [],
     collections: []
 }) =>  {
@@ -349,6 +365,7 @@ export const initialization = (settings: SettingsBeforeInitialization = {
         path: settings.path,
         backup: settings.backup,
         compress: settings.compress,
+        emulators: settings.emulators,
         buckets: settings.buckets,
         collections: settings.collections
     }
