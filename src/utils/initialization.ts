@@ -6,24 +6,6 @@ import { createHash, randomFillSync } from "crypto"
 import { Storage } from "@google-cloud/storage"
 
 /**
- * Module store (to prevent secondary initialization)
- */
-const store: {
-    /**
-     * firebase app
-     */
-    admin?: app.App,
-    /**
-     * settings object
-     */
-    settings?: Settings
-    /**
-     * Google cloud storage app
-     */
-    store?: Storage
-} = {}
-
-/**
  * write streams
  */
 export const writers: {[key: string]: Writer} = {}
@@ -355,12 +337,11 @@ export const initialization = (settings: SettingsBeforeInitialization = {
         (settings.hash_config.algorithm !== "SCRYPT")
     )
         throw new Error("Only SCRYPT algorithm implemented.")
-    if(store.settings && store.admin && store.store)
-        return store as {
-            settings: Settings,
-            admin: app.App,
-            store: Storage
-        }
+    const store: {
+        admin?: app.App,
+        settings?: Settings
+        store?: Storage
+    } = {}
     const _settings: SettingsBeforeInitialization = {
         path: settings.path,
         backup: settings.backup,

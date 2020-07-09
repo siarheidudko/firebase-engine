@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;bin/firebase-engine&quot; | Firebase Engine - v1.3.0</title>
+	<title>&quot;bin/firebase-engine&quot; | Firebase Engine - v1.3.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Firebase Engine - v1.3.0</a>
+					<a href="../index.html" class="title">Firebase Engine - v1.3.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -93,7 +93,7 @@
 					<div class="tsd-signature tsd-kind-icon">arg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>Description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>Name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>Short name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{&quot;Name&quot;: &quot;operations&quot;,&quot;Short name&quot;: &quot;o&quot;,&quot;Description&quot;: &quot;backup (b), restore (r) or clean (c). Default: backup&quot;},{&quot;Name&quot;: &quot;path&quot;,&quot;Short name&quot;: &quot;p&quot;,&quot;Description&quot;: &quot;Path to service account JSON file&quot;},{&quot;Name&quot;: &quot;services&quot;,&quot;Short name&quot;: &quot;s&quot;,&quot;Description&quot;: &quot;firestore (f), storage (s), auth (a), can be separated by commas. Default: all&quot;},{&quot;Name&quot;: &quot;backup&quot;,&quot;Short name&quot;: &quot;b&quot;,&quot;Description&quot;: &quot;Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup&quot;},{&quot;Name&quot;: &quot;collections&quot;,&quot;Short name&quot;: &quot;coll&quot;,&quot;Description&quot;: &quot;Apply to Collections (in Firestore service). Example for a subcollection of a pages inside a books collection: collections&#x3D;\&quot;books.pages\&quot; Default: all, if it is not set&quot;},{&quot;Name&quot;: &quot;buckets&quot;,&quot;Short name&quot;: &quot;buck&quot;,&quot;Description&quot;: &quot;Apply to Buckets (in Storage service). Default: all, if it is not set&quot;},{&quot;Name&quot;: &quot;--nocompress&quot;,&quot;Short name&quot;: &quot;-nc&quot;,&quot;Description&quot;: &quot;Do not use data compression&quot;},{&quot;Name&quot;: &quot;--emulators&quot;,&quot;Short name&quot;: &quot;-em&quot;,&quot;Description&quot;: &quot;Use firebase emulators (work for firestore)&quot;},{&quot;Name&quot;: &quot;algorithm&quot;,&quot;Short name&quot;: &quot;alg&quot;,&quot;Description&quot;: &quot;The password hashing information (algorithm, only SCRYPT). Default: SCRYPT&quot;},{&quot;Name&quot;: &quot;base64_signer_key&quot;,&quot;Short name&quot;: &quot;bsk&quot;,&quot;Description&quot;: &quot;The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set.&quot;},{&quot;Name&quot;: &quot;base64_salt_separator&quot;,&quot;Short name&quot;: &quot;bss&quot;,&quot;Description&quot;: &quot;The password hashing information (salt separator in base64). Default: Bw&#x3D;&#x3D;&quot;},{&quot;Name&quot;: &quot;rounds&quot;,&quot;Short name&quot;: &quot;rnd&quot;,&quot;Description&quot;: &quot;The password hashing information (rounds). Default: 8&quot;},{&quot;Name&quot;: &quot;mem_cost&quot;,&quot;Short name&quot;: &quot;mc&quot;,&quot;Description&quot;: &quot;The password hashing information (memory cost). Default: 14&quot;}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/bin/firebase-engine.ts#L11">bin/firebase-engine.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/bin/firebase-engine.ts#L11">bin/firebase-engine.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -115,7 +115,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/bin/firebase-engine.ts#L86">bin/firebase-engine.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/bin/firebase-engine.ts#L86">bin/firebase-engine.ts:86</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

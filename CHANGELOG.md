@@ -1,3 +1,8 @@
+# 1.3.1 / 2020-07-10
+
+## :bug: Fixes
+- Implemented the possibility of several initializations FirebaseEngine
+
 # 1.3.0 / 2020-07-10
 
 ## :tada: Enhancements

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>JobBackupStorage | Firebase Engine - v1.3.0</title>
+	<title>JobBackupStorage | Firebase Engine - v1.3.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Firebase Engine - v1.3.0</a>
+					<a href="../index.html" class="title">Firebase Engine - v1.3.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -128,7 +128,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.jobbackupservicetemplate.html">JobBackupServiceTemplate</a>.<a href="_utils_template_.jobbackupservicetemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/jobs/backup/storage.ts#L10">jobs/backup/storage.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/jobs/backup/storage.ts#L10">jobs/backup/storage.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -174,7 +174,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L31">utils/template.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L31">utils/template.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -190,7 +190,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#counter">counter</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L89">utils/template.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L89">utils/template.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -206,7 +206,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L27">utils/template.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L27">utils/template.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,7 +222,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#starttimestamp">startTimestamp</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L104">utils/template.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L104">utils/template.ts:104</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +238,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#store">store</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L35">utils/template.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L35">utils/template.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -254,7 +254,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobbackupservicetemplate.html">JobBackupServiceTemplate</a>.<a href="_utils_template_.jobbackupservicetemplate.html#stringiferstream">stringiferStream</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L138">utils/template.ts:138</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L138">utils/template.ts:138</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -270,7 +270,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobbackupservicetemplate.html">JobBackupServiceTemplate</a>.<a href="_utils_template_.jobbackupservicetemplate.html#writer">writer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L134">utils/template.ts:134</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L134">utils/template.ts:134</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -292,7 +292,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/jobs/backup/storage.ts#L22">jobs/backup/storage.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/jobs/backup/storage.ts#L22">jobs/backup/storage.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -324,7 +324,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#getworktime">getWorkTime</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/utils/template.ts#L93">utils/template.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L93">utils/template.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -347,7 +347,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#run">run</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/936517d/src/jobs/backup/storage.ts#L48">jobs/backup/storage.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/jobs/backup/storage.ts#L48">jobs/backup/storage.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

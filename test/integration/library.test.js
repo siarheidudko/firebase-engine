@@ -153,14 +153,14 @@ describe("Integration test Library", function() {
         return
     })
     /*
-        Firebase.Firestore: Backup, Clean, Restore in emulator
+        Firebase.Firestore: Backup, Clean, Restore
     */
     it("Backup, Clean, Restore - Firestore", async function(){
         const firebaseEngine = new FirebaseEngine({
             path: settings.serviceAccountPath,
             backup: backupPath,
             compress: false,
-            emulators: true,
+            emulators: false,
             buckets: [],
             collections: []
         })   
