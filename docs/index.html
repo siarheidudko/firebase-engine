@@ -178,10 +178,41 @@
 				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"clean"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"storage"</span> buckets=<span class="hljs-string">"test.appspott.com"</span></code></pre>
 				<p>With collection &amp; subcollection</p>
 				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"backup"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore"</span> collections=<span class="hljs-string">"authors,books.pages"</span></code></pre>
-				<p>With short names</p>
-				<pre><code class="language-bash">    firebase-engine o=<span class="hljs-string">"b, c"</span> p=<span class="hljs-string">"./test.json"</span> b=<span class="hljs-string">"test.backup"</span></code></pre>
+				<p>With short names and use emulators</p>
+				<pre><code class="language-bash">    firebase-engine o=<span class="hljs-string">"b, c"</span> s=<span class="hljs-string">"f"</span> p=<span class="hljs-string">"./test.json"</span> b=<span class="hljs-string">"test.backup"</span> -em</code></pre>
 				<p>With password recovery for users</p>
 				<pre><code class="language-bash">    firebase-engine operations=<span class="hljs-string">"restore"</span> path=<span class="hljs-string">"./test.json"</span> services=<span class="hljs-string">"firestore, auth"</span> backup=<span class="hljs-string">"test.backup"</span> bsk=<span class="hljs-string">"nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="</span></code></pre>
+				<a href="#copy-data-from-project-to-emulators-or-from-emulators-to-project" id="copy-data-from-project-to-emulators-or-from-emulators-to-project" style="color: inherit; text-decoration: none;">
+					<h2>Copy data from project to emulators or from emulators to project</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Short name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>--to-emulators</td>
+							<td>-to</td>
+							<td>Copy data from project to emulators (only firestore)</td>
+						</tr>
+						<tr>
+							<td>--from-emulators</td>
+							<td>-from</td>
+							<td>Copy data from emulators to project (only firestore)</td>
+						</tr>
+						<tr>
+							<td>path</td>
+							<td>p</td>
+							<td>Path to service account JSON file</td>
+						</tr>
+				</tbody></table>
+				<p>With full names</p>
+				<pre><code class="language-bash">    firebase-engine-emulators path=<span class="hljs-string">"./test.json"</span> --to-emulators</code></pre>
+				<p>With short names</p>
+				<pre><code class="language-bash">    firebase-engine-emulators p=<span class="hljs-string">"./test.json"</span> --from</code></pre>
 				<a href="#open-source" id="open-source" style="color: inherit; text-decoration: none;">
 					<h2>Open Source</h2>
 				</a>
@@ -222,6 +253,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_bin_firebase_engine_.html">&quot;bin/firebase-<wbr>engine&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bin_firebase_engine_emulators_.html">&quot;bin/firebase-<wbr>engine-<wbr>emulators&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">&quot;index&quot;</a>

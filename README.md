@@ -56,14 +56,32 @@ With collection & subcollection
 	firebase-engine operations="backup" path="./test.json" services="firestore" collections="authors,books.pages"
 ```
 
-With short names
+With short names and use emulators
 ```bash
-	firebase-engine o="b, c" p="./test.json" b="test.backup"
+	firebase-engine o="b, c" s="f" p="./test.json" b="test.backup" -em
 ```
 
 With password recovery for users
 ```bash
 	firebase-engine operations="restore" path="./test.json" services="firestore, auth" backup="test.backup" bsk="nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="
+```
+
+## Copy data from project to emulators or from emulators to project
+
+|       Name       | Short name |                                   Description                                    |
+|------------------|------------|----------------------------------------------------------------------------------|
+|  --to-emulators  |    -to     |               Copy data from project to emulators (only firestore)               |
+| --from-emulators |   -from    |               Copy data from emulators to project (only firestore)               |
+|       path       |     p      |                        Path to service account JSON file                         |
+
+With full names
+```bash
+	firebase-engine-emulators path="./test.json" --to-emulators
+```
+
+With short names
+```bash
+	firebase-engine-emulators p="./test.json" --from
 ```
 
 ## Open Source

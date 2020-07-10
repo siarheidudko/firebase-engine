@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;jobs/restore/auth&quot; | Firebase Engine - v1.3.2</title>
+	<title>&quot;bin/firebase-engine-emulators&quot; | Firebase Engine - v1.3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_jobs_restore_auth_.html">&quot;jobs/restore/auth&quot;</a>
+					<a href="_bin_firebase_engine_emulators_.html">&quot;bin/firebase-engine-emulators&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;jobs/restore/auth&quot;</h1>
+			<h1>External module &quot;bin/firebase-engine-emulators&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -70,13 +70,80 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_jobs_restore_auth_.jobrestoreauth.html" class="tsd-kind-icon">Job<wbr>Restore<wbr>Auth</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_bin_firebase_engine_emulators_.html#arg" class="tsd-kind-icon">arg</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_bin_firebase_engine_emulators_.html#errorhandler" class="tsd-kind-icon">error<wbr>Handler</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_bin_firebase_engine_emulators_.html#run" class="tsd-kind-icon">run</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="arg" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> arg</h3>
+					<div class="tsd-signature tsd-kind-icon">arg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>Description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>Name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>Short name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{&quot;Name&quot;: &quot;--to-emulators&quot;,&quot;Short name&quot;: &quot;-to&quot;,&quot;Description&quot;: &quot;Copy data from project to emulators (only firestore)&quot;},{&quot;Name&quot;: &quot;--from-emulators&quot;,&quot;Short name&quot;: &quot;-from&quot;,&quot;Description&quot;: &quot;Copy data from emulators to project (only firestore)&quot;},{&quot;Name&quot;: &quot;path&quot;,&quot;Short name&quot;: &quot;p&quot;,&quot;Description&quot;: &quot;Path to service account JSON file&quot;}]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in bin/firebase-engine-emulators.ts:13</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>command line help table</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="errorhandler" class="tsd-anchor"></a>
+					<h3>error<wbr>Handler</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">error<wbr>Handler<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in bin/firebase-engine-emulators.ts:38</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>command line error helper</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="run" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> run</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in bin/firebase-engine-emulators.ts:47</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -92,7 +159,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_bin_firebase_engine_.html">&quot;bin/firebase-<wbr>engine&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_bin_firebase_engine_emulators_.html">&quot;bin/firebase-<wbr>engine-<wbr>emulators&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -119,7 +186,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_jobs_clean_storage_.html">&quot;jobs/clean/storage&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_jobs_restore_auth_.html">&quot;jobs/restore/auth&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -150,8 +217,14 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_jobs_restore_auth_.jobrestoreauth.html" class="tsd-kind-icon">Job<wbr>Restore<wbr>Auth</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_bin_firebase_engine_emulators_.html#arg" class="tsd-kind-icon">arg</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_bin_firebase_engine_emulators_.html#errorhandler" class="tsd-kind-icon">error<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_bin_firebase_engine_emulators_.html#run" class="tsd-kind-icon">run</a>
 					</li>
 				</ul>
 			</nav>

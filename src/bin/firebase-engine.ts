@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-import { cmdParser, ParsedSettings, initialization, Settings } from "../utils/initialization"
+import { cmdParser, ParsedSettings } from "../utils/initialization"
 import { FirebaseEngine } from "../FirebaseEngine"
-import { app } from "firebase-admin"
 import { Logger } from "../utils/Logger"
 
 /**
@@ -85,8 +84,8 @@ const arg: {
  */
 function errorHandler(){
     Logger.log("=========================EXAMPLES=========================")
-    Logger.log("backup-engine.js operations=\"clean, restore\" path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
-    Logger.log("backup-engine.js o=\"b, c\" p=\"./test/utils/vend-park-development.json\"")
+    Logger.log("firebase-engine operations=\"clean, restore\" path=\"./test/utils/vend-park-development.json\" services=\"firestore, auth\" backup=\"vend-park-development.backup\"")
+    Logger.log("firebase-engine o=\"b, c\" p=\"./test/utils/vend-park-development.json\"")
     Logger.log("=========================ARGUMENTS========================")
     Logger.table(arg)
     Logger.log("===========================ERROR==========================")
@@ -97,15 +96,11 @@ function errorHandler(){
  */
 ( async() => {
     const _settings: ParsedSettings = cmdParser(process.argv)
-    const init: {
-        settings: Settings,
-        admin: app.App
-    } = initialization(_settings)
-    let firebaseEngine: FirebaseEngine = new FirebaseEngine(init.settings)
+    let firebaseEngine: FirebaseEngine = new FirebaseEngine(_settings)
     const run = async() => {
         for(const operation of _settings.operations){
             if(operation === "backup")
-                firebaseEngine = new FirebaseEngine(init.settings)
+                firebaseEngine = new FirebaseEngine(_settings)
             for(const service of _settings.services){
                 const startMsg = operation[0].toUpperCase()
                     + operation.substr(1)

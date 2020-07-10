@@ -2,6 +2,7 @@
 
 ## :bug: Fixes
 - Fixed process race condition
+- Add firebase-engine-emulators script
 
 # 1.3.1 / 2020-07-10
 
