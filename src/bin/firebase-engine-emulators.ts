@@ -5,7 +5,7 @@ import { Logger } from "../utils/Logger"
 import { randomFillSync } from "crypto"
 import { tmpdir } from "os"
 import { join } from "path"
-import { unlink } from "fs/promises"
+import { promises } from "fs"
 
 /**
  * command line help table
@@ -90,7 +90,7 @@ const run = async () => {
     await firebaseEngine2.jobs.restore.firestore()
     await firebaseEngine2.exit()
     await new Promise((res) => { setTimeout(res, 1) })
-    await unlink(backupPath)
+    await promises.unlink(backupPath)
 }
 
 run().then(() => {
