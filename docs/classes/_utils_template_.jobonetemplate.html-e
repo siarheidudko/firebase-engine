@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>JobOneTemplate | Firebase Engine - v1.3.1</title>
+	<title>JobOneTemplate | Firebase Engine - v1.3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Firebase Engine - v1.3.1</a>
+					<a href="../index.html" class="title">Firebase Engine - v1.3.2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -142,7 +142,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L41">utils/template.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L41">utils/template.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -188,7 +188,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L31">utils/template.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L31">utils/template.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -204,7 +204,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L27">utils/template.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L27">utils/template.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -220,7 +220,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#store">store</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L35">utils/template.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L35">utils/template.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -242,7 +242,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L60">utils/template.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L60">utils/template.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -264,7 +264,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L53">utils/template.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L53">utils/template.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -286,7 +286,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/f53b82c/src/utils/template.ts#L67">utils/template.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e5c22a3/src/utils/template.ts#L67">utils/template.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

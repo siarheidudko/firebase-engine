@@ -63,10 +63,10 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
                 else
                     res = await self.auth.importUsers(self.writeBuffer.batch)
                 self.counter += res.successCount
-                Logger.log(" -- Auth Restored - "+self.counter+" users in "+self.getWorkTime()+".")
                 if(res.failureCount !== 0)
                     Logger.warn(JSON.stringify(res.errors))
                 await self.writeBuffer.clear()
+                Logger.log(" -- Auth Restored - "+self.counter+" users in "+self.getWorkTime()+".")
                 return self.writeBuffer
             },
             set: async (ref: string, data: {uid: string, [key: string]: any}) => {  
@@ -135,12 +135,13 @@ export class JobRestoreAuth extends JobBackupServiceRestoreTemplate {
                 self.fileStream.pipe(self.parserStream).pipe(self.writeStream)
             }
             self.writeStream.on("finish", () => {
-                Logger.log(" - Auth Restore Complete!")
                 res()
             })
         })
         if((this.writeBuffer.iteration % this.writeBuffer.batchSize) !== 0)
             await this.writeBuffer.commit()
+        await new Promise((res) => { setTimeout(res, 1) })
+        Logger.log(" - Auth Restore Complete!")
         return
     }
 }

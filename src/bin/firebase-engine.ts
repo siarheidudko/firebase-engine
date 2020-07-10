@@ -118,6 +118,7 @@ function errorHandler(){
             }
             if(operation === "backup")
                 await firebaseEngine.exit()
+            await new Promise((res) => { setTimeout(res, 1) })
         }
         return
     }

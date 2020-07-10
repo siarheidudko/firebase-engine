@@ -89,12 +89,8 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
-        const self = this
         const unpipe = new Promise((res, rej) => {
             _write.once("unpipe", () => {
-                if((self.counter % 500) !== 0)
-                    Logger.log(" -- Firestore Backuped - "+self.counter+" docs in "+self.getWorkTime()+".")
-                Logger.log(" - Firestore Backup Complete!")
                 res()
             })
         })
@@ -102,6 +98,10 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
         await this.recursiveBackup(this.firestore)
         this.stringiferStream.unpipe(_write)
         await unpipe
+        await new Promise((res) => { setTimeout(res, 1) })
+        if((this.counter % 500) !== 0)
+            Logger.log(" -- Firestore Backuped - "+this.counter+" docs in "+this.getWorkTime()+".")
+        Logger.log(" - Firestore Backup Complete!")
         return
     }
 }

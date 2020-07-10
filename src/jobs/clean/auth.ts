@@ -36,6 +36,7 @@ export class JobCleanAuth extends JobOneServiceTemplate {
     public async run(){
         this.startTimestamp = Date.now()
         await this.recursiveClean()
+        await new Promise((res) => { setTimeout(res, 1) })
         Logger.log(" - Auth Clean Complete!")
         return
     }

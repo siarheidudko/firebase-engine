@@ -87,12 +87,13 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
                 self.fileStream.pipe(self.parserStream).pipe(self.writeStream)
             }
             self.writeStream.on("finish", () => {
-                if((self.counter % 100) !== 0)
-                    Logger.log(" -- Storage Restored - "+self.counter+" files in "+self.getWorkTime()+".")
-                Logger.log(" - Storage Restore Complete!")
                 res()
             })
         })
+        await new Promise((res) => { setTimeout(res, 1) })
+        if((this.counter % 100) !== 0)
+            Logger.log(" -- Storage Restored - "+self.counter+" files in "+self.getWorkTime()+".")
+        Logger.log(" - Storage Restore Complete!")
         return
     }
 }

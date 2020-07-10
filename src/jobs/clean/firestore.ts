@@ -56,8 +56,8 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
         }
         const result = await this.batch.commit()
         this.counter += result.length
-        Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
         this.batch = this.firestore.batch()
+        Logger.log(" -- Firestore Cleaned - "+this.counter+" docs in "+this.getWorkTime()+".")
         return
     }
     /**
@@ -87,6 +87,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
     public async run(){
         this.startTimestamp = Date.now()
         await this.recursiveClean(this.firestore)
+        await new Promise((res) => { setTimeout(res, 1) })
         Logger.log(" - Firestore Clean Complete!")
         return
     }

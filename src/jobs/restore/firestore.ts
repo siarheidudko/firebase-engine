@@ -72,8 +72,8 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
             commit: async () => {
                 const result = await self.writeBuffer.batch.commit()
                 self.counter += result.length
-                Logger.log(" -- Firebase Restored - "+self.counter+" docs in "+self.getWorkTime()+".")
                 await self.writeBuffer.clear()
+                Logger.log(" -- Firebase Restored - "+self.counter+" docs in "+self.getWorkTime()+".")
                 return self.writeBuffer
             },
             set: async (ref: Firestore.DocumentReference, data: {[key: string]: any}) => {
@@ -142,12 +142,13 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
                 self.fileStream.pipe(self.parserStream).pipe(self.writeStream)
             }
             self.writeStream.on("finish", () => {
-                Logger.log(" - Firestore Restore Complete!")
                 res()
             })
         })
         if((this.writeBuffer.iteration % this.writeBuffer.batchSize) !== 0)
             await this.writeBuffer.commit()
+        await new Promise((res) => { setTimeout(res, 1) })
+        Logger.log(" - Firestore Restore Complete!")
         return
     }
 }

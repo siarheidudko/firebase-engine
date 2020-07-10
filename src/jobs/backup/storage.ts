@@ -54,12 +54,8 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
-        const self = this
         const unpipe = new Promise((res, rej) => {
             _write.once("unpipe", () => {
-                if((self.counter % 100) !== 0)
-                    Logger.log(" -- Storage Backuped - "+self.counter+" files in "+self.getWorkTime()+".")
-                Logger.log(" - Storage Backup Complete!")
                 res()
             })
         })
@@ -74,6 +70,10 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         }
         this.stringiferStream.unpipe(_write)
         await unpipe
+        await new Promise((res) => { setTimeout(res, 1) })
+        if((this.counter % 100) !== 0)
+            Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
+        Logger.log(" - Storage Backup Complete!")
         return
     }
 }

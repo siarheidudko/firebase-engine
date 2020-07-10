@@ -59,12 +59,8 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
-        const self = this
         const unpipe = new Promise((res, rej) => {
             _write.once("unpipe", () => {
-                if((self.counter % 1000) !== 0)
-                    Logger.log(" -- Auth Backuped - "+self.counter+" users in "+self.getWorkTime()+".")
-                Logger.log(" - Auth Backup Complete!")
                 res()
             })
         })
@@ -72,6 +68,10 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
         await this.recursiveBackup()
         this.stringiferStream.unpipe(_write)
         await unpipe
+        await new Promise((res) => { setTimeout(res, 1) })
+        if((this.counter % 1000) !== 0)
+            Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
+        Logger.log(" - Auth Backup Complete!")
         return
     }
 }

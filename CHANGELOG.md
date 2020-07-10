@@ -1,3 +1,8 @@
+# 1.3.2 / 2020-07-10
+
+## :bug: Fixes
+- Fixed process race condition
+
 # 1.3.1 / 2020-07-10
 
 ## :bug: Fixes

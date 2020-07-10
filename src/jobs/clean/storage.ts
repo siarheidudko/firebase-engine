@@ -27,6 +27,7 @@ export class JobCleanStorage extends JobOneServiceTemplate {
             if(bucket.name.indexOf(this.admin.options.storageBucket as string))
             await bucket.delete()
         }
+        await new Promise((res) => { setTimeout(res, 1) })
         Logger.log(" -- Storage Cleaned files in "+this.getWorkTime()+".")
         Logger.log(" - Storage Clean Complete!")
         return
