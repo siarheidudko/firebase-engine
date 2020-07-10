@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DataModel | Firebase Engine - v1.3.4</title>
+	<title>DataModel | Firebase Engine - v1.3.5</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Firebase Engine - v1.3.4</a>
+					<a href="../index.html" class="title">Firebase Engine - v1.3.5</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -107,7 +107,7 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/86b3157/src/utils/template.ts#L199">utils/template.ts:199</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e9ae846/src/utils/template.ts#L199">utils/template.ts:199</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -122,7 +122,7 @@
 					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/86b3157/src/utils/template.ts#L195">utils/template.ts:195</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e9ae846/src/utils/template.ts#L195">utils/template.ts:195</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -137,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"firestore"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"auth"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"storage"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/86b3157/src/utils/template.ts#L191">utils/template.ts:191</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e9ae846/src/utils/template.ts#L191">utils/template.ts:191</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">

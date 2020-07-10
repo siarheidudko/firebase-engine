@@ -1,3 +1,8 @@
+# 1.3.5 / 2020-07-10
+
+## :bug: Fixes
+- Update firebase-engine-emulators
+
 # 1.3.4 / 2020-07-10
 
 ## :bug: Fixes

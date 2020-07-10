@@ -63,9 +63,9 @@ const run = async () => {
             settings.toEmulator = false
         }
     })
-    if(typeof(settings.path) === "string")
+    if(typeof(settings.path) !== "string")
         throw new Error("Service account path not set.")
-    if(typeof(settings.toEmulator) === "boolean")
+    if(typeof(settings.toEmulator) !== "boolean")
         throw new Error("Param --to-emulators (-to) or --from-emulators (-from) not set.")   
     const backupPath = join(tmpdir(), randomFillSync(Buffer.alloc(5)).toString("hex") + ".backup")
     const firebaseEngine1 = new FirebaseEngine({
