@@ -212,7 +212,7 @@
 				<p>With full names</p>
 				<pre><code class="language-bash">    firebase-engine-emulators path=<span class="hljs-string">"./test.json"</span> --to-emulators</code></pre>
 				<p>With short names</p>
-				<pre><code class="language-bash">    firebase-engine-emulators p=<span class="hljs-string">"./test.json"</span> --from</code></pre>
+				<pre><code class="language-bash">    firebase-engine-emulators p=<span class="hljs-string">"./test.json"</span> -from</code></pre>
 				<a href="#open-source" id="open-source" style="color: inherit; text-decoration: none;">
 					<h2>Open Source</h2>
 				</a>

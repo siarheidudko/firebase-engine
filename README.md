@@ -81,7 +81,7 @@ With full names
 
 With short names
 ```bash
-	firebase-engine-emulators p="./test.json" --from
+	firebase-engine-emulators p="./test.json" -from
 ```
 
 ## Open Source
