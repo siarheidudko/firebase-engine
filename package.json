@@ -1,6 +1,6 @@
 {
   "name": "firebase-engine",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Tools  for firebase (backup, clean,  restore)",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -11,7 +11,10 @@
     "test": "firebase emulators:exec --only firestore \"mocha --exit test/**/*.test.js\"",
     "cov": "firebase emulators:exec --only firestore \"nyc mocha --exit test/**/*.test.js\""
   },
-  "bin": "./lib/bin/firebase-engine.js",
+  "bin": {
+    "firebase-engine": "./lib/bin/firebase-engine.js",
+    "firebase-engine-emulators": "./lib/bin/firebase-engine-emulators.js"
+  },
   "repository": {
     "type": "git",
     "url": "github:siarheidudko/firebase-engine"

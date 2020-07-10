@@ -1,7 +1,14 @@
+# 1.3.3 / 2020-07-10
+
+## :bug: Fixes
+- Bin scripts in paackage.json
+
 # 1.3.2 / 2020-07-10
 
 ## :bug: Fixes
 - Fixed process race condition
+
+## :tada: Enhancements
 - Add firebase-engine-emulators script
 
 # 1.3.1 / 2020-07-10
