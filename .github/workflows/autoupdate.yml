@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
     steps:
       - name: Autoupdate
         uses: siarheidudko/autoupdater@v1
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
         with:
-          stages: 'node -e "console.log(process.env)"&&echo $SERVICE_ACCOUNT > serviceAccount.json&&sudo npm install firebase-tools nyc mocha -g&&npm run lint&&npm run build&&npm run cov&&npm run doc'
+          stages: 'echo $SERVICE_ACCOUNT > ./serviceAccount.json&&sudo npm install firebase-tools nyc mocha -g&&npm run lint&&npm run build&&npm run cov&&npm run doc'
