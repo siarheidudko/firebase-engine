@@ -6,10 +6,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+      DIRECTORY: ${{ github.workspace }}/'autoupdater_directory'
     steps:
+    - name: remove directory if exists directory
+        run: rm -rf $DIRECTORY
+      - name: make directory
+        run: mkdir -m 0777 $DIRECTORY
+      - name: set service account file
+        run: echo $SERVICE_ACCOUNT>./serviceAccount.json
+        working-directory: ${{ env.DIRECTORY }}
       - name: Autoupdate
         uses: siarheidudko/autoupdater@v1
-        env:
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
         with:
-          stages: 'echo $SERVICE_ACCOUNT > ./serviceAccount.json&&sudo npm install firebase-tools nyc mocha -g&&npm run lint&&npm run build&&npm run cov&&npm run doc'
+          stages: 'sudo npm install firebase-tools nyc mocha -g&&npm run lint&&npm run build&&npm run cov&&npm run doc'
+        working-directory: ${{ env.DIRECTORY }}
