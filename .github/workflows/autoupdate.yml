@@ -21,4 +21,4 @@ jobs:
         uses: siarheidudko/autoupdater@v1
         with:
           stages: 'sudo npm install firebase-tools nyc mocha -g&&npm run lint&&npm run build&&npm run cov&&npm run doc'
-        working-directory: ${{ env.DIRECTORY }}
+          working-directory: ${{ env.DIRECTORY }}
