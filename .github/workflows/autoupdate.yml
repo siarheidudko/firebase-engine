@@ -12,4 +12,4 @@ jobs:
       - name: Autoupdate
         uses: siarheidudko/autoupdater@v1
         with:
-          stages: 'sudo npm install firebase-tools nyc mocha -g&&echo $SERVICE_ACCOUNT>serviceAccount.json&&npm run lint&&npm run build&&npm run cov&&npm run doc'
+          stages: 'sudo npm install firebase-tools nyc mocha -g&&echo $SERVICE_ACCOUNT > serviceAccount.json&&npm run lint&&npm run build&&npm run cov&&npm run doc'
