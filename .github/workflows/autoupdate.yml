@@ -1,0 +1,11 @@
+name: Autoupdate
+on:
+  schedule:
+    - cron: "* 0/1 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Autoupdate
+        uses: siarheidudko/autoupdater@v1
