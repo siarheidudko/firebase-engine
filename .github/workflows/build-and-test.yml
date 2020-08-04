@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install builder
-        run: sudo npm install typescript tslint -g
+        run: sudo npm install typescript eslint -g
       - name: Run linter
         run: npm run lint
       - name: Run builder

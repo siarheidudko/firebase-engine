@@ -17,9 +17,11 @@ jobs:
       - name: set service account file
         run: echo $SERVICE_ACCOUNT>./serviceAccount.json
         working-directory: ${{ env.DIRECTORY }}
+      - name: install test dependencies
+        run: sudo npm install firebase-tools nyc mocha eslint typescript -g
       - name: Autoupdate
         uses: siarheidudko/autoupdater@v1
         with:
-          stages: 'sudo npm install firebase-tools nyc mocha -g&&npm run lint&&npm run build&&npm run cov&&npm run doc'
+          stages: 'npm run lint&&npm run build&&npm run cov&&npm run doc'
           working-directory: ${{ env.DIRECTORY }}
           debug: true
