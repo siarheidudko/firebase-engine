@@ -1,14 +1,14 @@
 name: Autoupdate
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-      DIRECTORY: ${{ github.workspace }}/'autoupdater_directory'
+      DIRECTORY: ${{ github.workspace }}/autoupdater_directory
     steps:
       - name: remove directory if exists directory
         run: rm -rf $DIRECTORY
