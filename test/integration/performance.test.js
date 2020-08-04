@@ -42,7 +42,7 @@ describe("Performance test CLI", function() {
     this.beforeAll(async () => {
         newDoc = Firestore.collection("test").doc()
         await newDoc.set(docData)
-        for(let i = 0; i < 9999; i++){
+        for(let i = 0; i < 999; i++){
             const _docRef = Firestore.collection("test").doc()
             docArr.push(_docRef.id)
             await _docRef.set(docData)
@@ -146,7 +146,7 @@ describe("Performance test CLI", function() {
                 errors.push("User data not equal!")
         }
         const collectionSnap = await Firestore.collection("test").get()
-        if(collectionSnap.size !== 10000){
+        if(collectionSnap.size !== 1000){
             console.log(collectionSnap.size)
             errors.push("Invalid restored collection size!")
         }
