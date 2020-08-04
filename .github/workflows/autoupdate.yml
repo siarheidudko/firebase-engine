@@ -9,3 +9,5 @@ jobs:
     steps:
       - name: Autoupdate
         uses: siarheidudko/autoupdater@v1
+        with:
+          stages: 'npm run lint&&npm run build&&npm run cov&&npm run doc'
