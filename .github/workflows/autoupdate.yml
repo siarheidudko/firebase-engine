@@ -1,11 +1,11 @@
 name: Autoupdate
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "* */6 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       DIRECTORY: ${{ github.workspace }}/autoupdater_directory
