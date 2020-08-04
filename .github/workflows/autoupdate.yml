@@ -10,7 +10,7 @@ jobs:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       DIRECTORY: ${{ github.workspace }}/'autoupdater_directory'
     steps:
-    - name: remove directory if exists directory
+      - name: remove directory if exists directory
         run: rm -rf $DIRECTORY
       - name: make directory
         run: mkdir -m 0777 $DIRECTORY
