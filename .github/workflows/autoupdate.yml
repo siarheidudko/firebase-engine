@@ -1,7 +1,7 @@
 name: Autoupdate
 on:
   schedule:
-    - cron: "* */6 * * *"
+    - cron: "0 1 */1 * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,7 +18,7 @@ jobs:
         run: echo $SERVICE_ACCOUNT>./serviceAccount.json
         working-directory: ${{ env.DIRECTORY }}
       - name: install test dependencies
-        run: sudo npm install firebase-tools nyc mocha eslint typescript -g
+        run: sudo npm install firebase-tools nyc mocha eslint typedoc typescript -g
       - name: Autoupdate
         uses: siarheidudko/autoupdater@v1
         with:
