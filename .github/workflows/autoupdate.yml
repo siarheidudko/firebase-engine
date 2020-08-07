@@ -19,4 +19,4 @@ jobs:
         uses: siarheidudko/autoupdater@v1
         with:
           stages: 'npm run lint&&npm run build&&npm run cov&&npm run doc'
-      - run: echo ${{ steps }}
+      - run: echo ${{ steps.autoupdate.outputs.updated }}
