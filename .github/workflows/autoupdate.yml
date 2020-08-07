@@ -26,8 +26,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.autoupdate.outputs.version }}
-          release_name: ${{ steps.autoupdate.outputs.version }}
+          tag_name: v${{ steps.autoupdate.outputs.version }}
+          release_name: Release v${{ steps.autoupdate.outputs.version }}
           body: |
             see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
           draft: false
