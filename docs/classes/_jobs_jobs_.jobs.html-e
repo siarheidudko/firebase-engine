@@ -1,0 +1,450 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Jobs | Firebase Engine - v1.3.5</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Firebase Engine - v1.3.5</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_jobs_jobs_.html">&quot;jobs/Jobs&quot;</a>
+				</li>
+				<li>
+					<a href="_jobs_jobs_.jobs.html">Jobs</a>
+				</li>
+			</ul>
+			<h1>Class Jobs</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Jobs Class</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="_utils_template_.jobtemplate.html" class="tsd-signature-type">JobTemplate</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">Jobs</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_jobs_jobs_.jobs.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_jobs_.jobs.html#admin" class="tsd-kind-icon">admin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_jobs_jobs_.jobs.html#backup" class="tsd-kind-icon">backup</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_jobs_jobs_.jobs.html#clean" class="tsd-kind-icon">clean</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_jobs_jobs_.jobs.html#restore" class="tsd-kind-icon">restore</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_jobs_.jobs.html#settings" class="tsd-kind-icon">settings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_jobs_jobs_.jobs.html#store" class="tsd-kind-icon">store</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Jobs<span class="tsd-signature-symbol">(</span>settings<span class="tsd-signature-symbol">: </span><a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a>, admin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">App</span>, store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Storage</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jobs_jobs_.jobs.html" class="tsd-signature-type">Jobs</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/jobs/Jobs.ts#L18">jobs/Jobs.ts:18</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>settings: <a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>settings object</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>admin: <span class="tsd-signature-type">App</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>firebase app</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>store: <span class="tsd-signature-type">Storage</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>google cloud storage app</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_jobs_jobs_.jobs.html" class="tsd-signature-type">Jobs</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="admin" class="tsd-anchor"></a>
+					<h3>admin</h3>
+					<div class="tsd-signature tsd-kind-icon">admin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">App</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/utils/template.ts#L31">utils/template.ts:31</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>firebase app</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="backup" class="tsd-anchor"></a>
+					<h3>backup</h3>
+					<div class="tsd-signature tsd-kind-icon">backup<span class="tsd-signature-symbol">:</span> <a href="_jobs_jobs_.jobsbackup.html" class="tsd-signature-type">JobsBackup</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/jobs/Jobs.ts#L33">jobs/Jobs.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>backup jobs</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="clean" class="tsd-anchor"></a>
+					<h3>clean</h3>
+					<div class="tsd-signature tsd-kind-icon">clean<span class="tsd-signature-symbol">:</span> <a href="_jobs_jobs_.jobsclean.html" class="tsd-signature-type">JobsClean</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/jobs/Jobs.ts#L37">jobs/Jobs.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>clean jobs</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="restore" class="tsd-anchor"></a>
+					<h3>restore</h3>
+					<div class="tsd-signature tsd-kind-icon">restore<span class="tsd-signature-symbol">:</span> <a href="_jobs_jobs_.jobsrestore.html" class="tsd-signature-type">JobsRestore</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/jobs/Jobs.ts#L41">jobs/Jobs.ts:41</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>restore jobs</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="settings" class="tsd-anchor"></a>
+					<h3>settings</h3>
+					<div class="tsd-signature tsd-kind-icon">settings<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_utils_initialization_.settings.html" class="tsd-signature-type">Settings</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/utils/template.ts#L27">utils/template.ts:27</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>settings object</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="store" class="tsd-anchor"></a>
+					<h3>store</h3>
+					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Storage</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#store">store</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/3a43a71/src/utils/template.ts#L35">utils/template.ts:35</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Google cloud storage app</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_firebaseengine_.html">&quot;<wbr>Firebase<wbr>Engine&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_bin_firebase_engine_.html">&quot;bin/firebase-<wbr>engine&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_bin_firebase_engine_emulators_.html">&quot;bin/firebase-<wbr>engine-<wbr>emulators&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_jobs_jobs_.html">&quot;jobs/<wbr>Jobs&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_backup_auth_.html">&quot;jobs/backup/auth&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_backup_firestore_.html">&quot;jobs/backup/firestore&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_backup_storage_.html">&quot;jobs/backup/storage&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_clean_auth_.html">&quot;jobs/clean/auth&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_clean_firestore_.html">&quot;jobs/clean/firestore&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_clean_storage_.html">&quot;jobs/clean/storage&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_restore_auth_.html">&quot;jobs/restore/auth&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_restore_firestore_.html">&quot;jobs/restore/firestore&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_jobs_restore_storage_.html">&quot;jobs/restore/storage&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_authconverter_.html">&quot;utils/<wbr>Auth<wbr>Converter&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_firestoreconverter_.html">&quot;utils/<wbr>Firestore<wbr>Converter&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_logger_.html">&quot;utils/<wbr>Logger&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_storageconverter_.html">&quot;utils/<wbr>Storage<wbr>Converter&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_initialization_.html">&quot;utils/initialization&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_template_.html">&quot;utils/template&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_jobs_jobs_.jobs.html" class="tsd-kind-icon">Jobs</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_jobs_jobs_.jobs.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_jobs_.jobs.html#admin" class="tsd-kind-icon">admin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_jobs_jobs_.jobs.html#backup" class="tsd-kind-icon">backup</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_jobs_jobs_.jobs.html#clean" class="tsd-kind-icon">clean</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_jobs_jobs_.jobs.html#restore" class="tsd-kind-icon">restore</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_jobs_.jobs.html#settings" class="tsd-kind-icon">settings</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_jobs_jobs_.jobs.html#store" class="tsd-kind-icon">store</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_jobs_jobs_.jobsbackup.html" class="tsd-kind-icon">Jobs<wbr>Backup</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_jobs_jobs_.jobsclean.html" class="tsd-kind-icon">Jobs<wbr>Clean</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_jobs_jobs_.jobsrestore.html" class="tsd-kind-icon">Jobs<wbr>Restore</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '234199319', 'firebase-engine.ml');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
