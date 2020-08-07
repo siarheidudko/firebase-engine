@@ -1,18 +1,3 @@
-# 1.3.8 / 2020-08-07
-
-### :tada: Enhancements
-- Updated dependencies: firebase-admin, mocha
-
-# 1.3.7 / 2020-08-07
-
-### :tada: Enhancements
-- Updated dependencies: firebase-admin, mocha
-
-# 1.3.6 / 2020-08-07
-
-### :tada: Enhancements
-- Updated dependencies: firebase-admin, mocha
-
 # 1.3.5 / 2020-07-10
 
 ## :bug: Fixes
