@@ -1,7 +1,6 @@
 name: Autoupdate
 on:
-  schedule:
-    - cron: "30 * * * *"
+  push
 jobs:
   check-updates:
     runs-on: ubuntu-latest
