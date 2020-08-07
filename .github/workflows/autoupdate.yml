@@ -1,6 +1,7 @@
 name: Autoupdate
 on:
-  push
+  schedule:
+    - cron: "55 * * * *"
 jobs:
   check-updates:
     runs-on: ubuntu-latest
@@ -26,8 +27,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.autoupdate.outputs.version }}
+          release_name: ${{ steps.autoupdate.outputs.version }}
           body: |
             see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
           draft: false
