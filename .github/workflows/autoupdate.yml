@@ -1,7 +1,6 @@
 name: Autoupdate
 on:
-  schedule:
-    - cron: "25 * * * *"
+  push
 jobs:
   check-updates:
     runs-on: ubuntu-latest
@@ -20,28 +19,4 @@ jobs:
         uses: siarheidudko/autoupdater@v1
         with:
           stages: 'npm run lint&&npm run build&&npm run cov&&npm run doc'
-      - name: Create Release
-        id: create_release
-        if: ${{ steps.autoupdate.outputs.updated == true }}
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
-          draft: false
-          prerelease: false
-      - name: Set registry npm packages
-        id: set_registry
-        if: ${{ steps.autoupdate.outputs.updated == true }}
-        uses: actions/setup-node@v1
-        with:
-          registry-url: 'https://registry.npmjs.org'
-      - name: Publish package to NPM
-        id: publish_package_npm
-        if: ${{ steps.autoupdate.outputs.updated == true }}
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}   
+      - run: echo ${{ steps }}
