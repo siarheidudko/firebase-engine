@@ -1,3 +1,8 @@
+# 1.3.15 / 2020-08-26
+
+### :tada: Enhancements
+- Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser, mocha
+
 # 1.3.14 / 2020-08-25
 
 ### :tada: Enhancements
