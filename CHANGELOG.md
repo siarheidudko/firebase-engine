@@ -1,3 +1,8 @@
+# 1.3.17 / 2020-08-29
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, mocha
+
 # 1.3.16 / 2020-08-28
 
 ### :tada: Enhancements
