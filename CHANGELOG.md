@@ -1,3 +1,8 @@
+# 1.3.21 / 2020-09-08
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+
 # 1.3.20 / 2020-09-03
 
 ### :tada: Enhancements
