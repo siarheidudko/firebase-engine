@@ -1,3 +1,8 @@
+# 1.3.27 / 2020-09-17
+
+### :tada: Enhancements
+- Updated dependencies: @types/node
+
 # 1.3.26 / 2020-09-16
 
 ### :tada: Enhancements
