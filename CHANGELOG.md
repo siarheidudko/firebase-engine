@@ -1,3 +1,8 @@
+# 1.3.31 / 2020-09-26
+
+### :tada: Enhancements
+- Updated dependencies: eslint-config-prettier
+
 # 1.3.30 / 2020-09-22
 
 ### :tada: Enhancements
