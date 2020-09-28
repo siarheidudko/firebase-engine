@@ -1,3 +1,8 @@
+# 1.3.33 / 2020-09-28
+
+### :tada: Enhancements
+- Updated dependencies: eslint-plugin-import
+
 # 1.3.32 / 2020-09-27
 
 ### :tada: Enhancements
