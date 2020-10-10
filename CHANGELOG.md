@@ -1,3 +1,8 @@
+# 1.3.38 / 2020-10-10
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, eslint
+
 # 1.3.37 / 2020-10-09
 
 ### :tada: Enhancements
