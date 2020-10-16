@@ -65,7 +65,14 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
      */
     private async recursiveClean(ref: Firestore.Firestore | Firestore.DocumentReference){
         const collections = await ref.listCollections()
-        for(const collectionRef of collections){
+        for(const collectionRef of collections)if(
+            (this.settings.collections.length === 0) ||
+            (this.settings.collections.find((selectedCollection) => {
+                return (collectionRef.path.split("/")
+                    .filter((parentPath, i)=>((i % 2) === 0))
+                    .join(".").indexOf(selectedCollection) === 0)
+            }))
+        ){
             const collectionSnap = await collectionRef.get()
             let arr: Firestore.DocumentReference[] = []
             for(let i = 1; i <= collectionSnap.docs.length; i++){

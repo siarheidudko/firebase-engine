@@ -14,7 +14,11 @@ jobs:
         run: echo $SERVICE_ACCOUNT>./serviceAccount.json
       - name: install test dependencies
         id: install_dependencies
-        run: sudo npm install firebase-tools@8.9.2 nyc mocha eslint typedoc typescript -g
+        run: sudo npm install firebase-tools nyc mocha eslint typedoc typescript -g
+      - name: Install emulator
+        run: sudo firebase setup:emulators:firestore
+      - name: hotfix firebase (after version 8.9.2, there is a problem with permissions)
+        run: sudo chmod 0755 /home/runner/.config/configstore/firebase-tools.json
       - name: Autoupdate
         id: autoupdate
         uses: siarheidudko/autoupdater@v1

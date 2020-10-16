@@ -1,3 +1,9 @@
+# 1.4.0 / 2020-10-16
+
+## :tada: Enhancements
+- Updated dependencies
+- Performance optimization for the case, if collections are specified
+
 # 1.3.39 / 2020-10-13
 
 ### :tada: Enhancements

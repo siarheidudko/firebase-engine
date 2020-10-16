@@ -56,7 +56,14 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
      */
     private async recursiveBackup(ref: Firestore.Firestore|Firestore.DocumentReference){
         const collections = await ref.listCollections()
-        for(const collectionRef of collections){
+        for(const collectionRef of collections)if(
+            (this.settings.collections.length === 0) ||
+            (this.settings.collections.find((selectedCollection) => {
+                return (collectionRef.path.split("/")
+                    .filter((parentPath, i)=>((i % 2) === 0))
+                    .join(".").indexOf(selectedCollection) === 0)
+            }))
+        ){
             let denied: boolean = true
             if(this.settings.collections.length !== 0){
                 const arr: string[] = collectionRef.path.split("/")
