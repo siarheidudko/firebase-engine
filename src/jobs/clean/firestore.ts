@@ -69,7 +69,7 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
             (this.settings.collections.length === 0) ||
             (this.settings.collections.find((selectedCollection) => {
                 return (collectionRef.path.split("/")
-                    .filter((parentPath, i)=>((i % 2) === 0))
+                    .filter((parentPath, i)=>((i % 2) === 1))
                     .join(".").indexOf(selectedCollection) === 0)
             }))
         ){

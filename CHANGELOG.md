@@ -1,3 +1,8 @@
+# 1.4.1 / 2020-10-16
+
+## :bug: Fixes
+- the case, if collections are specified
+
 # 1.4.0 / 2020-10-16
 
 ## :tada: Enhancements

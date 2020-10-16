@@ -109,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">writers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L11">utils/initialization.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L11">utils/initialization.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L200">utils/initialization.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L200">utils/initialization.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -167,7 +167,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L17">utils/initialization.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L17">utils/initialization.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,7 +203,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L326">utils/initialization.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L326">utils/initialization.ts:326</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

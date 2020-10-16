@@ -113,7 +113,7 @@
 					<div class="tsd-signature tsd-kind-icon">backup<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L82">utils/initialization.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L82">utils/initialization.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -128,7 +128,7 @@
 					<div class="tsd-signature tsd-kind-icon">buckets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L108">utils/initialization.ts:108</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L108">utils/initialization.ts:108</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -143,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">collections<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L112">utils/initialization.ts:112</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L112">utils/initialization.ts:112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -158,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">compress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L90">utils/initialization.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L90">utils/initialization.ts:90</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -173,7 +173,7 @@
 					<div class="tsd-signature tsd-kind-icon">emulators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L94">utils/initialization.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L94">utils/initialization.ts:94</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">hash_<wbr>config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>algorithm<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">auth.HashAlgorithmType</span><span class="tsd-signature-symbol">; </span>base64_salt_separator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">; </span>base64_signer_key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">; </span>mem_cost<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>rounds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L98">utils/initialization.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L98">utils/initialization.ts:98</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,7 +223,7 @@
 					<div class="tsd-signature tsd-kind-icon">operations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"backup"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"clean"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"restore"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L74">utils/initialization.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L74">utils/initialization.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +238,7 @@
 					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L78">utils/initialization.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L78">utils/initialization.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -253,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">"firestore"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"auth"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"storage"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/initialization.ts#L86">utils/initialization.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/initialization.ts#L86">utils/initialization.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">

@@ -146,7 +146,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L144">utils/template.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L144">utils/template.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -192,7 +192,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#admin">admin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L31">utils/template.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L31">utils/template.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,7 +208,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#counter">counter</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L89">utils/template.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L89">utils/template.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,7 +223,7 @@
 					<div class="tsd-signature tsd-kind-icon">file<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadStream</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L173">utils/template.ts:173</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L173">utils/template.ts:173</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +238,7 @@
 					<div class="tsd-signature tsd-kind-icon">gunzip<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Gunzip</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L177">utils/template.ts:177</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L177">utils/template.ts:177</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -253,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">parser<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transform</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L181">utils/template.ts:181</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L181">utils/template.ts:181</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -269,7 +269,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L27">utils/template.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L27">utils/template.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -285,7 +285,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#starttimestamp">startTimestamp</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L104">utils/template.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L104">utils/template.ts:104</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -301,7 +301,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_template_.jobtemplate.html">JobTemplate</a>.<a href="_utils_template_.jobtemplate.html#store">store</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L35">utils/template.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L35">utils/template.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -324,7 +324,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#getworktime">getWorkTime</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L93">utils/template.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L93">utils/template.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -347,7 +347,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_utils_template_.joboneservicetemplate.html">JobOneServiceTemplate</a>.<a href="_utils_template_.joboneservicetemplate.html#run">run</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/df38fc8/src/utils/template.ts#L108">utils/template.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0e43497/src/utils/template.ts#L108">utils/template.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
