@@ -37,6 +37,20 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
      */
     private async batchClean(arr: Firestore.DocumentReference[]){
         for(const ref of arr){
+            let denied: boolean = true
+            if(this.settings.collections.length !== 0){
+                const _arr: string[] = ref.path.split("/")
+                let str: string = ""
+                for(let i = 0; i < _arr.length; i++)if((i % 2) === 0){
+                    str += _arr[i]
+                    if(this.settings.collections.indexOf(str) !== -1){
+                        denied = false
+                        break
+                    }
+                    str +="."
+                }
+            } else denied = false
+            if(!denied)
             this.batch.delete(ref)
             await this.recursiveClean(ref)
         }
@@ -54,9 +68,13 @@ export class JobCleanFirestore extends JobOneServiceTemplate {
         for(const collectionRef of collections)if(
             (this.settings.collections.length === 0) ||
             (this.settings.collections.find((selectedCollection) => {
-                return (collectionRef.path.split("/")
+                const shortName = collectionRef.path.split("/")
                     .filter((parentPath, i)=>((i % 2) === 0))
-                    .join(".").indexOf(selectedCollection) === 0)
+                    .join(".")
+                return (
+                    (shortName.indexOf(selectedCollection) === 0) || 
+                    (selectedCollection.indexOf(shortName) === 0)
+                )
             }))
         ){
             const collectionSnap = await collectionRef.get()

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;utils/initialization&quot; | Firebase Engine - v1.4.0</title>
+	<title>&quot;utils/initialization&quot; | Firebase Engine - v1.4.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Firebase Engine - v1.4.0</a>
+					<a href="../index.html" class="title">Firebase Engine - v1.4.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -109,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">writers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0cda9df/src/utils/initialization.ts#L11">utils/initialization.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e871bdd/src/utils/initialization.ts#L11">utils/initialization.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0cda9df/src/utils/initialization.ts#L200">utils/initialization.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e871bdd/src/utils/initialization.ts#L200">utils/initialization.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -167,7 +167,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0cda9df/src/utils/initialization.ts#L17">utils/initialization.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e871bdd/src/utils/initialization.ts#L17">utils/initialization.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,7 +203,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/0cda9df/src/utils/initialization.ts#L326">utils/initialization.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/siarheidudko/firebase-engine/blob/e871bdd/src/utils/initialization.ts#L326">utils/initialization.ts:326</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
