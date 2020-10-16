@@ -60,26 +60,13 @@ export class JobBackupFirestore extends JobBackupServiceTemplate {
             (this.settings.collections.length === 0) ||
             (this.settings.collections.find((selectedCollection) => {
                 return (collectionRef.path.split("/")
-                    .filter((parentPath, i)=>((i % 2) === 1))
+                    .filter((parentPath, i)=>((i % 2) === 0))
                     .join(".").indexOf(selectedCollection) === 0)
             }))
-        ){
-            let denied: boolean = true
-            if(this.settings.collections.length !== 0){
-                const arr: string[] = collectionRef.path.split("/")
-                let str: string = ""
-                for(let i = 0; i < arr.length; i++)if((i % 2) === 0){
-                    str += arr[i]
-                    if(this.settings.collections.indexOf(str) !== -1){
-                        denied = false
-                        break
-                    }
-                    str +="."
-                }
-            } else denied = false           
+        ){        
             const collectionSnap = await collectionRef.get()
             for(let i = 1; i <= collectionSnap.docs.length; i++){
-                if(!denied)  await this.documentBackup(collectionSnap.docs[i-1])
+                await this.documentBackup(collectionSnap.docs[i-1])
                 await this.recursiveBackup(collectionSnap.docs[i-1].ref)
             }           
         }
