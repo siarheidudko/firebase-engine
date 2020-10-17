@@ -1,3 +1,8 @@
+# 1.4.2 / 2020-10-17
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, eslint-config-prettier, mocha
+
 # 1.4.1 / 2020-10-16
 
 ## :bug: Fixes
