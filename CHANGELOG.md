@@ -1,3 +1,8 @@
+# 1.4.4 / 2020-10-21
+
+### :tada: Enhancements
+- Updated dependencies: @types/node
+
 # 1.4.3 / 2020-10-20
 
 ### :tada: Enhancements
