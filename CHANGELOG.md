@@ -1,3 +1,8 @@
+# 1.4.5 / 2020-10-26
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, eslint, eslint-config-prettier
+
 # 1.4.4 / 2020-10-21
 
 ### :tada: Enhancements
