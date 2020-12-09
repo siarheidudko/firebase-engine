@@ -23,7 +23,7 @@ jobs:
         id: autoupdate
         uses: siarheidudko/autoupdater@v1
         with:
-          stages: 'npm run lint&&npm run build&&npm run cov&&npm run doc'
+          stages: 'npm run lint&&rm -rf lib&&tsc --declaration&&npm run cov&&npm run doc'
       - name: Create Release
         id: create_release
         if: ${{ steps.autoupdate.outputs.updated == 'true' }}
