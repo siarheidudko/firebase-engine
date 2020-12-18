@@ -34,12 +34,13 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
                 data: docString
             }
             const self = this
-            await new Promise((res, rej) => {
+            const p: Promise<void> = new Promise((res, rej) => {
                 self.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
                     if(err) Logger.warn(err)
                     res()
                 })
             })
+            await p
             ++this.counter
             if((this.counter % 1000) === 0)
                 Logger.log(" -- Auth Backuped - "+this.counter+" users in "+this.getWorkTime()+".")
@@ -59,7 +60,7 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
-        const unpipe = new Promise((res, rej) => {
+        const unpipe: Promise<void> = new Promise((res, rej) => {
             _write.once("unpipe", () => {
                 res()
             })

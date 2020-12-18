@@ -40,7 +40,7 @@ export class FirebaseEngine {
         const arr: Promise<any>[] = []
         for(const key in writers){
             const writer = writers[key]
-            const promise = new Promise((res,rej) => {  
+            const promise: Promise<void> = new Promise((res,rej) => {  
                 if(writer.fileStream.destroyed){
                     res()
                     return

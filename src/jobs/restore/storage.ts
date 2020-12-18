@@ -74,7 +74,7 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
     public async run(){
         this.startTimestamp = Date.now()
         const self = this
-        await new Promise((res, rej) => {
+        const p: Promise<void> = new Promise((res, rej) => {
             if(self.gunzipStream){
                 const gunzip = self.gunzipStream
                 self.gunzipStream.on("unpipe", () => {
@@ -90,6 +90,7 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
                 res()
             })
         })
+        await p
         await new Promise((res) => { setTimeout(res, 1) })
         if((this.counter % 100) !== 0)
             Logger.log(" -- Storage Restored - "+self.counter+" files in "+self.getWorkTime()+".")

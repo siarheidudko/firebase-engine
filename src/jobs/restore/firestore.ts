@@ -129,7 +129,7 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
     public async run(){
         this.startTimestamp = Date.now()
         const self = this
-        await new Promise((res, rej) => {
+        const p: Promise<void> = new Promise((res, rej) => {
             if(self.gunzipStream){
                 const gunzip = self.gunzipStream
                 self.gunzipStream.on("unpipe", () => {
@@ -145,6 +145,7 @@ export class JobRestoreFirestore extends JobBackupServiceRestoreTemplate {
                 res()
             })
         })
+        await p
         if((this.writeBuffer.iteration % this.writeBuffer.batchSize) !== 0)
             await this.writeBuffer.commit()
         await new Promise((res) => { setTimeout(res, 1) })

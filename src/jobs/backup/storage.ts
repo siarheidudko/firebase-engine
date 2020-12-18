@@ -31,12 +31,13 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
             data: docString
         }
         const self = this
-        await new Promise((res, rej) => {
+        const p: Promise<void> = new Promise((res, rej) => {
             self.stringiferStream.write(_doc, undefined, (err: Error|null|undefined)=>{
                 if(err) Logger.warn(err)
                 res()
             })
         })
+        await p
         ++this.counter
         if((this.counter % 100) === 0)
             Logger.log(" -- Storage Backuped - "+this.counter+" files in "+this.getWorkTime()+".")
@@ -54,7 +55,7 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
         } else {
             _write = this.writer.fileStream
         }
-        const unpipe = new Promise((res, rej) => {
+        const unpipe: Promise<void> = new Promise((res, rej) => {
             _write.once("unpipe", () => {
                 res()
             })
