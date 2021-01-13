@@ -1,7 +1,7 @@
 name: Autoupdate
 on:
   schedule:
-    - cron: "0 1 * * 1"
+    - cron: "0 1 * * *"
 jobs:
   check-updates:
     runs-on: ubuntu-latest
@@ -23,7 +23,7 @@ jobs:
         id: autoupdate
         uses: siarheidudko/autoupdater@v1
         with:
-          stages: 'eslint -c .eslintrc.js --ext .ts src&&rm -rf lib&&tsc --declaration&&firebase emulators:exec --only firestore "nyc mocha --exit test/**/*.test.js"&&bash hosting.sh'
+          stages: "eslint -c .eslintrc.js --ext .ts src&&rm -rf lib&&tsc --declaration&&firebase emulators:exec --only firestore 'nyc mocha --exit test/**/*.test.js'&&bash hosting.sh"
       - name: Create Release
         id: create_release
         if: ${{ steps.autoupdate.outputs.updated == 'true' }}
