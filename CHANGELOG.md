@@ -1,3 +1,8 @@
+# 1.4.16 / 2021-03-16
+
+### :tada: Enhancements
+- Updated dependencies
+
 # 1.4.15 / 2021-01-04
 
 ### :tada: Enhancements

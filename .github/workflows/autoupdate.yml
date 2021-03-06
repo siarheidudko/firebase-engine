@@ -23,7 +23,7 @@ jobs:
         id: autoupdate
         uses: siarheidudko/autoupdater@v1
         with:
-          stages: "eslint -c .eslintrc.js --ext .ts src&&rm -rf lib&&tsc --declaration&&firebase emulators:exec --only firestore 'nyc mocha --exit test/**/*.test.js'&&bash hosting.sh"
+          stages: "npm run lint&&npm run build&&npm run cov&&bash hosting.sh"
       - name: Create Release
         id: create_release
         if: ${{ steps.autoupdate.outputs.updated == 'true' }}
