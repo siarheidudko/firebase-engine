@@ -1,16 +1,25 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017",
+    "target": "ES2017",
     "resolveJsonModule": true
   },
   "compileOnSave": true,
   "include": [
     "src"
-  ]
+  ],
+  "typedocOptions": {
+    "out": "./docs/",
+    "theme": "default",
+    "name": "Firebase Engine",
+    "includeVersion": true,
+    "hideGenerator": true,
+    "gaID": "234199319",
+    "gaSite": "firebase-engine.ml"
+  }
 }
