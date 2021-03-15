@@ -1,3 +1,8 @@
+# 1.4.20 / 2021-03-15
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, eslint, mocha
+
 # 1.4.19 / 2021-03-10
 
 ### :tada: Enhancements
