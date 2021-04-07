@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+env:
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,12 +42,12 @@ jobs:
         with:
           name: lib
           path: ${{ github.workspace }}/lib
+          retention-days: 1
   node10:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: build
     env:
-      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       NODE_VERSION: 10
     steps:
       - name: Сheckout repo
@@ -74,8 +76,6 @@ jobs:
         run: npm ci
       - name: Install emulator and test library
         run: sudo npm install firebase-tools nyc mocha -g
-      - name: Install emulator
-        run: sudo firebase setup:emulators:firestore
       - name: Set service account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
@@ -85,7 +85,6 @@ jobs:
     timeout-minutes: 15
     needs: [build, node10]
     env:
-      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       NODE_VERSION: 12
     steps:
       - name: Сheckout repo
@@ -114,8 +113,6 @@ jobs:
         run: npm ci
       - name: Install emulator and test library
         run: sudo npm install firebase-tools nyc mocha -g
-      - name: Install emulator
-        run: sudo firebase setup:emulators:firestore
       - name: Set service account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
@@ -125,7 +122,6 @@ jobs:
     timeout-minutes: 15
     needs: [build, node10, node12]
     env:
-      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       NODE_VERSION: 14
     steps:
       - name: Сheckout repo
@@ -154,8 +150,6 @@ jobs:
         run: npm ci
       - name: Install emulator and test library
         run: sudo npm install firebase-tools nyc mocha -g
-      - name: Install emulator
-        run: sudo firebase setup:emulators:firestore
       - name: Set service account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator

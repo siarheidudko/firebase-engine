@@ -15,8 +15,6 @@ jobs:
       - name: install test dependencies
         id: install_dependencies
         run: sudo npm install firebase-tools nyc mocha eslint typedoc typescript -g
-      - name: Install emulator
-        run: sudo firebase setup:emulators:firestore
       - name: Autoupdate
         id: autoupdate
         uses: siarheidudko/autoupdater@v1
@@ -47,18 +45,17 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: The job has failed - archive npm logs
+        if: ${{ failure() }}
+        run: |
+          if [[ -d /home/runner/.npm/_logs ]]; then
+            tar -czf ${{ github.workspace }}/npm-logs.tar.gz /home/runner/.npm/_logs;
+          fi
+        working-directory: /
       - name: The job has failed
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
           name: logs
-          path: /home/runner/.npm/_logs/*
-  remove-old-artifacts:
-    name: Remove old artifacts
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-    - name: Remove old artifacts
-      uses: c-hive/gha-remove-artifacts@v1
-      with:
-        age: '7 days'
+          path: ${{ github.workspace }}/npm-logs.tar.gz
+          retention-days: 1

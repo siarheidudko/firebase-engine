@@ -40,6 +40,7 @@ jobs:
         with:
           name: lib
           path: ${{ github.workspace }}/lib
+          retention-days: 1
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -91,11 +92,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#      - name: Set registry github packages
-#        uses: actions/setup-node@v1
-#        with:
-#          registry-url: 'https://npm.pkg.github.com'
-#      - name: Publish package to GITHUB
-#        run: npm publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
