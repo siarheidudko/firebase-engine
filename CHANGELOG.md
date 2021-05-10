@@ -1,3 +1,8 @@
+# 1.4.23 / 2021-05-10
+
+### :tada: Enhancements
+- Updated dependencies, disabled autoupdater (bug in @types/node@15)
+
 # 1.4.22 / 2021-04-12
 
 ### :tada: Enhancements
