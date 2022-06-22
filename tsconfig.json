@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "ES2017",
-    "resolveJsonModule": true
+    "target": "ES2018",
+    "lib": ["ES2018", "ES2019", "ES2020", "ES2021"],
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "noEmit": false,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src"
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "typedocOptions": {
     "out": "./docs/",
     "theme": "default",
@@ -20,6 +27,6 @@
     "includeVersion": true,
     "hideGenerator": true,
     "gaID": "234199319",
-    "gaSite": "firebase-engine.ml"
+    "gaSite": "https://siarheidudko.github.io/firebase-engine"
   }
 }

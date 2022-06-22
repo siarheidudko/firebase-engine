@@ -19,3 +19,6 @@ tslint.json
 typedoc.json
 *.backup
 *.log
+firestore.rules
+firestore.indexes.json
+storage.rules

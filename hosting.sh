@@ -3,7 +3,7 @@ MYHOSTDIRNAME="docs"
 rm -rf $MYHOSTDIRNAME
 typedoc src
 rsync -ra hosting/ $MYHOSTDIRNAME
-echo "firebase-engine.ml">$MYHOSTDIRNAME/CNAME
+# echo "firebase-engine.ml">$MYHOSTDIRNAME/CNAME
 echo "">$MYHOSTDIRNAME/.nojekyll
 OLDTEXT="<meta name=\"description\" content=\"\">"
 NEWTEXT=$(cat "hosting.html" | tr "\n" "\0")

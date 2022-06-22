@@ -2,13 +2,13 @@ name: Build and deploy
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      NODE_VERSION: 10
+      NODE_VERSION: 16
     steps:
       - name: Сheckout repo
         uses: actions/checkout@v2
@@ -46,7 +46,7 @@ jobs:
     timeout-minutes: 15
     needs: [build]
     env:
-      NODE_VERSION: 10
+      NODE_VERSION: 16
     steps:
       - name: Сheckout repo
         uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
       - name: Set registry npm packages
         uses: actions/setup-node@v1
         with:
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
       - name: Publish package to NPM
         run: npm publish
         env:

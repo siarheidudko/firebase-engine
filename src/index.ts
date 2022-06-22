@@ -1,3 +1,3 @@
-import { FirebaseEngine } from "./FirebaseEngine"
+import { FirebaseEngine } from "./FirebaseEngine";
 
-module.exports = FirebaseEngine
+module.exports = FirebaseEngine;
