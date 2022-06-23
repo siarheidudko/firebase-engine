@@ -1,7 +1,7 @@
 #!/bin/bash
 MYHOSTDIRNAME="docs"
 rm -rf $MYHOSTDIRNAME
-typedoc src
+node_modules/.bin/typedoc --entryPointStrategy expand src&&echo \"\">./docs/.nojekyll
 rsync -ra hosting/ $MYHOSTDIRNAME
 # echo "firebase-engine.ml">$MYHOSTDIRNAME/CNAME
 echo "">$MYHOSTDIRNAME/.nojekyll

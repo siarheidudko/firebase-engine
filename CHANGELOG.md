@@ -4,6 +4,7 @@
 
 - Updated dependencies
 - Updated code style
+- Moved homepage to https://siarheidudko.github.io/firebase-engine
 
 # 1.4.23 / 2021-05-10
 

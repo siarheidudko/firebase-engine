@@ -1,367 +1,202 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Firebase Engine - v1.5.0</title>
-	<meta name="description" content="Documentation for Firebase Engine - v1.5.0">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">Firebase Engine - v1.5.0</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>Firebase Engine - v1.5.0</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#firebase-engine" id="firebase-engine" style="color: inherit; text-decoration: none;">
-					<h1>firebase-engine</h1>
-				</a>
-				<p>Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage, Firebase.Auth</p>
-				<p><a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/v/firebase-engine.svg" alt="npm"></a>
-					<a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/dy/firebase-engine.svg" alt="npm"></a>
-					<a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/l/firebase-engine.svg" alt="NpmLicense"></a>
-					<img src="https://img.shields.io/github/last-commit/siarheidudko/firebase-engine.svg" alt="GitHub last commit">
-				<img src="https://img.shields.io/github/release/siarheidudko/firebase-engine.svg" alt="GitHub release"></p>
-				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
-					<h2>Install</h2>
-				</a>
-				<pre><code class="language-bash"><span style="color: #000000">    npm i firebase-engine -g</span>
-</code></pre>
-				<a href="#launch-parameters" id="launch-parameters" style="color: inherit; text-decoration: none;">
-					<h2>Launch parameters</h2>
-				</a>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Short name</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>operations</td>
-							<td>o</td>
-							<td>backup (b), restore (r) or clean (c). Default: backup</td>
-						</tr>
-						<tr>
-							<td>path</td>
-							<td>p</td>
-							<td>Path to service account JSON file</td>
-						</tr>
-						<tr>
-							<td>services</td>
-							<td>s</td>
-							<td>firestore (f), storage (s), auth (a), can be separated by commas. Default: all</td>
-						</tr>
-						<tr>
-							<td>backup</td>
-							<td>b</td>
-							<td>Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup</td>
-						</tr>
-						<tr>
-							<td>collections</td>
-							<td>coll</td>
-							<td>Apply to Collections (in Firestore service). Default: all, if it is not set</td>
-						</tr>
-						<tr>
-							<td>buckets</td>
-							<td>buck</td>
-							<td>Apply to Buckets (in Storage service). Default: all, if it is not set</td>
-						</tr>
-						<tr>
-							<td>--nocompress</td>
-							<td>-nc</td>
-							<td>Do not use data compression</td>
-						</tr>
-						<tr>
-							<td>--emulators</td>
-							<td>-em</td>
-							<td>Use firebase emulators (work for firestore)</td>
-						</tr>
-				</tbody></table>
-				<ul>
-					<li>collections - the rule also applies to all nested collections and documents</li>
-				</ul>
-				<a href="#launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" id="launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" style="color: inherit; text-decoration: none;">
-					<h2>Launch parameters (only for password recovery for users in Firebase.Auth)</h2>
-				</a>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Short name</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>algorithm</td>
-							<td>alg</td>
-							<td>The password hashing information (algorithm, only SCRYPT). Default: SCRYPT</td>
-						</tr>
-						<tr>
-							<td>base64_signer_key</td>
-							<td>bsk</td>
-							<td>The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set.</td>
-						</tr>
-						<tr>
-							<td>base64_salt_separator</td>
-							<td>bss</td>
-							<td>The password hashing information (salt separator in base64). Default: Bw==</td>
-						</tr>
-						<tr>
-							<td>rounds</td>
-							<td>rnd</td>
-							<td>The password hashing information (rounds). Default: 8</td>
-						</tr>
-						<tr>
-							<td>mem_cost</td>
-							<td>mc</td>
-							<td>The password hashing information (memory cost). Default: 14</td>
-						</tr>
-				</tbody></table>
-				<a href="#use" id="use" style="color: inherit; text-decoration: none;">
-					<h2>Use</h2>
-				</a>
-				<p>With full names</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine operations=</span><span style="color: #A31515">&quot;clean, restore&quot;</span><span style="color: #000000"> path=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> services=</span><span style="color: #A31515">&quot;firestore, storage&quot;</span><span style="color: #000000"> backup=</span><span style="color: #A31515">&quot;test.backup&quot;</span>
-</code></pre>
-				<p>With one bucket</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine operations=</span><span style="color: #A31515">&quot;clean&quot;</span><span style="color: #000000"> path=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> services=</span><span style="color: #A31515">&quot;storage&quot;</span><span style="color: #000000"> buckets=</span><span style="color: #A31515">&quot;test.appspott.com&quot;</span>
-</code></pre>
-				<p>With collection &amp; subcollection</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine operations=</span><span style="color: #A31515">&quot;backup&quot;</span><span style="color: #000000"> path=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> services=</span><span style="color: #A31515">&quot;firestore&quot;</span><span style="color: #000000"> collections=</span><span style="color: #A31515">&quot;authors,books.pages&quot;</span>
-</code></pre>
-				<p>With short names and use emulators</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine o=</span><span style="color: #A31515">&quot;b, c&quot;</span><span style="color: #000000"> s=</span><span style="color: #A31515">&quot;f&quot;</span><span style="color: #000000"> p=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> b=</span><span style="color: #A31515">&quot;test.backup&quot;</span><span style="color: #000000"> -em</span>
-</code></pre>
-				<p>With password recovery for users</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine operations=</span><span style="color: #A31515">&quot;restore&quot;</span><span style="color: #000000"> path=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> services=</span><span style="color: #A31515">&quot;firestore, auth&quot;</span><span style="color: #000000"> backup=</span><span style="color: #A31515">&quot;test.backup&quot;</span><span style="color: #000000"> bsk=</span><span style="color: #A31515">&quot;nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg==&quot;</span>
-</code></pre>
-				<a href="#copy-data-from-project-to-emulators-or-from-emulators-to-project" id="copy-data-from-project-to-emulators-or-from-emulators-to-project" style="color: inherit; text-decoration: none;">
-					<h2>Copy data from project to emulators or from emulators to project</h2>
-				</a>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Short name</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>--to-emulators</td>
-							<td>-to</td>
-							<td>Copy data from project to emulators (only firestore)</td>
-						</tr>
-						<tr>
-							<td>--from-emulators</td>
-							<td>-from</td>
-							<td>Copy data from emulators to project (only firestore)</td>
-						</tr>
-						<tr>
-							<td>path</td>
-							<td>p</td>
-							<td>Path to service account JSON file</td>
-						</tr>
-				</tbody></table>
-				<p>With full names</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine-emulators path=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> --to-emulators</span>
-</code></pre>
-				<p>With short names</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase-engine-emulators p=</span><span style="color: #A31515">&quot;./test.json&quot;</span><span style="color: #000000"> -from</span>
-</code></pre>
-				<a href="#open-source" id="open-source" style="color: inherit; text-decoration: none;">
-					<h2>Open Source</h2>
-				</a>
-				<p><a href="https://siarheidudko.github.io/firebase-engine">See source docs</a></p>
-				<p><a href="https://github.com/siarheidudko/firebase-engine">See source</a></p>
-				<a href="#service-account-key" id="service-account-key" style="color: inherit; text-decoration: none;">
-					<h2>Service Account Key</h2>
-				</a>
-				<p>Get your service account key from IAM
-				<a href="https://console.cloud.google.com/iam-admin/serviceaccounts">Open google IAM</a></p>
-				<p>Or from the FIREBASE project
-				<a href="https://sites.google.com/site/scriptsexamples/new-connectors-to-google-services/firebase/tutorials/authenticate-with-a-service-account">Open official firebase docs</a></p>
-				<a href="#warning-password-hashes-of-users" id="warning-password-hashes-of-users" style="color: inherit; text-decoration: none;">
-					<h3>WARNING (Password hashes of users)</h3>
-				</a>
-				<p>Firebase API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
-				<a href="https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users">Open official firebase docs</a></p>
-				<a href="#warning-restoration-of-subcollections" id="warning-restoration-of-subcollections" style="color: inherit; text-decoration: none;">
-					<h3>WARNING (restoration of subcollections)</h3>
-				</a>
-				<p>I recommend using only the top collection level in the collections parameter. Because you can get shadow document by restoring a subcollection in a non-existent document.
-				To a full database cleanup, including shadow documents, use the command in firebase tools</p>
-				<pre><code class="language-bash"><span style="color: #000000">    firebase firestore:delete -r</span>
-</code></pre>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>LICENSE</h2>
-				</a>
-				<p>Apache-2.0</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/firebaseengine.html">Firebase<wbr>Engine</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/bin_firebase_engine.html">bin/firebase-<wbr>engine</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/bin_firebase_engine_emulators.html">bin/firebase-<wbr>engine-<wbr>emulators</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_jobs.html">jobs/<wbr>Jobs</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_backup_auth.html">jobs/backup/auth</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_backup_firestore.html">jobs/backup/firestore</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_backup_storage.html">jobs/backup/storage</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_clean_auth.html">jobs/clean/auth</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_clean_firestore.html">jobs/clean/firestore</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_clean_storage.html">jobs/clean/storage</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_restore_auth.html">jobs/restore/auth</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_restore_firestore.html">jobs/restore/firestore</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/jobs_restore_storage.html">jobs/restore/storage</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_authconverter.html">utils/<wbr>Auth<wbr>Converter</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_firebaseadmin.html">utils/<wbr>Firebase<wbr>Admin</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_firebaseauth.html">utils/<wbr>Firebase<wbr>Auth</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_firebasefirestore.html">utils/<wbr>Firebase<wbr>Firestore</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_firebasestorage.html">utils/<wbr>Firebase<wbr>Storage</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_firestoreconverter.html">utils/<wbr>Firestore<wbr>Converter</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_logger.html">utils/<wbr>Logger</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_storageconverter.html">utils/<wbr>Storage<wbr>Converter</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_initialization.html">utils/initialization</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_randomstr.html">utils/random<wbr>Str</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utils_template.html">utils/template</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer>
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Firebase Engine - v1.5.0</title><meta name="description" content="Documentation for Firebase Engine - v1.5.0"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Firebase Engine - v1.5.0</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> Firebase Engine - v1.5.0 </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#firebase-engine" id="firebase-engine" style="color: inherit; text-decoration: none;">
+  <h1>firebase-engine</h1>
+</a>
+<p>Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage, Firebase.Auth</p>
+<p><a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/v/firebase-engine.svg" alt="npm"></a>
+<a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/dy/firebase-engine.svg" alt="npm"></a>
+<a href="https://www.npmjs.com/package/firebase-engine"><img src="https://img.shields.io/npm/l/firebase-engine.svg" alt="NpmLicense"></a>
+<img src="https://img.shields.io/github/last-commit/siarheidudko/firebase-engine.svg" alt="GitHub last commit">
+<img src="https://img.shields.io/github/release/siarheidudko/firebase-engine.svg" alt="GitHub release"></p>
 
-        ga('create', '234199319', 'https://siarheidudko.github.io/firebase-engine');
-        ga('send', 'pageview');
-    </script>
-</body>
-</html>
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h2>Install</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">    npm i firebase-engine -g</span>
+</code></pre>
+
+<a href="#launch-parameters" id="launch-parameters" style="color: inherit; text-decoration: none;">
+  <h2>Launch parameters</h2>
+</a>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Short name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>operations</td>
+<td>o</td>
+<td>backup (b), restore (r) or clean (c). Default: backup</td>
+</tr>
+<tr>
+<td>path</td>
+<td>p</td>
+<td>Path to service account JSON file</td>
+</tr>
+<tr>
+<td>services</td>
+<td>s</td>
+<td>firestore (f), storage (s), auth (a), can be separated by commas. Default: all</td>
+</tr>
+<tr>
+<td>backup</td>
+<td>b</td>
+<td>Path to backup or restore file. Default: ./{$PROJECT_ID + $TIMESTAMP}.backup</td>
+</tr>
+<tr>
+<td>collections</td>
+<td>coll</td>
+<td>Apply to Collections (in Firestore service). Default: all, if it is not set</td>
+</tr>
+<tr>
+<td>buckets</td>
+<td>buck</td>
+<td>Apply to Buckets (in Storage service). Default: all, if it is not set</td>
+</tr>
+<tr>
+<td>--nocompress</td>
+<td>-nc</td>
+<td>Do not use data compression</td>
+</tr>
+<tr>
+<td>--emulators</td>
+<td>-em</td>
+<td>Use firebase emulators (work for firestore)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>collections - the rule also applies to all nested collections and documents</li>
+</ul>
+
+<a href="#launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" id="launch-parameters-only-for-password-recovery-for-users-in-firebaseauth" style="color: inherit; text-decoration: none;">
+  <h2>Launch parameters (only for password recovery for users in Firebase.Auth)</h2>
+</a>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Short name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>algorithm</td>
+<td>alg</td>
+<td>The password hashing information (algorithm, only SCRYPT). Default: SCRYPT</td>
+</tr>
+<tr>
+<td>base64_signer_key</td>
+<td>bsk</td>
+<td>The password hashing information (key in base64 encoding). Default: user passwords are not restored if not set.</td>
+</tr>
+<tr>
+<td>base64_salt_separator</td>
+<td>bss</td>
+<td>The password hashing information (salt separator in base64). Default: Bw==</td>
+</tr>
+<tr>
+<td>rounds</td>
+<td>rnd</td>
+<td>The password hashing information (rounds). Default: 8</td>
+</tr>
+<tr>
+<td>mem_cost</td>
+<td>mc</td>
+<td>The password hashing information (memory cost). Default: 14</td>
+</tr>
+</tbody></table>
+
+<a href="#use" id="use" style="color: inherit; text-decoration: none;">
+  <h2>Use</h2>
+</a>
+<p>With full names</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine operations=</span><span class="hl-1">&quot;clean, restore&quot;</span><span class="hl-0"> path=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> services=</span><span class="hl-1">&quot;firestore, storage&quot;</span><span class="hl-0"> backup=</span><span class="hl-1">&quot;test.backup&quot;</span>
+</code></pre>
+<p>With one bucket</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine operations=</span><span class="hl-1">&quot;clean&quot;</span><span class="hl-0"> path=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> services=</span><span class="hl-1">&quot;storage&quot;</span><span class="hl-0"> buckets=</span><span class="hl-1">&quot;test.appspott.com&quot;</span>
+</code></pre>
+<p>With collection &amp; subcollection</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine operations=</span><span class="hl-1">&quot;backup&quot;</span><span class="hl-0"> path=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> services=</span><span class="hl-1">&quot;firestore&quot;</span><span class="hl-0"> collections=</span><span class="hl-1">&quot;authors,books.pages&quot;</span>
+</code></pre>
+<p>With short names and use emulators</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine o=</span><span class="hl-1">&quot;b, c&quot;</span><span class="hl-0"> s=</span><span class="hl-1">&quot;f&quot;</span><span class="hl-0"> p=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> b=</span><span class="hl-1">&quot;test.backup&quot;</span><span class="hl-0"> -em</span>
+</code></pre>
+<p>With password recovery for users</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine operations=</span><span class="hl-1">&quot;restore&quot;</span><span class="hl-0"> path=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> services=</span><span class="hl-1">&quot;firestore, auth&quot;</span><span class="hl-0"> backup=</span><span class="hl-1">&quot;test.backup&quot;</span><span class="hl-0"> bsk=</span><span class="hl-1">&quot;nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg==&quot;</span>
+</code></pre>
+
+<a href="#copy-data-from-project-to-emulators-or-from-emulators-to-project" id="copy-data-from-project-to-emulators-or-from-emulators-to-project" style="color: inherit; text-decoration: none;">
+  <h2>Copy data from project to emulators or from emulators to project</h2>
+</a>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Short name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>--to-emulators</td>
+<td>-to</td>
+<td>Copy data from project to emulators (only firestore)</td>
+</tr>
+<tr>
+<td>--from-emulators</td>
+<td>-from</td>
+<td>Copy data from emulators to project (only firestore)</td>
+</tr>
+<tr>
+<td>path</td>
+<td>p</td>
+<td>Path to service account JSON file</td>
+</tr>
+</tbody></table>
+<p>With full names</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine-emulators path=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> --to-emulators</span>
+</code></pre>
+<p>With short names</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase-engine-emulators p=</span><span class="hl-1">&quot;./test.json&quot;</span><span class="hl-0"> -from</span>
+</code></pre>
+
+<a href="#open-source" id="open-source" style="color: inherit; text-decoration: none;">
+  <h2>Open Source</h2>
+</a>
+<p><a href="https://siarheidudko.github.io/firebase-engine">See source docs</a></p>
+<p><a href="https://github.com/siarheidudko/firebase-engine">See source</a></p>
+
+<a href="#service-account-key" id="service-account-key" style="color: inherit; text-decoration: none;">
+  <h2>Service Account Key</h2>
+</a>
+<p>Get your service account key from IAM
+<a href="https://console.cloud.google.com/iam-admin/serviceaccounts">Open google IAM</a></p>
+<p>Or from the FIREBASE project
+<a href="https://sites.google.com/site/scriptsexamples/new-connectors-to-google-services/firebase/tutorials/authenticate-with-a-service-account">Open official firebase docs</a></p>
+
+<a href="#warning-password-hashes-of-users" id="warning-password-hashes-of-users" style="color: inherit; text-decoration: none;">
+  <h3>WARNING (Password hashes of users)</h3>
+</a>
+<p>Firebase API also returns the passwordSalt and passwordHash hashed by the Firebase Auth backend for password users if the user/service account used to generate the request OAuth access token has the firebaseauth.configs.getHashConfig permission. Otherwise the passwordHash and passwordSalt will not be set.
+<a href="https://firebase.google.com/docs/auth/admin/manage-users#password_hashes_of_listed_users">Open official firebase docs</a></p>
+
+<a href="#warning-restoration-of-subcollections" id="warning-restoration-of-subcollections" style="color: inherit; text-decoration: none;">
+  <h3>WARNING (restoration of subcollections)</h3>
+</a>
+<p>I recommend using only the top collection level in the collections parameter. Because you can get shadow document by restoring a subcollection in a non-existent document.
+To a full database cleanup, including shadow documents, use the command in firebase tools</p>
+<pre><code class="language-bash"><span class="hl-0">    firebase firestore:delete -r</span>
+</code></pre>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>LICENSE</h2>
+</a>
+<p>Apache-2.0</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/FirebaseEngine.html">Firebase<wbr/>Engine</a></li><li class=" tsd-kind-module"><a href="modules/jobs_Jobs.html">jobs/<wbr/>Jobs</a></li><li class=" tsd-kind-module"><a href="modules/jobs_backup_auth.html">jobs/backup/auth</a></li><li class=" tsd-kind-module"><a href="modules/jobs_backup_firestore.html">jobs/backup/firestore</a></li><li class=" tsd-kind-module"><a href="modules/jobs_backup_storage.html">jobs/backup/storage</a></li><li class=" tsd-kind-module"><a href="modules/jobs_clean_auth.html">jobs/clean/auth</a></li><li class=" tsd-kind-module"><a href="modules/jobs_clean_firestore.html">jobs/clean/firestore</a></li><li class=" tsd-kind-module"><a href="modules/jobs_clean_storage.html">jobs/clean/storage</a></li><li class=" tsd-kind-module"><a href="modules/jobs_restore_auth.html">jobs/restore/auth</a></li><li class=" tsd-kind-module"><a href="modules/jobs_restore_firestore.html">jobs/restore/firestore</a></li><li class=" tsd-kind-module"><a href="modules/jobs_restore_storage.html">jobs/restore/storage</a></li><li class=" tsd-kind-module"><a href="modules/utils_AuthConverter.html">utils/<wbr/>Auth<wbr/>Converter</a></li><li class=" tsd-kind-module"><a href="modules/utils_FirebaseAdmin.html">utils/<wbr/>Firebase<wbr/>Admin</a></li><li class=" tsd-kind-module"><a href="modules/utils_FirebaseAuth.html">utils/<wbr/>Firebase<wbr/>Auth</a></li><li class=" tsd-kind-module"><a href="modules/utils_FirebaseFirestore.html">utils/<wbr/>Firebase<wbr/>Firestore</a></li><li class=" tsd-kind-module"><a href="modules/utils_FirebaseStorage.html">utils/<wbr/>Firebase<wbr/>Storage</a></li><li class=" tsd-kind-module"><a href="modules/utils_FirestoreConverter.html">utils/<wbr/>Firestore<wbr/>Converter</a></li><li class=" tsd-kind-module"><a href="modules/utils_Logger.html">utils/<wbr/>Logger</a></li><li class=" tsd-kind-module"><a href="modules/utils_StorageConverter.html">utils/<wbr/>Storage<wbr/>Converter</a></li><li class=" tsd-kind-module"><a href="modules/utils_initialization.html">utils/initialization</a></li><li class=" tsd-kind-module"><a href="modules/utils_randomStr.html">utils/random<wbr/>Str</a></li><li class=" tsd-kind-module"><a href="modules/utils_template.html">utils/template</a></li></ul></nav></div></div></div><footer class=""><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="overlay"></div><script src="assets/main.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', '234199319', 'https://siarheidudko.github.io/firebase-engine');
+ga('send', 'pageview');</script></body></html>

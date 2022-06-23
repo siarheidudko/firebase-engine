@@ -14,7 +14,7 @@ jobs:
         run: echo $SERVICE_ACCOUNT>./serviceAccount.json
       - name: install test dependencies
         id: install_dependencies
-        run: sudo npm install firebase-tools nyc mocha eslint typedoc typescript -g
+        run: sudo npm install firebase-tools nyc mocha eslint typescript -g
       - name: Autoupdate
         id: autoupdate
         uses: siarheidudko/autoupdater@v1
