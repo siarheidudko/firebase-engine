@@ -117,40 +117,40 @@ jobs:
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
         run: npm run cov
-  node18:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: [build, node14, node16]
-    env:
-      NODE_VERSION: 18
-    steps:
-      - name: Сheckout repo
-        uses: actions/checkout@v2
-      - name: Unarchiving lib directory
-        uses: actions/download-artifact@v2
-        with:
-          name: lib
-          path: ${{ github.workspace }}/lib
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache node modules
-        uses: actions/cache@v1
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install dependencies
-        run: npm ci
-      - name: Install emulator and test library
-        run: sudo npm install firebase-tools nyc mocha -g
-      - name: Set service account
-        run: echo $SERVICE_ACCOUNT>serviceAccount.json
-      - name: Run emulator
-        run: npm run cov
+  # node18:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 15
+  #   needs: [build, node14, node16]
+  #   env:
+  #     NODE_VERSION: 18
+  #   steps:
+  #     - name: Сheckout repo
+  #       uses: actions/checkout@v2
+  #     - name: Unarchiving lib directory
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: lib
+  #         path: ${{ github.workspace }}/lib
+  #     - name: Use Node.js ${{ env.NODE_VERSION }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #     - name: Cache node modules
+  #       uses: actions/cache@v1
+  #       env:
+  #         cache-name: cache-node-modules
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-build-${{ env.cache-name }}-
+  #           ${{ runner.os }}-build-
+  #           ${{ runner.os }}-
+  #     - name: Install dependencies
+  #       run: npm ci
+  #     - name: Install emulator and test library
+  #       run: sudo npm install firebase-tools nyc mocha -g
+  #     - name: Set service account
+  #       run: echo $SERVICE_ACCOUNT>serviceAccount.json
+  #     - name: Run emulator
+  #       run: npm run cov
