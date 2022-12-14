@@ -1,4 +1,4 @@
-# 1.5.0 / 2022-12-14
+# 1.5.1 / 2022-12-14
 
 ### :tada: Enhancements
 - Updated dependencies: @google-cloud/storage, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, firebase-admin, mocha, typedoc, typescript
