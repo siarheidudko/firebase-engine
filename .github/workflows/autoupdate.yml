@@ -10,6 +10,7 @@ jobs:
   update:
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+      NODE_VERSION: 16
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
@@ -26,6 +27,27 @@ jobs:
         id: set_service_account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
         working-directory: ${{ github.workspace }}/tmp
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        id: setup_node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: "https://registry.npmjs.org"
+      - name: Cache node modules
+        id: use_cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install global dependencies
+        id: install_global
+        run: npm install firebase-tools -g
       - name: Autoupdate
         id: autoupdate
         uses: siarheidudko/autoupdater@v2
@@ -62,6 +84,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: "https://registry.npmjs.org"
+      - name: Cache node modules
+        id: use_cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install dependencies
+        id: install_ci
+        run: npm ci
       - name: Build package
         id: build_package
         run: npm run build
