@@ -41,6 +41,7 @@ jobs:
             bash hosting.sh
             git add --all
             git commit -m 'hosting'
+          debug: "true"
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 20
