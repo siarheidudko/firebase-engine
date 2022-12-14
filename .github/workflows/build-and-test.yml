@@ -31,8 +31,6 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies
         run: npm ci
-      - name: Install builder
-        run: sudo npm install typescript eslint -g
       - name: Run linter
         run: npm run lint
       - name: Run builder
@@ -75,7 +73,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install emulator and test library
-        run: sudo npm install firebase-tools nyc mocha -g
+        run: sudo npm install firebase-tools -g
       - name: Set service account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
@@ -112,7 +110,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install emulator and test library
-        run: sudo npm install firebase-tools nyc mocha -g
+        run: sudo npm install firebase-tools -g
       - name: Set service account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
       - name: Run emulator
@@ -149,7 +147,7 @@ jobs:
   #     - name: Install dependencies
   #       run: npm ci
   #     - name: Install emulator and test library
-  #       run: sudo npm install firebase-tools nyc mocha -g
+  #       run: sudo npm install firebase-tools -g
   #     - name: Set service account
   #       run: echo $SERVICE_ACCOUNT>serviceAccount.json
   #     - name: Run emulator

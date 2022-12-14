@@ -1,0 +1,96 @@
+name: Autoupdate
+on:
+  push:
+    branches:
+      - master
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.ref }}"
+  cancel-in-progress: false
+jobs:
+  update:
+    env:
+      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      updated: ${{ steps.autoupdate.outputs.updated }}
+      version: ${{ steps.autoupdate.outputs.version }}
+    steps:
+      - name: Сheckout repo
+        id: checkout_repo
+        uses: actions/checkout@v3
+        with:
+          ref: "master"
+      - name: Set service account
+        id: set_service_account
+        run: echo $SERVICE_ACCOUNT>serviceAccount.json
+        working-directory: ${{ github.workspace }}/tmp
+      - name: Autoupdate
+        id: autoupdate
+        uses: siarheidudko/autoupdater@v2
+        with:
+          author-email: "slavianich@gmail.com"
+          author-name: "Siarhei Dudko"
+          working-directory: ${{ github.workspace }}/tmp
+          ref: ${{ github.repository }}
+          builds-and-checks: |
+            npm run lint
+            npm run build
+            npm run cov
+            bash hosting.sh
+            git add --all
+            git commit -m 'hosting'
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NODE_VERSION: 16
+      VERSION: ${{ needs.update.outputs.version }}
+    needs: [update]
+    if: ${{ needs.update.outputs.updated == 'true' }}
+    steps:
+      - name: Сheckout repo
+        id: checkout_repo
+        uses: actions/checkout@v3
+        with:
+          ref: "master"
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        id: setup_node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: "https://registry.npmjs.org"
+      - name: Build package
+        id: build_package
+        run: npm run build
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.VERSION }}
+          release_name: Release v${{ env.VERSION }}
+          body: |
+            see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
+          draft: false
+          prerelease: false
+      - name: Publish package to NPM
+        id: npm_publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: The job has failed - archive npm logs
+        if: ${{ failure() }}
+        run: |
+          if [[ -d /home/runner/.npm/_logs ]]; then
+            tar -czf ${{ github.workspace }}/npm-logs.tar.gz /home/runner/.npm/_logs;
+          fi
+        working-directory: /
+      - name: The job has failed
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs
+          path: ${{ github.workspace }}/npm-logs.tar.gz
+          retention-days: 1

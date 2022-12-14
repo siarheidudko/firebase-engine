@@ -5,8 +5,8 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "lint": "eslint -c .eslintrc.js --ext .ts src",
-    "build": "tsc --declaration",
+    "lint": "node_modules/.bin/eslint -c .eslintrc.js --ext .ts src",
+    "build": "node_modules/.bin/tsc --declaration",
     "doc": "bash hosting.sh",
     "test": "firebase emulators:exec --only firestore,auth 'node_modules/.bin/mocha --exit test/**/*.test.js'",
     "cov": "firebase emulators:exec --only firestore,auth 'node_modules/.bin/nyc node_modules/.bin/mocha --exit test/**/*.test.js'",
