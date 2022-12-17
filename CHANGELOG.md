@@ -1,9 +1,9 @@
-# 1.5.21 / 2022-12-17
+# 1.5.3 / 2022-12-17
 
 ### :tada: Enhancements
 - Updated dependencies: @types/node, eslint
 
-# 1.5.11 / 2022-12-16
+# 1.5.2 / 2022-12-16
 
 ### :tada: Enhancements
 - Updated dependencies: firebase-admin
