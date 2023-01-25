@@ -40,7 +40,7 @@
   "author": "Siarhei Dudko <slavianich@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/storage": "^6.9.0",
+    "@google-cloud/storage": "^6.9.1",
     "@sergdudko/objectstream": "^3.1.1",
     "firebase-admin": "^11.5.0"
   },
