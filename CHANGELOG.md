@@ -1,3 +1,8 @@
+# 1.5.29 / 2023-02-16
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage
+
 # 1.5.28 / 2023-02-14
 
 ### :tada: Enhancements
