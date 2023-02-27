@@ -1,3 +1,8 @@
+# 1.5.33 / 2023-02-27
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, eslint, typedoc
+
 # 1.5.32 / 2023-02-24
 
 ### :tada: Enhancements
