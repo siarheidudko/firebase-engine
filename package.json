@@ -40,12 +40,12 @@
   "author": "Siarhei Dudko <slavianich@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/storage": "^6.9.3",
+    "@google-cloud/storage": "^6.9.4",
     "@sergdudko/objectstream": "^3.1.1",
     "firebase-admin": "^11.5.0"
   },
   "devDependencies": {
-    "@types/node": "^18.14.2",
+    "@types/node": "^18.14.4",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "eslint": "^8.35.0",
