@@ -1,3 +1,8 @@
+# 1.5.37 / 2023-03-07
+
+### :tada: Enhancements
+- Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint-config-prettier, typedoc
+
 # 1.5.36 / 2023-03-04
 
 ### :tada: Enhancements
