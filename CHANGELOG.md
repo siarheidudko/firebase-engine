@@ -1,3 +1,8 @@
+# 1.5.45 / 2023-03-24
+
+### :tada: Enhancements
+- Updated dependencies: @types/node
+
 # 1.5.44 / 2023-03-21
 
 ### :tada: Enhancements
