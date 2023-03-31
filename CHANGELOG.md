@@ -1,3 +1,8 @@
+# 1.5.50 / 2023-03-31
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage, typescript
+
 # 1.5.49 / 2023-03-29
 
 ### :tada: Enhancements
