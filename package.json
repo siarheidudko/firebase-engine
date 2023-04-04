@@ -38,6 +38,20 @@
     "mobile"
   ],
   "author": "Siarhei Dudko <slavianich@gmail.com>",
+  "funding": [
+    {
+      "type": "buymeacoffee",
+      "url": "https://www.buymeacoffee.com/dudko.dev"
+    },
+    {
+      "type": "paypal",
+      "url": "https://paypal.me/dudkodev"
+    },
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/dudko_dev"
+    }
+  ],
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^6.9.5",
