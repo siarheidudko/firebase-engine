@@ -55,7 +55,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^6.9.5",
-    "@sergdudko/objectstream": "^3.1.1",
+    "@sergdudko/objectstream": "^3.1.2",
     "firebase-admin": "^11.5.0"
   },
   "devDependencies": {
