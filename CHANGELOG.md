@@ -1,3 +1,8 @@
+# 1.5.72 / 2023-05-06
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, eslint
+
 # 1.5.71 / 2023-05-05
 
 ### :tada: Enhancements
