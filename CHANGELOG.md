@@ -1,446 +1,541 @@
+# 1.5.90 / 2023-10-11
+
+### :tada: Enhancements
+
+- Updated dependencies
+
 # 1.5.89 / 2023-06-02
 
 ### :tada: Enhancements
+
 - Updated dependencies: typescript
 
 # 1.5.88 / 2023-05-31
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.87 / 2023-05-30
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.86 / 2023-05-27
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.85 / 2023-05-26
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.84 / 2023-05-23
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.83 / 2023-05-22
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.82 / 2023-05-20
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint
 
 # 1.5.81 / 2023-05-19
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.80 / 2023-05-18
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.79 / 2023-05-17
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.78 / 2023-05-16
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.77 / 2023-05-14
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.76 / 2023-05-12
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.75 / 2023-05-11
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage, @types/node
 
 # 1.5.74 / 2023-05-09
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.73 / 2023-05-08
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.72 / 2023-05-06
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, eslint
 
 # 1.5.71 / 2023-05-05
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.70 / 2023-05-03
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage
 
 # 1.5.69 / 2023-05-02
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.68 / 2023-04-30
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.67 / 2023-04-28
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.66 / 2023-04-27
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.65 / 2023-04-25
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser, typedoc
 
 # 1.5.64 / 2023-04-24
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.63 / 2023-04-23
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.62 / 2023-04-22
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, eslint
 
 # 1.5.61 / 2023-04-20
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.60 / 2023-04-19
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.59 / 2023-04-18
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.58 / 2023-04-17
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.57 / 2023-04-16
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.56 / 2023-04-11
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.55 / 2023-04-09
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.54 / 2023-04-08
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint, typescript
 
 # 1.5.53 / 2023-04-07
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.52 / 2023-04-05
 
 ### :tada: Enhancements
+
 - Updated dependencies: @sergdudko/objectstream
 
 # 1.5.51 / 2023-04-04
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.50 / 2023-03-31
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage, typescript
 
 # 1.5.49 / 2023-03-29
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, eslint
 
 # 1.5.48 / 2023-03-28
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.47 / 2023-03-26
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.46 / 2023-03-25
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.45 / 2023-03-24
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.44 / 2023-03-21
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint-config-prettier
 
 # 1.5.43 / 2023-03-20
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc, typescript
 
 # 1.5.42 / 2023-03-15
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.41 / 2023-03-14
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.40 / 2023-03-11
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint
 
 # 1.5.39 / 2023-03-10
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.38 / 2023-03-08
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.37 / 2023-03-07
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint-config-prettier, typedoc
 
 # 1.5.36 / 2023-03-04
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.35 / 2023-03-03
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage, @types/node
 
 # 1.5.34 / 2023-02-28
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.33 / 2023-02-27
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, eslint, typedoc
 
 # 1.5.32 / 2023-02-24
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.31 / 2023-02-21
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.30 / 2023-02-18
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.29 / 2023-02-16
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage
 
 # 1.5.28 / 2023-02-14
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.27 / 2023-02-12
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.26 / 2023-02-11
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint
 
 # 1.5.25 / 2023-02-08
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.24 / 2023-02-07
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.23 / 2023-02-05
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.22 / 2023-02-01
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.21 / 2023-01-31
 
 ### :tada: Enhancements
+
 - Updated dependencies: typescript
 
 # 1.5.20 / 2023-01-29
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint
 
 # 1.5.19 / 2023-01-25
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage
 
 # 1.5.18 / 2023-01-24
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.17 / 2023-01-20
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.16 / 2023-01-17
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint-plugin-import
 
 # 1.5.15 / 2023-01-16
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint
 
 # 1.5.14 / 2023-01-13
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint-plugin-import
 
 # 1.5.13 / 2023-01-10
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.12 / 2023-01-08
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.11 / 2023-01-05
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage
 
 # 1.5.10 / 2023-01-03
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint-config-prettier
 
 # 1.5.9 / 2023-01-01
 
 ### :tada: Enhancements
+
 - Updated dependencies: eslint
 
 # 1.5.8 / 2022-12-27
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.7 / 2022-12-23
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.6 / 2022-12-20
 
 ### :tada: Enhancements
+
 - Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.5 / 2022-12-19
 
 ### :tada: Enhancements
+
 - Updated dependencies: typedoc
 
 # 1.5.4 / 2022-12-18
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node
 
 # 1.5.3 / 2022-12-17
 
 ### :tada: Enhancements
+
 - Updated dependencies: @types/node, eslint
 
 # 1.5.2 / 2022-12-16
 
 ### :tada: Enhancements
+
 - Updated dependencies: firebase-admin
 
 # 1.5.1 / 2022-12-14
 
 ### :tada: Enhancements
+
 - Updated dependencies: @google-cloud/storage, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, firebase-admin, mocha, typedoc, typescript
 
 # 1.5.0 / 2022-06-22
@@ -449,7 +544,7 @@
 
 - Updated dependencies
 - Updated code style
-- Moved homepage to https://siarheidudko.github.io/firebase-engine
+- Moved homepage to <https://siarheidudko.github.io/firebase-engine>
 
 # 1.4.23 / 2021-05-10
 
@@ -833,7 +928,7 @@
 ## :tada: Enhancements
 
 - Replaced tslint with eslint
-- Moved homepage to https://firebase-engine.ml
+- Moved homepage to <https://firebase-engine.ml>
 
 # 1.2.6 / 2020-06-08
 

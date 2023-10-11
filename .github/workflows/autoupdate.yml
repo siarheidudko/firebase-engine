@@ -9,7 +9,7 @@ jobs:
   update:
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-      NODE_VERSION: 16
+      NODE_VERSION: 20
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      NODE_VERSION: 16
+      NODE_VERSION: 20
       VERSION: ${{ needs.update.outputs.version }}
     needs: [update]
     if: ${{ needs.update.outputs.updated == 'true' }}
