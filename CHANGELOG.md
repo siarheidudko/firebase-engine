@@ -1,3 +1,8 @@
+# 1.5.102 / 2023-10-31
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+
 # 1.5.101 / 2023-10-30
 
 ### :tada: Enhancements
