@@ -1,6 +1,6 @@
 # firebase-engine
 
-Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage, Firebase.Auth
+Unlock Peak Performance for Your Firebase Project: A Dynamic Engine for Effortless Backup, Thorough Cleaning, and Seamless Restoration. Tailored for Firebase Firestore, Firebase Storage, and Firebase Auth. Streamline Your Workflow with Unrivaled Efficiency!
 
 [![npm](https://img.shields.io/npm/v/firebase-engine.svg)](https://www.npmjs.com/package/firebase-engine)
 [![npm](https://img.shields.io/npm/dy/firebase-engine.svg)](https://www.npmjs.com/package/firebase-engine)
@@ -11,7 +11,7 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 ## Install
 
 ```bash
-	npm i firebase-engine -g
+ npm i firebase-engine -g
 ```
 
 ## Launch parameters
@@ -44,31 +44,31 @@ Engine to Backup, Clean, Restore. Work for Firebase.Firestore, Firebase.Storage,
 With full names
 
 ```bash
-	firebase-engine operations="clean, restore" path="./test.json" services="firestore, storage" backup="test.backup"
+ firebase-engine operations="clean, restore" path="./test.json" services="firestore, storage" backup="test.backup"
 ```
 
 With one bucket
 
 ```bash
-	firebase-engine operations="clean" path="./test.json" services="storage" buckets="test.appspott.com"
+ firebase-engine operations="clean" path="./test.json" services="storage" buckets="test.appspott.com"
 ```
 
 With collection & subcollection
 
 ```bash
-	firebase-engine operations="backup" path="./test.json" services="firestore" collections="authors,books.pages"
+ firebase-engine operations="backup" path="./test.json" services="firestore" collections="authors,books.pages"
 ```
 
 With short names and use emulators
 
 ```bash
-	firebase-engine o="b, c" s="f" p="./test.json" b="test.backup" -em
+ firebase-engine o="b, c" s="f" p="./test.json" b="test.backup" -em
 ```
 
 With password recovery for users
 
 ```bash
-	firebase-engine operations="restore" path="./test.json" services="firestore, auth" backup="test.backup" bsk="nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="
+ firebase-engine operations="restore" path="./test.json" services="firestore, auth" backup="test.backup" bsk="nMyNs6sFWp0GZ/JSW2tsNGvGZ70oiv13gxO7ub7rxPwK271P945BiZmjrdsBRbgZmzPPgwATLR6FaXq3rUspVg=="
 ```
 
 ## Copy data from project to emulators or from emulators to project
@@ -82,13 +82,13 @@ With password recovery for users
 With full names
 
 ```bash
-	firebase-engine-emulators path="./test.json" --to-emulators
+ firebase-engine-emulators path="./test.json" --to-emulators
 ```
 
 With short names
 
 ```bash
-	firebase-engine-emulators p="./test.json" -from
+ firebase-engine-emulators p="./test.json" -from
 ```
 
 ## Open Source
@@ -116,7 +116,7 @@ I recommend using only the top collection level in the collections parameter. Be
 To a full database cleanup, including shadow documents, use the command in firebase tools
 
 ```bash
-	firebase firestore:delete -r
+ firebase firestore:delete -r
 ```
 
 ## LICENSE

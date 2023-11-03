@@ -1,7 +1,7 @@
 {
   "name": "firebase-engine",
   "version": "1.5.103",
-  "description": "Tools  for firebase (backup, clean,  restore)",
+  "description": "Engine for Backup, Clean and Restore your Firebase Project data",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -37,7 +37,7 @@
     "cli",
     "mobile"
   ],
-  "author": "Siarhei Dudko <slavianich@gmail.com>",
+  "author": "Siarhei Dudko <sergey@dudko.dev>",
   "funding": [
     {
       "type": "buymeacoffee",
