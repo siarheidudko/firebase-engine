@@ -55,11 +55,11 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^7.5.0",
-    "@sergdudko/objectstream": "^3.1.4",
+    "@sergdudko/objectstream": "^3.1.5",
     "firebase-admin": "^11.11.0"
   },
   "devDependencies": {
-    "@types/node": "^20.8.10",
+    "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "eslint": "^8.53.0",
