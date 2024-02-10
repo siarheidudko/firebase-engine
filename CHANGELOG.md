@@ -1,3 +1,8 @@
+# 1.5.117 / 2024-02-10
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream, typedoc
+
 # 1.5.116 / 2024-02-09
 
 ### :tada: Enhancements
