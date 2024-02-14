@@ -1,3 +1,8 @@
+# 1.5.120 / 2024-02-14
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream
+
 # 1.5.119 / 2024-02-13
 
 ### :tada: Enhancements
