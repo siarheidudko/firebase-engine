@@ -1,3 +1,8 @@
+# 1.5.134 / 2024-03-11
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage, @types/node, typedoc, typescript
+
 # 1.5.133 / 2024-03-06
 
 ### :tada: Enhancements
