@@ -1,3 +1,8 @@
+# 1.5.135 / 2024-03-12
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+
 # 1.5.134 / 2024-03-11
 
 ### :tada: Enhancements
