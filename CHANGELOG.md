@@ -1,3 +1,8 @@
+# 1.5.139 / 2024-03-19
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+
 # 1.5.138 / 2024-03-16
 
 ### :tada: Enhancements
