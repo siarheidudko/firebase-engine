@@ -1,3 +1,8 @@
+# 1.5.143 / 2024-03-26
+
+### :tada: Enhancements
+- Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+
 # 1.5.142 / 2024-03-22
 
 ### :tada: Enhancements
