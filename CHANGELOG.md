@@ -1,3 +1,8 @@
+# 1.5.144 / 2024-03-27
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream, mocha
+
 # 1.5.143 / 2024-03-26
 
 ### :tada: Enhancements
