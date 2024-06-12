@@ -1,3 +1,8 @@
+# 1.5.150 / 2024-06-12
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage, @sergdudko/objectstream, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, firebase-admin, nyc, typedoc, typescript
+
 # 1.5.149 / 2024-04-04
 
 ### :tada: Enhancements
