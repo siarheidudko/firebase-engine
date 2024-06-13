@@ -1,6 +1,6 @@
 {
   "name": "firebase-engine",
-  "version": "1.5.150",
+  "version": "1.5.151",
   "description": "Engine for Backup, Clean and Restore your Firebase Project data",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
