@@ -1,3 +1,8 @@
+# 1.5.155 / 2024-06-21
+
+### :tada: Enhancements
+- Updated dependencies: @types/node, firebase-admin, typescript
+
 # 1.5.154 / 2024-06-20
 
 ### :tada: Enhancements
