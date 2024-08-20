@@ -1,5 +1,6 @@
 "use strict";
-require("mocha");
+const { describe, it, before, after } = require("node:test");
+const assert = require("node:assert");
 const admin = require("firebase-admin");
 const path = require("path");
 const crypto = require("crypto");
@@ -29,7 +30,6 @@ const Storage = app.storage();
 const Bucket = Storage.bucket(serviceAccount.project_id + ".appspot.com");
 
 describe("Integration test Library", function () {
-  this.timeout(60000);
   const backupPath =
     "./" + crypto.randomFillSync(Buffer.alloc(4)).toString("hex") + ".backup";
   let newDoc;
@@ -79,7 +79,7 @@ describe("Integration test Library", function () {
     name: "test.txt",
     data: Buffer.from("Test data"),
   };
-  this.beforeAll(async () => {
+  before(async () => {
     newDoc = Firestore.collection("test").doc();
     await newDoc.set(docData);
     await Auth.importUsers([userData]);
@@ -87,7 +87,7 @@ describe("Integration test Library", function () {
     await f.save(file.data);
     return;
   });
-  this.afterAll(async () => {
+  after(async () => {
     await newDoc.delete().catch((err) => {});
     await Auth.deleteUser(userData.uid).catch((err) => {});
     const f = Bucket.file(file.name);

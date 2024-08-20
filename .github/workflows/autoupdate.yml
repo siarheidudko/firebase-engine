@@ -9,7 +9,7 @@ jobs:
   update:
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-      NODE_VERSION: 20
+      NODE_VERSION: 22
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Сheckout repo
         id: checkout_repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: "master"
           path: "tmp"
@@ -28,13 +28,13 @@ jobs:
         working-directory: ${{ github.workspace }}/tmp
       - name: Use Node.js ${{ env.NODE_VERSION }}
         id: setup_node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: "https://registry.npmjs.org"
       - name: Cache node modules
         id: use_cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -63,30 +63,30 @@ jobs:
             git add --all
             git commit -m 'hosting'
           ignore-packages: |
-            eslint
+            @types/node
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      NODE_VERSION: 20
+      NODE_VERSION: 22
       VERSION: ${{ needs.update.outputs.version }}
     needs: [update]
     if: ${{ needs.update.outputs.updated == 'true' }}
     steps:
       - name: Сheckout repo
         id: checkout_repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: "master"
       - name: Use Node.js ${{ env.NODE_VERSION }}
         id: setup_node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: "https://registry.npmjs.org"
       - name: Cache node modules
         id: use_cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -128,7 +128,7 @@ jobs:
         working-directory: /
       - name: The job has failed
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: logs
           path: ${{ github.workspace }}/npm-logs.tar.gz

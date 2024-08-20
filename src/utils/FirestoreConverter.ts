@@ -53,6 +53,7 @@ export class FirestoreConverter {
         data: { [key: string]: any };
         type: "map";
       } = { data: {}, type: "map" };
+      // eslint-disable-next-line guard-for-in
       for (const key in d) _obj.data[key] = FirestoreConverter.toObject(d[key]);
       return _obj;
     }
@@ -92,6 +93,7 @@ export class FirestoreConverter {
         for (const val of d.data) _arr.push(FirestoreConverter.fromObject(val));
         return _arr;
       case "map":
+        // eslint-disable-next-line guard-for-in
         for (const key in d.data)
           _obj[key] = FirestoreConverter.fromObject(d.data[key]);
         return _obj;

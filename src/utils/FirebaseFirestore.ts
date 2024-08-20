@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   getFirestore,
   Firestore,
@@ -8,7 +7,6 @@ import {
   Timestamp,
   GeoPoint,
 } from "firebase-admin/firestore";
-/* eslint-enable */
 
 export {
   getFirestore,

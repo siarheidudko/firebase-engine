@@ -8,16 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      NODE_VERSION: 20
+      NODE_VERSION: 22
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -34,7 +34,7 @@ jobs:
       - name: Run builder
         run: npm run build
       - name: Archiving lib directory
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lib
           path: ${{ github.workspace }}/lib
@@ -44,22 +44,22 @@ jobs:
     timeout-minutes: 15
     needs: [build]
     env:
-      NODE_VERSION: 20
+      NODE_VERSION: 22
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Unarchiving lib directory
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: lib
           path: ${{ github.workspace }}/lib
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: "https://registry.npmjs.org"
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:

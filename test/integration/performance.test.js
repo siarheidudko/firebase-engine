@@ -1,5 +1,6 @@
 "use strict";
-require("mocha");
+const { describe, it, before, after } = require("node:test");
+const assert = require("node:assert");
 const admin = require("firebase-admin");
 const path = require("path");
 const crypto = require("crypto");
@@ -25,7 +26,6 @@ if (admin.apps.length > 0) {
 const Firestore = app.firestore();
 
 describe("Performance test CLI", function () {
-  this.timeout(600000);
   const backupPath =
     "./" + crypto.randomFillSync(Buffer.alloc(4)).toString("hex") + ".backup";
   let newDoc;
@@ -43,7 +43,7 @@ describe("Performance test CLI", function () {
       binary: Buffer.from("Test data"),
     },
   };
-  this.beforeAll(async () => {
+  before(async () => {
     newDoc = Firestore.collection("test").doc();
     await newDoc.set(docData);
     for (let i = 0; i < 9999; i++) {
@@ -53,7 +53,7 @@ describe("Performance test CLI", function () {
     }
     return;
   });
-  this.afterAll(async () => {
+  after(async () => {
     await newDoc.delete().catch((err) => {});
     for (let i = 0; i < docArr.length; i++) {
       const _docRef = Firestore.collection("test").doc(docArr[i]);

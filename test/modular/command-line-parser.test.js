@@ -1,5 +1,6 @@
 "use strict";
-require("mocha");
+const { describe, it } = require("node:test");
+const assert = require("node:assert");
 const settings = require("../utils/settings");
 Object.assign(global, require("../utils/global"));
 

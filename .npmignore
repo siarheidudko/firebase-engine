@@ -22,3 +22,4 @@ typedoc.json
 firestore.rules
 firestore.indexes.json
 storage.rules
+eslint.config.mjs

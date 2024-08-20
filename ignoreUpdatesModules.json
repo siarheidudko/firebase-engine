@@ -1,4 +1,4 @@
 {
-  "base": ["eslint"],
+  "base": [],
   "dev": ["@types/node"]
 }
