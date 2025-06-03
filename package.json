@@ -9,8 +9,8 @@
     "prebuild": "npm run lint",
     "build": "node_modules/.bin/tsc --declaration",
     "doc": "bash hosting.sh",
-    "test": "firebase emulators:exec --only firestore,auth 'node --test test/**/*.test.js'",
-    "cov": "firebase emulators:exec --only firestore,auth 'node_modules/.bin/nyc node --test test/**/*.test.js'",
+    "test": "firebase emulators:exec --only firestore,auth 'node --test --test-concurrency=1 test/**/*.test.js'",
+    "cov": "firebase emulators:exec --only firestore,auth 'node_modules/.bin/nyc node --test --test-concurrency=1 test/**/*.test.js'",
     "update": "eval \"$(node -e 'const t = require(`./package.json`);const ignore = require(`./ignoreUpdatesModules.json`);console.log(`npm i ${(Object.keys(t.dependencies).filter((e)=>ignore.base.indexOf(e) === -1).map((e)=>(`${e}@latest`)).join(` `))} --save&&npm i ${(Object.keys(t.devDependencies).filter((e)=>ignore.dev.indexOf(e) === -1).map((e)=>(`${e}@latest`)).join(` `))} --save-dev`);')\""
   },
   "bin": {
@@ -55,19 +55,19 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/storage": "^7.14.0",
+    "@google-cloud/storage": "^7.16.0",
     "@sergdudko/objectstream": "^3.2.26",
-    "firebase-admin": "^13.0.1"
+    "firebase-admin": "^13.4.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.16.0",
+    "@eslint/js": "^9.28.0",
     "@types/node": "^22.4.1",
-    "eslint": "^9.16.0",
+    "eslint": "^9.28.0",
     "is-buffer": "^2.0.5",
     "nyc": "^17.1.0",
-    "prettier": "^3.4.2",
-    "typedoc": "^0.27.4",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.0"
+    "prettier": "^3.5.3",
+    "typedoc": "^0.28.5",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.1"
   }
 }

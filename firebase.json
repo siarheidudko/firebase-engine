@@ -11,7 +11,8 @@
     },
     "ui": {
       "enabled": true
-    }
+    },
+    "singleProjectMode": false
   },
   "firestore": {
     "rules": "firestore.rules",
