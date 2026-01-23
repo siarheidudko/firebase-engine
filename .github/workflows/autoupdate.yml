@@ -2,9 +2,14 @@ name: Autoupdate
 on:
   schedule:
     - cron: "0 1 * * *"
+  workflow_dispatch:
+  workflow_call:
 concurrency:
   group: "${{ github.workflow }} @ ${{ github.ref }}"
   cancel-in-progress: false
+permissions:
+  contents: write
+  actions: write
 jobs:
   update:
     env:
@@ -139,3 +144,15 @@ jobs:
           name: logs
           path: ${{ github.workspace }}/npm-logs.tar.gz
           retention-days: 1
+  deploy:
+    runs-on: ubuntu-latest
+    needs: update
+    if: needs.update.outputs.updated == 'true'
+    steps:
+      - name: Trigger Build and Deploy Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy.yml
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          inputs: '{ "tag": "${{ needs.update.outputs.version }}" }'
