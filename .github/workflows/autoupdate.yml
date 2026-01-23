@@ -26,6 +26,12 @@ jobs:
         id: set_service_account
         run: echo $SERVICE_ACCOUNT>serviceAccount.json
         working-directory: ${{ github.workspace }}/tmp
+      - name: Set up JDK 21
+        id: setup_java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
       - name: Use Node.js ${{ env.NODE_VERSION }}
         id: setup_node
         uses: actions/setup-node@v4
