@@ -154,4 +154,5 @@ jobs:
         with:
           workflow: build-and-deploy.yml
           ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
           inputs: '{ "tag": "${{ needs.update.outputs.version }}" }'
