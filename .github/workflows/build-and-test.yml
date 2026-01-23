@@ -16,13 +16,13 @@ jobs:
       NODE_VERSION: 22
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: cache-node-modules
         with:
@@ -39,7 +39,7 @@ jobs:
       - name: Run builder
         run: npm run build
       - name: Archiving lib directory
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lib
           path: ${{ github.workspace }}/lib
@@ -52,23 +52,23 @@ jobs:
       NODE_VERSION: 20
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Unarchiving lib directory
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: lib
           path: ${{ github.workspace }}/lib
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: cache-node-modules
         with:
@@ -94,23 +94,23 @@ jobs:
       NODE_VERSION: 22
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Unarchiving lib directory
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: lib
           path: ${{ github.workspace }}/lib
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: cache-node-modules
         with:
