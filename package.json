@@ -23,7 +23,7 @@
   },
   "homepage": "https://siarheidudko.github.io/firebase-engine/",
   "engines": {
-    "node": ">=10.12"
+    "node": ">=18"
   },
   "keywords": [
     "firebase",
