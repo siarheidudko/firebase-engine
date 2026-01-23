@@ -26,13 +26,13 @@ jobs:
       NODE_VERSION: 22
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: cache-node-modules
         with:
@@ -49,7 +49,7 @@ jobs:
       - name: Run builder
         run: npm run build
       - name: Archiving lib directory
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lib
           path: ${{ github.workspace }}/lib
@@ -62,19 +62,19 @@ jobs:
       NODE_VERSION: 22
     steps:
       - name: Сheckout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Unarchiving lib directory
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: lib
           path: ${{ github.workspace }}/lib
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: "https://registry.npmjs.org"
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: cache-node-modules
         with:
@@ -96,15 +96,22 @@ jobs:
           echo "RELEASE_VERSION=${RELEASE_VERSION#v}" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.RELEASE_VERSION }}
-          release_name: Release v${{ env.RELEASE_VERSION }}
-          body: |
-            see [CHANGELOG.md](https://github.com/siarheidudko/firebase-engine/blob/master/CHANGELOG.md)
+          name: v${{ env.RELEASE_VERSION }}
+          body_path: ${{ github.workspace }}/README.md
+          repository: siarheidudko/firebase-engine
+          token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
-          prerelease: false
+          prerelease: ${{ !!endsWith(env.RELEASE_VERSION, '-beta') }}
+      - name: Set registry npm packages
+        if: ${{ !endsWith(env.RELEASE_VERSION, '-beta') }}
+        uses: actions/setup-node@v6
+        with:
+          registry-url: "https://registry.npmjs.org"
+      - name: Update npm to latest version
+        run: npm install -g npm@latest
       - name: Publish package to NPM
+        if: ${{ !endsWith(env.RELEASE_VERSION, '-beta') }}
         run: npm publish
