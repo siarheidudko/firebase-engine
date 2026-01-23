@@ -1,3 +1,8 @@
+# 1.7.0 / 2026-01-23
+
+### :tada: Enhancements
+- Version bump to 1.7.0
+
 # 1.6.1 / 2025-06-10
 
 ### :tada: Enhancements
