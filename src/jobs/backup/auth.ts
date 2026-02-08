@@ -36,14 +36,10 @@ export class JobBackupAuth extends JobBackupServiceTemplate {
       };
       const self = this;
       const p: Promise<void> = new Promise((res, rej) => {
-        self.stringiferStream.write(
-          _doc,
-          undefined,
-          (err: Error | null | undefined) => {
-            if (err) Logger.warn(err);
-            res();
-          }
-        );
+        self.stringiferStream.write(_doc, (err: Error | null | undefined) => {
+          if (err) Logger.warn(err);
+          res();
+        });
       });
       await p;
       ++this.counter;
