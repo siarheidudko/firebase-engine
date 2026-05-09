@@ -1,0 +1,87 @@
+name: PR checks
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches-ignore: [master]
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.ref || github.ref }}"
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      NODE_VERSION: 24
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+      - name: Run builder
+        run: npm run build
+      - name: Archive build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: ${{ github.workspace }}/lib
+  test:
+    name: Test (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    strategy:
+      matrix:
+        node-version: [20, 22]
+    env:
+      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/serviceAccount.json
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Download build artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: dist
+          path: ${{ github.workspace }}/lib
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Install firebase-tools
+        run: sudo npm install firebase-tools -g
+      - name: Write service account
+        run: echo "$SERVICE_ACCOUNT" > serviceAccount.json
+      - name: Run test
+        run: npm run cov

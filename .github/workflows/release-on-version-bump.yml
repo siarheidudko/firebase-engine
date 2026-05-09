@@ -1,0 +1,51 @@
+name: Release on version bump
+on:
+  push:
+    branches: [master]
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.ref }}"
+  cancel-in-progress: false
+permissions:
+  contents: write
+  actions: write
+env:
+  RELEASE_WORKFLOW: build-and-deploy.yml
+jobs:
+  release:
+    name: Release on version bump
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Detect version bump
+        id: bump
+        run: |
+          CURRENT=$(node -e "console.log(require('./package.json').version)")
+          PREVIOUS=$(git show HEAD~1:package.json 2>/dev/null \
+            | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{console.log(JSON.parse(s).version)}catch{console.log('')}})")
+          if [ -n "$CURRENT" ] && [ "$CURRENT" != "$PREVIOUS" ]; then
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+            echo "tag=v$CURRENT" >> "$GITHUB_OUTPUT"
+          else
+            echo "bumped=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Configure git
+        if: steps.bump.outputs.bumped == 'true'
+        run: |
+          git config user.email "slavianich@gmail.com"
+          git config user.name "Siarhei Dudko"
+      - name: Force-recreate tag on main HEAD
+        if: steps.bump.outputs.bumped == 'true'
+        run: |
+          git tag -fa "${{ steps.bump.outputs.tag }}" -m "Release ${{ steps.bump.outputs.tag }}"
+          git push --force origin "${{ steps.bump.outputs.tag }}"
+      - name: Dispatch release workflow
+        if: steps.bump.outputs.bumped == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run "$RELEASE_WORKFLOW" --ref master -f tag="${{ steps.bump.outputs.tag }}"

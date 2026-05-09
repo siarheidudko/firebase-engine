@@ -1,7 +1,7 @@
 name: Autoupdate
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 23 * * 5"
   workflow_dispatch:
   workflow_call:
 concurrency:
@@ -10,80 +10,200 @@ concurrency:
 permissions:
   contents: write
   actions: write
+  pull-requests: write
+  issues: write
+env:
+  AUTOUPDATE_BRANCH: chore/autoupdate-${{ github.run_id }}
 jobs:
   update:
+    name: Autoupdate dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-      NODE_VERSION: 22
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    outputs:
-      updated: ${{ steps.autoupdate.outputs.updated }}
-      version: ${{ steps.autoupdate.outputs.version }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/serviceAccount.json
     steps:
-      - name: Сheckout repo
-        id: checkout_repo
+      - name: Checkout repo
         uses: actions/checkout@v6
         with:
-          ref: "master"
-          path: "tmp"
-      - name: Set service account
-        id: set_service_account
-        run: echo $SERVICE_ACCOUNT>serviceAccount.json
-        working-directory: ${{ github.workspace }}/tmp
-      - name: Set up JDK 21
-        id: setup_java
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        id: setup_node
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - name: Configure git
+        run: |
+          git config user.email "slavianich@gmail.com"
+          git config user.name "Siarhei Dudko"
+      - name: Create autoupdate branch
+        run: |
+          git checkout -b "$AUTOUPDATE_BRANCH"
+          git push -u origin "$AUTOUPDATE_BRANCH"
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          registry-url: "https://registry.npmjs.org"
-      - name: Cache node modules
-        id: use_cache
-        uses: actions/cache@v5
-        env:
-          cache-name: cache-node-modules
+          node-version: 24
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install global dependencies
-        id: install_global
-        run: npm install firebase-tools -g
-      - name: Autoupdate
+          distribution: temurin
+          java-version: 21
+      - name: Install firebase-tools
+        run: sudo npm install firebase-tools -g
+      - name: Write service account
+        run: echo "$SERVICE_ACCOUNT" > serviceAccount.json
+      - name: Run autoupdater
         id: autoupdate
-        uses: siarheidudko/autoupdater@v3
+        continue-on-error: true
+        uses: siarheidudko/autoupdater@v6
         with:
           author-email: "slavianich@gmail.com"
           author-name: "Siarhei Dudko"
-          working-directory: ${{ github.workspace }}/tmp
+          working-directory: ${{ github.workspace }}
           ref: ${{ github.repository }}
+          branch: ${{ env.AUTOUPDATE_BRANCH }}
           builds-and-checks: |
-            npm run lint
-            npm run build
-            npm run cov
-            bash hosting.sh
-            git add --all
-            git commit -m 'hosting'
+              npm run lint
+              npm run build
+              npm run cov
+          debug: "true"
           ignore-packages: |
-            @types/node
-  deploy:
-    runs-on: ubuntu-latest
-    needs: update
-    if: needs.update.outputs.updated == 'true'
-    steps:
-      - name: Trigger Build and Deploy Workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: build-and-deploy.yml
-          ref: master
-          token: ${{ secrets.GITHUB_TOKEN }}
-          inputs: '{ "tag": "${{ needs.update.outputs.version }}" }'
+              @types/node
+      - name: Persist autoupdater work on failure
+        if: steps.autoupdate.outcome == 'failure'
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore(deps): autoupdater partial update"
+          fi
+          git push --force-with-lease origin "HEAD:$AUTOUPDATE_BRANCH" || true
+      - name: Fallback baseline update if branch still empty vs main
+        if: steps.autoupdate.outcome == 'failure'
+        run: |
+          git fetch origin master
+          if git diff --quiet origin/master; then
+            npx --yes npm-check-updates -u || true
+            npm install --no-audit --no-fund || true
+            if [ -n "$(git status --porcelain)" ]; then
+              git add -A
+              git commit -m "chore(deps): npm-check-updates baseline (autoupdater fallback)"
+              git push origin "HEAD:$AUTOUPDATE_BRANCH"
+            fi
+          fi
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create autoupdate --color "0e8a16" --description "Automated dependency update PRs" --force || true
+          gh label create needs-claude --color "d4c5f9" --description "Needs Claude GitHub App to fix" --force || true
+      - name: Detect diff vs main
+        id: diff
+        if: always()
+        run: |
+          git fetch origin master "$AUTOUPDATE_BRANCH"
+          if git diff --quiet "origin/master" "origin/$AUTOUPDATE_BRANCH"; then
+            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_diff=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Read package version from branch
+        id: pkg
+        if: steps.diff.outputs.has_diff == 'true'
+        run: |
+          VERSION=$(git show "origin/$AUTOUPDATE_BRANCH:package.json" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).version))")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Open PR (autoupdater succeeded)
+        id: pr_success
+        if: |
+          steps.autoupdate.outcome == 'success' &&
+          steps.autoupdate.outputs.updated == 'true' &&
+          steps.diff.outputs.has_diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(cat <<EOF
+          Automated dependency update.
+
+          - autoupdater outcome: success
+          - target version: v${{ steps.pkg.outputs.version }}
+
+          PR-checks must be green before merge.
+          EOF
+          )
+          PR_URL=$(gh pr create \
+            --base master \
+            --head "$AUTOUPDATE_BRANCH" \
+            --title "chore(deps): autoupdate v${{ steps.pkg.outputs.version }}" \
+            --body "$BODY" \
+            --assignee siarheidudko \
+            --reviewer siarheidudko)
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+      - name: Enable auto-merge on success PR
+        if: steps.pr_success.outputs.pr_url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.pr_success.outputs.pr_url }}
+        run: |
+          gh api repos/${{ github.repository }} --method PATCH -f allow_auto_merge=true || true
+          gh pr merge "$PR_URL" --auto --squash || true
+      - name: Open PR (autoupdater failed)
+        id: pr_failure
+        if: steps.autoupdate.outcome == 'failure' && steps.diff.outputs.has_diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          BODY=$(cat <<EOF
+          The dependency autoupdater failed during \`builds-and-checks\`.
+
+          Run log: $RUN_URL
+
+          A Claude session has been dispatched to push fixes onto this branch
+          so the following commands all exit 0:
+
+                npm run lint
+                npm run build
+                npm run cov
+
+          Claude will leave a status comment on this PR when it finishes.
+          PR-checks will re-run on each new commit.
+          EOF
+          )
+          PR_URL=$(gh pr create \
+            --base master \
+            --head "$AUTOUPDATE_BRANCH" \
+            --title "chore(deps): autoupdate (needs claude fix)" \
+            --body "$BODY" \
+            --assignee siarheidudko \
+            --reviewer siarheidudko)
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+      - name: Trigger PR checks (GITHUB_TOKEN can't auto-trigger pull_request)
+        if: steps.pr_success.outputs.pr_url != '' || steps.pr_failure.outputs.pr_url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run pr-checks.yml --ref "$AUTOUPDATE_BRANCH" || true
+      - name: Dispatch Claude to fix the failed autoupdate
+        if: steps.pr_failure.outputs.pr_url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.pr_failure.outputs.pr_url }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh workflow run claude.yml --ref master \
+            -f branch="$AUTOUPDATE_BRANCH" \
+            -f pr_url="$PR_URL" \
+            -f run_url="$RUN_URL"
+      - name: Add labels to PR
+        if: steps.pr_success.outputs.pr_url != '' || steps.pr_failure.outputs.pr_url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.pr_success.outputs.pr_url || steps.pr_failure.outputs.pr_url }}
+        run: |
+          if [ "${{ steps.pr_failure.outputs.pr_url }}" != "" ]; then
+            gh pr edit "$PR_URL" --add-label autoupdate --add-label needs-claude || true
+          else
+            gh pr edit "$PR_URL" --add-label autoupdate || true
+          fi
+      - name: Cleanup branch when nothing to ship
+        if: always() && steps.diff.outputs.has_diff != 'true'
+        run: |
+          git push origin --delete "$AUTOUPDATE_BRANCH" || true
