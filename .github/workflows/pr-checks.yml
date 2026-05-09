@@ -52,7 +52,6 @@ jobs:
         node-version: [20, 22]
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/serviceAccount.json
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
