@@ -9,10 +9,9 @@
     "prebuild": "npm run lint",
     "build": "node_modules/.bin/tsc --declaration",
     "doc": "bash hosting.sh",
-    "test": "firebase emulators:exec --only firestore,auth 'node --test --test-concurrency=1 test/**/*.test.js'",
-    "cov": "firebase emulators:exec --only firestore,auth 'node_modules/.bin/nyc node --test --test-concurrency=1 test/**/*.test.js'",
-    "update": "eval \"$(node -e 'const t = require(`./package.json`);const ignore = require(`./ignoreUpdatesModules.json`);console.log(`npm i ${(Object.keys(t.dependencies).filter((e)=>ignore.base.indexOf(e) === -1).map((e)=>(`${e}@latest`)).join(` `))} --save&&npm i ${(Object.keys(t.devDependencies).filter((e)=>ignore.dev.indexOf(e) === -1).map((e)=>(`${e}@latest`)).join(` `))} --save-dev`);')\""
-  },
+    "test": "firebase emulators:exec --project demo-fir-engine --only firestore,auth,storage 'node --test --test-concurrency=1 test/**/*.test.js'",
+    "cov": "firebase emulators:exec --project demo-fir-engine --only firestore,auth,storage 'node_modules/.bin/nyc node --test --test-concurrency=1 test/**/*.test.js'",
+    "update": "eval \"$(node -e 'const t = require(`./package.json`);const ignore = require(`./ignoreUpdatesModules.json`);console.log(`npm i ${(Object.keys(t.dependencies).filter((e)=>ignore.base.indexOf(e) === -1).map((e)=>(`${e}@latest`)).join(` `))} --save&&npm i ${(Object.keys(t.devDependencies).filter((e)=>ignore.dev.indexOf(e) === -1).map((e)=>(`${e}@latest`)).join(` `))} --save-dev`);')\""  },
   "bin": {
     "firebase-engine": "./lib/bin/firebase-engine.js",
     "firebase-engine-emulators": "./lib/bin/firebase-engine-emulators.js"

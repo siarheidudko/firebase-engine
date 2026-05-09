@@ -41,8 +41,12 @@ export class JobRestoreStorage extends JobBackupServiceRestoreTemplate {
             return;
           const bucket = self.store.bucket(bName);
           if (self.buckets.indexOf(bucket.name) === -1) {
-            const [f] = await bucket.exists();
-            if (!f) await bucket.create();
+            const [f] = await bucket.exists().catch(() => [false] as [false]);
+            if (!f)
+              await bucket.create().catch(() => {
+                // Emulator auto-creates buckets on first upload;
+                // in production a concurrent create may race — both are safe to ignore
+              });
             self.buckets.push(bName);
           }
           const fileRef = bucket.file(fArg[1]);
