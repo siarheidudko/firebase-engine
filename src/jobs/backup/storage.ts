@@ -55,7 +55,20 @@ export class JobBackupStorage extends JobBackupServiceTemplate {
    * job runner
    */
   public async run() {
-    const [buckets] = await this.store.getBuckets();
+    const isEmulator =
+      !!process.env.STORAGE_EMULATOR_HOST ||
+      !!process.env.FIREBASE_STORAGE_EMULATOR_HOST ||
+      this.settings.emulators;
+    let buckets: Bucket[];
+    if (isEmulator) {
+      const bucketNames =
+        this.settings.buckets.length > 0
+          ? this.settings.buckets
+          : [this.settings.serviceAccount.project_id + ".appspot.com"];
+      buckets = bucketNames.map((name) => this.store.bucket(name));
+    } else {
+      [buckets] = await this.store.getBuckets();
+    }
     this.startTimestamp = Date.now();
     let _write: Gzip | WriteStream;
     if (this.writer.gzipStream) {
