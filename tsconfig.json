@@ -8,6 +8,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
+    "rootDir": "src",
     "sourceMap": true,
     "strict": true,
     "target": "ES2018",
@@ -15,8 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": false,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": "src"
+    "forceConsistentCasingInFileNames": true
   },
   "compileOnSave": true,
   "include": ["src"],
