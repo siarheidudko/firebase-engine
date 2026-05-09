@@ -12,7 +12,7 @@
     "ui": {
       "enabled": true
     },
-    "singleProjectMode": false
+    "singleProjectMode": true
   },
   "firestore": {
     "rules": "firestore.rules",
