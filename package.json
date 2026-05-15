@@ -57,19 +57,19 @@
   "dependencies": {
     "@google-cloud/storage": "^7.19.0",
     "@sergdudko/objectstream": "^4.0.34",
-    "firebase-admin": "^13.9.0"
+    "firebase-admin": "^13.10.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.2.2",
-    "eslint": "^10.3.0",
-    "firebase-tools": "^15.17.0",
+    "eslint": "^10.4.0",
+    "firebase-tools": "^15.18.0",
     "globals": "^17.6.0",
     "is-buffer": "^2.0.5",
     "nyc": "^18.0.0",
     "prettier": "^3.8.3",
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2"
+    "typescript-eslint": "^8.59.3"
   }
 }

@@ -1,3 +1,8 @@
+# 1.7.3 / 2026-05-15
+
+### :tada: Enhancements
+- Updated dependencies: eslint, firebase-admin, firebase-tools, typescript-eslint
+
 # 1.7.2 / 2026-05-09
 
 ### :tada: Enhancements
