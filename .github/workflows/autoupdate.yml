@@ -18,7 +18,7 @@ jobs:
   update:
     name: Autoupdate dependencies
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/serviceAccount.json
@@ -136,14 +136,6 @@ jobs:
             --assignee siarheidudko \
             --reviewer siarheidudko)
           echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
-      - name: Enable auto-merge on success PR
-        if: steps.pr_success.outputs.pr_url != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ steps.pr_success.outputs.pr_url }}
-        run: |
-          gh api repos/${{ github.repository }} --method PATCH -f allow_auto_merge=true || true
-          gh pr merge "$PR_URL" --auto --squash || true
       - name: Open PR (autoupdater failed)
         id: pr_failure
         if: steps.autoupdate.outcome == 'failure' && steps.diff.outputs.has_diff == 'true'
@@ -181,6 +173,31 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh workflow run pr-checks.yml --ref "$AUTOUPDATE_BRANCH" || true
+      - name: Wait for PR checks and merge (autoupdater succeeded)
+        id: merge_pr
+        if: steps.pr_success.outputs.pr_url != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.pr_success.outputs.pr_url }}
+        run: |
+          for i in $(seq 1 10); do
+            COUNT=$(gh pr checks "$PR_URL" 2>/dev/null | grep -c '\S' || true)
+            [ "$COUNT" -gt 0 ] && break
+            sleep 30
+          done
+          gh pr checks "$PR_URL" --watch
+          gh pr merge "$PR_URL" --squash --delete-branch
+      - name: Tag release commit and dispatch deploy
+        if: steps.merge_pr.outcome == 'success' && steps.pkg.outputs.version != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch origin master
+          git tag -f "v${{ steps.pkg.outputs.version }}" "$(git rev-parse origin/master)"
+          git push --force origin "v${{ steps.pkg.outputs.version }}"
+          gh workflow run build-and-deploy.yml --ref master \
+            -f tag="v${{ steps.pkg.outputs.version }}" || true
       - name: Dispatch Claude to fix the failed autoupdate
         if: steps.pr_failure.outputs.pr_url != ''
         env:
