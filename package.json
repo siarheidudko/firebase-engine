@@ -1,6 +1,6 @@
 {
   "name": "firebase-engine",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Engine for Backup, Clean and Restore your Firebase Project data",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -70,6 +70,6 @@
     "prettier": "^3.8.3",
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3"
+    "typescript-eslint": "^8.59.4"
   }
 }
