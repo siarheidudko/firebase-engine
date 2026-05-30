@@ -181,12 +181,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ steps.pr_success.outputs.pr_url }}
         run: |
-          for i in $(seq 1 10); do
-            COUNT=$(gh pr checks "$PR_URL" 2>/dev/null | grep -c '\S' || true)
+          for i in $(seq 1 20); do
+            COUNT=$(gh pr checks "$PR_URL" 2>/dev/null | grep -cE 'https?://' || true)
             [ "$COUNT" -gt 0 ] && break
             sleep 30
           done
-          gh pr checks "$PR_URL" --watch
+          gh pr checks "$PR_URL" --watch || true
+          gh pr checks "$PR_URL" 2>/dev/null | grep -qE '\s+fail\b' && { echo "checks failed"; exit 1; }
           gh pr merge "$PR_URL" --squash --delete-branch
       - name: Tag release commit and dispatch deploy
         if: steps.merge_pr.outcome == 'success' && steps.pkg.outputs.version != ''
