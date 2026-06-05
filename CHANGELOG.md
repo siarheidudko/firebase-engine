@@ -1,3 +1,8 @@
+# 1.7.6 / 2026-06-05
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream, firebase-tools, typescript-eslint
+
 # 1.7.5 / 2026-05-29
 
 ### :tada: Enhancements
