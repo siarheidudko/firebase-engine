@@ -1,4 +1,6 @@
-import { credential, apps } from "firebase-admin";
-import { App, initializeApp } from "firebase-admin/app";
+import { App, initializeApp, cert, getApps } from "firebase-admin/app";
+
+const credential = { cert };
+const apps = { get length() { return getApps().length; } };
 
 export { initializeApp, App, credential, apps };

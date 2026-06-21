@@ -2,6 +2,9 @@
 const { describe, it, before, after } = require("node:test");
 const assert = require("node:assert");
 const admin = require("firebase-admin");
+const { getFirestore, FieldValue, Timestamp, GeoPoint } = require("firebase-admin/firestore");
+const { getAuth } = require("firebase-admin/auth");
+const { getStorage } = require("firebase-admin/storage");
 const path = require("path");
 const crypto = require("crypto");
 const settings = require("../utils/settings");
@@ -10,22 +13,22 @@ Object.assign(global, require("../utils/global"));
 const serviceAccount = require(settings.serviceAccountPath);
 
 let app;
-if (admin.apps.length > 0) {
+if (admin.getApps().length > 0) {
   app = admin.initializeApp(
     {
-      credential: admin.credential.cert(serviceAccount),
+      credential: admin.cert(serviceAccount),
     },
     "cli-test"
   );
 } else {
   app = admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.cert(serviceAccount),
   });
 }
 
-const Firestore = app.firestore();
-const Auth = app.auth();
-const Storage = app.storage();
+const Firestore = getFirestore(app);
+const Auth = getAuth(app);
+const Storage = getStorage(app);
 const Bucket = Storage.bucket(serviceAccount.project_id + ".appspot.com");
 
 describe("Integration test CLI", function () {
@@ -33,15 +36,15 @@ describe("Integration test CLI", function () {
     "./" + crypto.randomFillSync(Buffer.alloc(4)).toString("hex") + ".backup";
   let newDoc;
   const docData = {
-    array: admin.firestore.FieldValue.arrayUnion("a", "b"),
+    array: FieldValue.arrayUnion("a", "b"),
     map: {
       number: 1,
       string: "test",
       null: null,
       boolean: true,
-      timestamp: admin.firestore.Timestamp.fromMillis(Date.now()),
+      timestamp: Timestamp.fromMillis(Date.now()),
       ref: Firestore.collection("test").doc(),
-      geopoint: new admin.firestore.GeoPoint(1, 11),
+      geopoint: new GeoPoint(1, 11),
       binary: Buffer.from("Test data"),
     },
   };
