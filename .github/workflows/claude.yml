@@ -41,7 +41,7 @@ jobs:
       pull-requests: write
       issues: write
       id-token: write
-      actions: read
+      actions: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
@@ -79,7 +79,11 @@ jobs:
             defaults). Do NOT change product logic.
           - Do NOT bump the package version.
           - When all commands are green, push commits with your fixes
-            (if any). \`pr-checks\` will re-run automatically on each push.
+            (if any). Do NOT try to trigger \`pr-checks\` yourself: a push
+            made with \`GITHUB_TOKEN\` does not start a workflow run, and
+            the \`pull_request\` run it queues stays in \`action_required\`.
+            This workflow re-dispatches \`pr-checks\` for you after this
+            step finishes.
 
           ## MANDATORY final step
 
@@ -102,6 +106,7 @@ jobs:
             echo PROMPT_EOF
           } >> "$GITHUB_OUTPUT"
       - name: Run Claude Code
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -109,3 +114,17 @@ jobs:
           prompt: ${{ steps.prep.outputs.prompt }}
           claude_args: |
             --allowedTools "Edit,Write,MultiEdit,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(node:*),Bash(rm:*),Bash(mkdir:*),Bash(cat:*),Bash(ls:*),Bash(echo:*),Bash(grep:*),Bash(find:*),Bash(sed:*),Bash(awk:*),Bash(head:*),Bash(tail:*),Bash(diff:*),Bash(mv:*),Bash(cp:*),Bash(touch:*)"
+      # Claude pushes with GITHUB_TOKEN, so its push fires no `push` run and the
+      # `pull_request` run GitHub queues for it stays stuck in `action_required`.
+      # Dispatch the checks explicitly — `workflow_dispatch` is the only trigger
+      # that is not gated. Runs even if the step above failed, so the PR ends up
+      # with a red check instead of no checks at all.
+      - name: Re-dispatch PR checks on the branch Claude pushed to
+        if: always() && github.event_name == 'workflow_dispatch' && github.event.inputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          git fetch origin "$BRANCH"
+          echo "Dispatching checks for $BRANCH @ $(git rev-parse --short "origin/$BRANCH")"
+          gh workflow run pr-checks.yml --ref "$BRANCH" || true
