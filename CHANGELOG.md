@@ -1,3 +1,8 @@
+# 1.7.11 / 2026-07-31
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream, firebase-tools, globals, typescript
+
 # 1.7.9 / 2026-07-03
 
 ### :tada: Enhancements
