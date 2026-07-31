@@ -63,13 +63,13 @@
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.1",
     "eslint": "^10.8.0",
-    "firebase-tools": "^15.25.1",
+    "firebase-tools": "^15.22.4",
     "globals": "^17.8.0",
     "is-buffer": "^2.0.5",
     "nyc": "^18.0.0",
     "prettier": "^3.9.6",
     "typedoc": "^0.28.20",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.65.0"
   }
 }
