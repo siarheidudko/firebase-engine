@@ -182,13 +182,28 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ steps.pr_success.outputs.pr_url }}
         run: |
-          for i in $(seq 1 20); do
-            COUNT=$(gh pr checks "$PR_URL" 2>/dev/null | grep -cE 'https?://' || true)
-            [ "$COUNT" -gt 0 ] && break
+          # Poll the check-runs API instead of `gh pr checks --watch`.
+          # The pull_request run GitHub queues for a bot-authored PR is gated on
+          # manual approval and sits in `action_required` forever. It surfaces in
+          # the status rollup that `gh pr checks` reads, so `--watch` waited on a
+          # check that can never complete and this step hung until the job timed
+          # out, never reaching `gh pr merge`. Gated runs create no check runs, so
+          # this view sees only jobs that actually execute -- among them the run
+          # the previous step dispatched explicitly.
+          SHA=$(gh pr view "$PR_URL" --json headRefOid --jq .headRefOid)
+          for i in $(seq 1 40); do
+            RUNS=$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA/check-runs" --jq .check_runs)
+            TOTAL=$(jq length <<<"$RUNS")
+            PENDING=$(jq '[.[] | select(.status != "completed")] | length' <<<"$RUNS")
+            [ "$TOTAL" -gt 0 ] && [ "$PENDING" -eq 0 ] && break
             sleep 30
           done
-          gh pr checks "$PR_URL" --watch || true
-          gh pr checks "$PR_URL" 2>/dev/null | grep -qE '\s+fail\b' && { echo "checks failed"; exit 1; }
+          FAILED=$(jq '[.[] | select(.conclusion != null and (.conclusion | IN("success","neutral","skipped") | not))] | length' <<<"$RUNS")
+          echo "checks: total=$TOTAL pending=$PENDING failed=$FAILED"
+          if [ "$TOTAL" -eq 0 ] || [ "$PENDING" -ne 0 ] || [ "$FAILED" -ne 0 ]; then
+            echo "not merging: checks are not green"
+            exit 1
+          fi
           gh pr merge "$PR_URL" --squash --delete-branch
       - name: Tag release commit and dispatch deploy
         if: steps.merge_pr.outcome == 'success' && steps.pkg.outputs.version != ''
