@@ -88,6 +88,28 @@ jobs:
               git push origin "HEAD:$AUTOUPDATE_BRANCH"
             fi
           fi
+      - name: Bump patch version on the failure path
+        if: steps.autoupdate.outcome == 'failure'
+        run: |
+          # The autoupdater bumps the version itself, but only on the success
+          # path. Neither the persist step nor the npm-check-updates fallback
+          # touches it, so without this the dependency update merges into the
+          # default branch, release-on-version-bump sees no version change and
+          # never fires, and the update is never published.
+          git fetch origin master
+          git show origin/main:package.json > /tmp/base-package.json
+          BASE=$(node -p "require('/tmp/base-package.json').version")
+          CURRENT=$(node -p "require('$PWD/package.json').version")
+          if [ "$BASE" != "$CURRENT" ]; then
+            echo "version already bumped: $BASE -> $CURRENT"
+          else
+            npm --no-git-tag-version --ignore-scripts version patch
+            NEW=$(node -p "require('$PWD/package.json').version")
+            git add package.json package-lock.json
+            git commit -m "chore(release): v$NEW"
+            git push origin "HEAD:$AUTOUPDATE_BRANCH"
+            echo "bumped $BASE -> $NEW"
+          fi
       - name: Ensure labels exist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
