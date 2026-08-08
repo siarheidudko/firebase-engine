@@ -88,6 +88,28 @@ jobs:
               git push origin "HEAD:$AUTOUPDATE_BRANCH"
             fi
           fi
+      - name: Bump patch version on the failure path
+        if: steps.autoupdate.outcome == 'failure'
+        run: |
+          # The autoupdater bumps the version itself, but only on the success
+          # path. Neither the persist step nor the npm-check-updates fallback
+          # touches it, so without this the dependency update merges into the
+          # default branch, release-on-version-bump sees no version change and
+          # never fires, and the update is never published.
+          git fetch origin master
+          git show origin/main:package.json > /tmp/base-package.json
+          BASE=$(node -p "require('/tmp/base-package.json').version")
+          CURRENT=$(node -p "require('$PWD/package.json').version")
+          if [ "$BASE" != "$CURRENT" ]; then
+            echo "version already bumped: $BASE -> $CURRENT"
+          else
+            npm --no-git-tag-version --ignore-scripts version patch
+            NEW=$(node -p "require('$PWD/package.json').version")
+            git add package.json package-lock.json
+            git commit -m "chore(release): v$NEW"
+            git push origin "HEAD:$AUTOUPDATE_BRANCH"
+            echo "bumped $BASE -> $NEW"
+          fi
       - name: Ensure labels exist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -182,13 +204,28 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ steps.pr_success.outputs.pr_url }}
         run: |
-          for i in $(seq 1 20); do
-            COUNT=$(gh pr checks "$PR_URL" 2>/dev/null | grep -cE 'https?://' || true)
-            [ "$COUNT" -gt 0 ] && break
+          # Poll the check-runs API instead of `gh pr checks --watch`.
+          # The pull_request run GitHub queues for a bot-authored PR is gated on
+          # manual approval and sits in `action_required` forever. It surfaces in
+          # the status rollup that `gh pr checks` reads, so `--watch` waited on a
+          # check that can never complete and this step hung until the job timed
+          # out, never reaching `gh pr merge`. Gated runs create no check runs, so
+          # this view sees only jobs that actually execute -- among them the run
+          # the previous step dispatched explicitly.
+          SHA=$(gh pr view "$PR_URL" --json headRefOid --jq .headRefOid)
+          for i in $(seq 1 40); do
+            RUNS=$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA/check-runs" --jq .check_runs)
+            TOTAL=$(jq length <<<"$RUNS")
+            PENDING=$(jq '[.[] | select(.status != "completed")] | length' <<<"$RUNS")
+            [ "$TOTAL" -gt 0 ] && [ "$PENDING" -eq 0 ] && break
             sleep 30
           done
-          gh pr checks "$PR_URL" --watch || true
-          gh pr checks "$PR_URL" 2>/dev/null | grep -qE '\s+fail\b' && { echo "checks failed"; exit 1; }
+          FAILED=$(jq '[.[] | select(.conclusion != null and (.conclusion | IN("success","neutral","skipped") | not))] | length' <<<"$RUNS")
+          echo "checks: total=$TOTAL pending=$PENDING failed=$FAILED"
+          if [ "$TOTAL" -eq 0 ] || [ "$PENDING" -ne 0 ] || [ "$FAILED" -ne 0 ]; then
+            echo "not merging: checks are not green"
+            exit 1
+          fi
           gh pr merge "$PR_URL" --squash --delete-branch
       - name: Tag release commit and dispatch deploy
         if: steps.merge_pr.outcome == 'success' && steps.pkg.outputs.version != ''

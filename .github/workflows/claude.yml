@@ -128,3 +128,30 @@ jobs:
           git fetch origin "$BRANCH"
           echo "Dispatching checks for $BRANCH @ $(git rev-parse --short "origin/$BRANCH")"
           gh workflow run pr-checks.yml --ref "$BRANCH" || true
+      # Without this the autoupdate flow has no ending: the success path merges
+      # itself, but a PR that needed a Claude fix stayed open forever even once
+      # its checks were green, so these PRs just piled up week after week.
+      - name: Merge once the dispatched checks are green
+        if: always() && github.event_name == 'workflow_dispatch' && github.event.inputs.pr_url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.inputs.pr_url }}
+        run: |
+          # Poll check-runs, not `gh pr checks`: the approval-gated pull_request
+          # run shows up as a permanently-pending check in the status rollup but
+          # produces no check runs, so this view sees only jobs that really ran.
+          SHA=$(gh pr view "$PR_URL" --json headRefOid --jq .headRefOid)
+          for i in $(seq 1 40); do
+            RUNS=$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA/check-runs" --jq .check_runs)
+            TOTAL=$(jq length <<<"$RUNS")
+            PENDING=$(jq '[.[] | select(.status != "completed")] | length' <<<"$RUNS")
+            [ "$TOTAL" -gt 0 ] && [ "$PENDING" -eq 0 ] && break
+            sleep 30
+          done
+          FAILED=$(jq '[.[] | select(.conclusion != null and (.conclusion | IN("success","neutral","skipped") | not))] | length' <<<"$RUNS")
+          echo "checks: total=$TOTAL pending=$PENDING failed=$FAILED"
+          if [ "$TOTAL" -eq 0 ] || [ "$PENDING" -ne 0 ] || [ "$FAILED" -ne 0 ]; then
+            echo "leaving the PR open for review: checks are not green"
+            exit 0
+          fi
+          gh pr merge "$PR_URL" --squash --delete-branch
