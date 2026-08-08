@@ -1,6 +1,6 @@
 {
   "name": "firebase-engine",
-  "version": "1.7.11",
+  "version": "1.7.12",
   "description": "Engine for Backup, Clean and Restore your Firebase Project data",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -56,7 +56,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^7.21.0",
-    "@sergdudko/objectstream": "^4.0.43",
+    "@sergdudko/objectstream": "^4.0.44",
     "firebase-admin": "^14.2.0"
   },
   "devDependencies": {
