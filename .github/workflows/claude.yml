@@ -142,7 +142,13 @@ jobs:
           # produces no check runs, so this view sees only jobs that really ran.
           SHA=$(gh pr view "$PR_URL" --json headRefOid --jq .headRefOid)
           for i in $(seq 1 40); do
-            RUNS=$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA/check-runs" --jq .check_runs)
+            ALL=$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA/check-runs" --jq .check_runs)
+            # Keep only the newest run of each check name. A check can appear
+            # several times on one commit: autoupdate dispatches CI, then
+            # claude.yml dispatches it again, and pr-checks' concurrency group
+            # cancels the earlier one. Those cancelled leftovers are not a
+            # verdict on the code, but counting them lost a fully green PR.
+            RUNS=$(jq 'group_by(.name) | map(max_by(.id))' <<<"$ALL")
             TOTAL=$(jq length <<<"$RUNS")
             PENDING=$(jq '[.[] | select(.status != "completed")] | length' <<<"$RUNS")
             [ "$TOTAL" -gt 0 ] && [ "$PENDING" -eq 0 ] && break
