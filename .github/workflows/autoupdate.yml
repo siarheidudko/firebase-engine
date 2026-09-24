@@ -67,6 +67,7 @@ jobs:
           debug: "true"
           ignore-packages: |
               @types/node
+              typescript
       - name: Persist autoupdater work on failure
         if: steps.autoupdate.outcome == 'failure'
         run: |
@@ -80,7 +81,10 @@ jobs:
         run: |
           git fetch origin master
           if git diff --quiet origin/master; then
-            npx --yes npm-check-updates -u || true
+            # --reject: ignore_packages exist because those updates are known
+            # to break (TS 7 vs typescript-eslint/tsup, jsdom 30 on Node 20).
+            # Without it this fallback reintroduced exactly those every week.
+            npx --yes npm-check-updates -u --reject "@types/node,typescript" || true
             npm install --no-audit --no-fund || true
             if [ -n "$(git status --porcelain)" ]; then
               git add -A
@@ -97,7 +101,7 @@ jobs:
           # default branch, release-on-version-bump sees no version change and
           # never fires, and the update is never published.
           git fetch origin master
-          git show origin/main:package.json > /tmp/base-package.json
+          git show origin/master:package.json > /tmp/base-package.json
           BASE=$(node -p "require('/tmp/base-package.json').version")
           CURRENT=$(node -p "require('$PWD/package.json').version")
           if [ "$BASE" != "$CURRENT" ]; then
@@ -110,6 +114,7 @@ jobs:
             git push origin "HEAD:$AUTOUPDATE_BRANCH"
             echo "bumped $BASE -> $NEW"
           fi
+
       - name: Ensure labels exist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -230,19 +235,47 @@ jobs:
           echo "checks: total=$TOTAL pending=$PENDING failed=$FAILED"
           if [ "$TOTAL" -eq 0 ] || [ "$PENDING" -ne 0 ] || [ "$FAILED" -ne 0 ]; then
             echo "not merging: checks are not green"
+            echo "ci_sha=$SHA" >> "$GITHUB_OUTPUT"
             exit 1
           fi
           gh pr merge "$PR_URL" --squash --delete-branch
-      - name: Tag release commit and dispatch deploy
-        if: steps.merge_pr.outcome == 'success' && steps.pkg.outputs.version != ''
+          # GITHUB_TOKEN merges fire no `push` run, so release-on-version-bump
+          # never sees them and the update used to land unpublished. Tag the
+          # merge commit and dispatch the release directly.
+          MERGE_SHA=$(gh pr view "$PR_URL" --json mergeCommit --jq .mergeCommit.oid)
+          PARENT_SHA=$(gh api "repos/$GITHUB_REPOSITORY/commits/$MERGE_SHA" --jq '.parents[0].sha')
+          version_at() { gh api "repos/$GITHUB_REPOSITORY/contents/package.json?ref=$1" --jq .content | base64 -d | jq -r .version; }
+          VERSION=$(version_at "$MERGE_SHA")
+          if [ "$VERSION" = "$(version_at "$PARENT_SHA")" ]; then
+            echo "version unchanged ($VERSION), nothing to release"
+            exit 0
+          fi
+          # Through the API with GITHUB_TOKEN, so the tag itself triggers nothing
+          # and the package is not published twice.
+          gh api "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/v$VERSION" -f sha="$MERGE_SHA" >/dev/null \
+            || gh api -X PATCH "repos/$GITHUB_REPOSITORY/git/refs/tags/v$VERSION" -f sha="$MERGE_SHA" -F force=true >/dev/null
+          gh workflow run build-and-deploy.yml --ref master -f tag="v$VERSION"
+          echo "released v$VERSION from $MERGE_SHA"
+      # The autoupdater proves an update only with its own command list on one
+      # Node version, while CI also runs the test matrix and any extra jobs. An
+      # update CI rejected used to stop here and sit open for good; hand it to
+      # Claude together with the CI logs instead.
+      - name: Dispatch Claude when CI rejects the update
+        # ci_sha is set only when the checks were red, not when e.g. the
+        # release dispatch after a successful merge failed.
+        if: steps.merge_pr.outputs.ci_sha != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.pr_success.outputs.pr_url }}
+          CI_SHA: ${{ steps.merge_pr.outputs.ci_sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          git fetch origin master
-          git tag -f "v${{ steps.pkg.outputs.version }}" "$(git rev-parse origin/master)"
-          git push --force origin "v${{ steps.pkg.outputs.version }}"
-          gh workflow run build-and-deploy.yml --ref master \
-            -f tag="v${{ steps.pkg.outputs.version }}" || true
+          gh pr edit "$PR_URL" --add-label needs-claude || true
+          gh workflow run claude.yml --ref master \
+            -f branch="$AUTOUPDATE_BRANCH" \
+            -f pr_url="$PR_URL" \
+            -f run_url="$RUN_URL" \
+            -f ci_sha="$CI_SHA"
       - name: Dispatch Claude to fix the failed autoupdate
         if: steps.pr_failure.outputs.pr_url != ''
         env:
@@ -265,6 +298,22 @@ jobs:
           else
             gh pr edit "$PR_URL" --add-label autoupdate || true
           fi
+      # Every run branches from main afresh, so an autoupdate PR that is still
+      # open is strictly behind the one just opened. Close it instead of
+      # letting a new one pile up on top each week.
+      - name: Close autoupdate PRs superseded by this one
+        if: steps.pr_success.outputs.pr_url != '' || steps.pr_failure.outputs.pr_url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.pr_success.outputs.pr_url || steps.pr_failure.outputs.pr_url }}
+        run: |
+          gh pr list --state open --base master \
+            --json number,headRefName \
+            --jq '.[] | select(.headRefName | startswith("chore/autoupdate-")) | select(.headRefName != env.AUTOUPDATE_BRANCH) | .number' |
+          while read -r N; do
+            echo "closing #$N, superseded by $PR_URL"
+            gh pr close "$N" --delete-branch --comment "Superseded by $PR_URL." || true
+          done
       - name: Cleanup branch when nothing to ship
         if: always() && steps.diff.outputs.has_diff != 'true'
         run: |

@@ -22,6 +22,15 @@ on:
         description: "URL of the failing autoupdate run, included in the prompt for context"
         required: false
         type: string
+      ci_sha:
+        description: "Commit whose CI went red; the logs of its failing jobs are handed to Claude"
+        required: false
+        type: string
+      attempt:
+        description: "Fix attempt number; the workflow re-dispatches itself while CI stays red"
+        required: false
+        type: string
+        default: "1"
 concurrency:
   group: "${{ github.workflow }} @ ${{ github.event.issue.number || github.event.pull_request.number || github.event.inputs.branch }}"
   cancel-in-progress: false
@@ -35,7 +44,9 @@ jobs:
       (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Claude (capped below) plus up to 20 minutes waiting on the checks it
+    # dispatched. At 30 the wait could be killed before it ever merged.
+    timeout-minutes: 60
     permissions:
       contents: write
       pull-requests: write
@@ -48,6 +59,56 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch || github.ref }}
           fetch-depth: 1
+      # CI tests on a Node matrix, so give Claude every version in it. Claude
+      # used to verify on the runner's one Node only and push "fixes" that CI
+      # then rejected on another version (jsdom 30, firebase-admin's optional
+      # deps). The last setup wins the PATH and is the default `node`.
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Provide with-node for the other Node versions
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          cat > "$RUNNER_TEMP/bin/with-node" <<'SH'
+          #!/usr/bin/env bash
+          # with-node <major> <command...>: run a command under that Node major.
+          set -euo pipefail
+          major="$1"; shift
+          dir=$(ls -d "$RUNNER_TOOL_CACHE"/node/"$major".*/x64 2>/dev/null | sort -V | tail -n 1)
+          [ -n "$dir" ] || { echo "with-node: Node $major is not installed" >&2; exit 2; }
+          PATH="$dir/bin:$PATH" exec "$@"
+          SH
+          chmod +x "$RUNNER_TEMP/bin/with-node"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      # When CI went red, hand Claude the failing job logs up front. Without
+      # them it re-ran its own command list, saw green, and pushed nothing
+      # that addressed what CI actually rejected.
+      - name: Collect the failing CI logs
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.ci_sha != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_SHA: ${{ github.event.inputs.ci_sha }}
+        run: |
+          mkdir -p .git/info
+          echo ci-failure.log >> .git/info/exclude
+          : > ci-failure.log
+          for WF in pr-checks.yml; do
+            RUN=$(gh run list --workflow "$WF" --commit "$CI_SHA" --event workflow_dispatch --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+            [ -n "$RUN" ] || continue
+            for JOB in $(gh run view "$RUN" --json jobs --jq '.jobs[] | select(.conclusion == "failure" or .conclusion == "timed_out") | .databaseId'); do
+              {
+                echo "===== $WF run $RUN, job $JOB"
+                gh run view "$RUN" --job "$JOB" --log-failed | tail -n 200
+              } >> ci-failure.log || true
+            done
+          done
+          [ -s ci-failure.log ] || echo "No failed job logs were found for $CI_SHA: CI was still running, timed out or was cancelled." > ci-failure.log
+          wc -l ci-failure.log
       - name: Prepare autoupdate-fix prompt
         if: github.event_name == 'workflow_dispatch'
         id: prep
@@ -55,12 +116,21 @@ jobs:
           BRANCH: ${{ github.event.inputs.branch }}
           PR_URL: ${{ github.event.inputs.pr_url }}
           RUN_URL: ${{ github.event.inputs.run_url }}
+          CI_SHA: ${{ github.event.inputs.ci_sha }}
+          ATTEMPT: ${{ github.event.inputs.attempt || '1' }}
         run: |
+          CI_NOTE=""
+          if [ -n "$CI_SHA" ]; then
+            CI_NOTE="CI went red on commit $CI_SHA. The logs of the failing jobs are in ci-failure.log in the repo root: read it FIRST (cat ci-failure.log) and fix what it shows, not only what the commands below show. The file is untracked on purpose; never commit it."
+          fi
           {
             echo 'prompt<<PROMPT_EOF'
             cat <<EOF
-          The dependency autoupdater failed on branch \`$BRANCH\` (run: $RUN_URL).
+          The dependency autoupdate on branch \`$BRANCH\` needs a fix (run: $RUN_URL).
           PR: $PR_URL
+          Fix attempt: $ATTEMPT of 3.
+
+          $CI_NOTE
 
           Run these commands and observe their exit codes via the Bash tool —
           not inferred:
@@ -68,6 +138,13 @@ jobs:
                   npm run lint
                   npm run build
                   npm run cov
+
+          CI runs the tests on Node 22, 24; the default \`node\`
+          here is the newest of them. Every one is installed: run a command
+          under another major with \`with-node <major> <command>\`, e.g.
+          \`with-node 22 npm ci\` then \`with-node 22 npm test\`, and run plain
+          \`npm ci\` again afterwards. A fix that is green on one Node only is
+          not done.
 
           Hard rules:
           - Run those commands yourself before every push. Do not push
@@ -107,13 +184,14 @@ jobs:
           } >> "$GITHUB_OUTPUT"
       - name: Run Claude Code
         id: claude
+        timeout-minutes: 30
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_bots: "*"
           prompt: ${{ steps.prep.outputs.prompt }}
           claude_args: |
-            --allowedTools "Edit,Write,MultiEdit,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(node:*),Bash(rm:*),Bash(mkdir:*),Bash(cat:*),Bash(ls:*),Bash(echo:*),Bash(grep:*),Bash(find:*),Bash(sed:*),Bash(awk:*),Bash(head:*),Bash(tail:*),Bash(diff:*),Bash(mv:*),Bash(cp:*),Bash(touch:*)"
+            --allowedTools "Edit,Write,MultiEdit,Bash(with-node:*),Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(node:*),Bash(rm:*),Bash(mkdir:*),Bash(cat:*),Bash(ls:*),Bash(echo:*),Bash(grep:*),Bash(find:*),Bash(sed:*),Bash(awk:*),Bash(head:*),Bash(tail:*),Bash(diff:*),Bash(mv:*),Bash(cp:*),Bash(touch:*)"
       # Claude pushes with GITHUB_TOKEN, so its push fires no `push` run and the
       # `pull_request` run GitHub queues for it stays stuck in `action_required`.
       # Dispatch the checks explicitly — `workflow_dispatch` is the only trigger
@@ -136,7 +214,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.inputs.pr_url }}
+          BRANCH: ${{ github.event.inputs.branch }}
+          RUN_URL: ${{ github.event.inputs.run_url }}
+          ATTEMPT: ${{ github.event.inputs.attempt || '1' }}
+          MAX_ATTEMPTS: 3
         run: |
+          if [ "$(gh pr view "$PR_URL" --json state --jq .state)" != "OPEN" ]; then
+            echo "PR is no longer open (merged or superseded), nothing to do"
+            exit 0
+          fi
           # Poll check-runs, not `gh pr checks`: the approval-gated pull_request
           # run shows up as a permanently-pending check in the status rollup but
           # produces no check runs, so this view sees only jobs that really ran.
@@ -157,7 +243,39 @@ jobs:
           FAILED=$(jq '[.[] | select(.conclusion != null and (.conclusion | IN("success","neutral","skipped") | not))] | length' <<<"$RUNS")
           echo "checks: total=$TOTAL pending=$PENDING failed=$FAILED"
           if [ "$TOTAL" -eq 0 ] || [ "$PENDING" -ne 0 ] || [ "$FAILED" -ne 0 ]; then
-            echo "leaving the PR open for review: checks are not green"
+            # Claude verifies on this runner; CI is the judge. Stopping at the
+            # first red CI left every such PR open for good, so feed the CI
+            # logs back to a fresh attempt, a bounded number of times. A new
+            # dispatch also re-runs CI, which clears a check that merely hung.
+            if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+              echo "checks are not green: dispatching attempt $((ATTEMPT + 1)) with the CI logs of $SHA"
+              gh workflow run claude.yml --ref master \
+                -f branch="$BRANCH" \
+                -f pr_url="$PR_URL" \
+                -f run_url="$RUN_URL" \
+                -f ci_sha="$SHA" \
+                -f attempt="$((ATTEMPT + 1))"
+            else
+              echo "checks are still not green after $ATTEMPT attempts: leaving the PR for a maintainer"
+              gh pr comment "$PR_URL" --body "CI is still red on \`$SHA\` after $ATTEMPT Claude fix attempts (checks: total=$TOTAL pending=$PENDING failed=$FAILED), so this PR is left open for a maintainer. Next week's autoupdate supersedes it if nobody picks it up." || true
+            fi
             exit 0
           fi
           gh pr merge "$PR_URL" --squash --delete-branch
+          # GITHUB_TOKEN merges fire no `push` run, so release-on-version-bump
+          # never sees them and the update used to land unpublished. Tag the
+          # merge commit and dispatch the release directly.
+          MERGE_SHA=$(gh pr view "$PR_URL" --json mergeCommit --jq .mergeCommit.oid)
+          PARENT_SHA=$(gh api "repos/$GITHUB_REPOSITORY/commits/$MERGE_SHA" --jq '.parents[0].sha')
+          version_at() { gh api "repos/$GITHUB_REPOSITORY/contents/package.json?ref=$1" --jq .content | base64 -d | jq -r .version; }
+          VERSION=$(version_at "$MERGE_SHA")
+          if [ "$VERSION" = "$(version_at "$PARENT_SHA")" ]; then
+            echo "version unchanged ($VERSION), nothing to release"
+            exit 0
+          fi
+          # Through the API with GITHUB_TOKEN, so the tag itself triggers nothing
+          # and the package is not published twice.
+          gh api "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/v$VERSION" -f sha="$MERGE_SHA" >/dev/null \
+            || gh api -X PATCH "repos/$GITHUB_REPOSITORY/git/refs/tags/v$VERSION" -f sha="$MERGE_SHA" -F force=true >/dev/null
+          gh workflow run build-and-deploy.yml --ref master -f tag="v$VERSION"
+          echo "released v$VERSION from $MERGE_SHA"
