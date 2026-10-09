@@ -1,3 +1,8 @@
+# 1.7.15 / 2026-10-09
+
+### :tada: Enhancements
+- Updated dependencies: @google-cloud/storage, @sergdudko/objectstream, firebase-tools, typescript-eslint
+
 # 1.7.14 / 2026-10-02
 
 ### :tada: Enhancements
