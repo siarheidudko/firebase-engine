@@ -1,4 +1,4 @@
 {
-  "base": [],
+  "base": ["@google-cloud/storage"],
   "dev": ["@types/node"]
 }

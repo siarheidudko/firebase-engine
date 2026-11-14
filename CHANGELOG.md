@@ -1,3 +1,8 @@
+# 1.7.20 / 2026-11-13
+
+### :tada: Enhancements
+- Updated dependencies: @sergdudko/objectstream, eslint, firebase-admin, firebase-tools, prettier, typescript-eslint
+
 # 1.7.19 / 2026-11-06
 
 ### :tada: Enhancements
@@ -21,7 +26,7 @@
 # 1.7.15 / 2026-10-09
 
 ### :tada: Enhancements
-- Updated dependencies: @google-cloud/storage, @sergdudko/objectstream, firebase-tools, typescript-eslint
+- Updated dependencies: @sergdudko/objectstream, firebase-tools, typescript-eslint
 
 # 1.7.14 / 2026-10-02
 
@@ -31,7 +36,7 @@
 # 1.7.13 / 2026-09-25
 
 ### :tada: Enhancements
-- Updated dependencies: @google-cloud/storage, @sergdudko/objectstream, eslint, firebase-admin, firebase-tools, globals, prettier, typescript-eslint
+- Updated dependencies: @sergdudko/objectstream, eslint, firebase-admin, firebase-tools, globals, prettier, typescript-eslint
 
 # 1.7.11 / 2026-07-31
 
@@ -51,7 +56,7 @@
 # 1.7.7 / 2026-06-19
 
 ### :tada: Enhancements
-- Updated dependencies: @google-cloud/storage, @sergdudko/objectstream, eslint, firebase-admin, firebase-tools, prettier, typescript-eslint
+- Updated dependencies: @sergdudko/objectstream, eslint, firebase-admin, firebase-tools, prettier, typescript-eslint
 
 # 1.7.6 / 2026-06-05
 
@@ -128,7 +133,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @sergdudko/objectstream, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, firebase-admin, nyc, typedoc, typescript
+- Updated dependencies: @sergdudko/objectstream, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, firebase-admin, nyc, typedoc, typescript
 
 # 1.5.149 / 2024-04-04
 
@@ -194,7 +199,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+- Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.138 / 2024-03-16
 
@@ -224,7 +229,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @types/node, typedoc, typescript
+- Updated dependencies: @types/node, typedoc, typescript
 
 # 1.5.133 / 2024-03-06
 
@@ -416,7 +421,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+- Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.101 / 2023-10-30
 
@@ -482,7 +487,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @types/node
+- Updated dependencies: @types/node
 
 # 1.5.90 / 2023-10-11
 
@@ -578,7 +583,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @types/node
+- Updated dependencies: @types/node
 
 # 1.5.74 / 2023-05-09
 
@@ -728,7 +733,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, typescript
+- Updated dependencies: typescript
 
 # 1.5.49 / 2023-03-29
 
@@ -818,7 +823,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @types/node
+- Updated dependencies: @types/node
 
 # 1.5.34 / 2023-02-28
 
@@ -884,7 +889,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+- Updated dependencies: @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 
 # 1.5.23 / 2023-02-05
 
@@ -1022,7 +1027,7 @@
 
 ### :tada: Enhancements
 
-- Updated dependencies: @google-cloud/storage, @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, firebase-admin, mocha, typedoc, typescript
+- Updated dependencies: @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, firebase-admin, mocha, typedoc, typescript
 
 # 1.5.0 / 2022-06-22
 
