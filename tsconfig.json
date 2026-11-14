@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "CommonJS",
     "allowJs": false,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitReturns": true,
