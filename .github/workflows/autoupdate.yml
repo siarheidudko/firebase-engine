@@ -68,6 +68,7 @@ jobs:
           ignore-packages: |
               @types/node
               typescript
+              @google-cloud/storage
       - name: Persist autoupdater work on failure
         if: steps.autoupdate.outcome == 'failure'
         run: |
@@ -84,7 +85,7 @@ jobs:
             # --reject: ignore_packages exist because those updates are known
             # to break (TS 7 vs typescript-eslint/tsup, jsdom 30 on Node 20).
             # Without it this fallback reintroduced exactly those every week.
-            npx --yes npm-check-updates -u --reject "@types/node,typescript" || true
+            npx --yes npm-check-updates -u --reject "@types/node,typescript,@google-cloud/storage" || true
             npm install --no-audit --no-fund || true
             if [ -n "$(git status --porcelain)" ]; then
               git add -A
