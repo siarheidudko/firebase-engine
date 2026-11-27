@@ -56,13 +56,13 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/storage": "^8.4.0",
-    "@sergdudko/objectstream": "^4.0.59",
+    "@sergdudko/objectstream": "^4.0.60",
     "firebase-admin": "^14.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.1",
-    "eslint": "^10.15.0",
+    "eslint": "^10.16.0",
     "firebase-tools": "^15.37.0",
     "globals": "^17.14.0",
     "is-buffer": "^2.0.5",
@@ -70,6 +70,6 @@
     "prettier": "^3.10.1",
     "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.73.0"
+    "typescript-eslint": "^8.74.0"
   }
 }
